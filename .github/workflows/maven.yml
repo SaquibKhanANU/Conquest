@@ -32,4 +32,3 @@ jobs:
       working-directory: conquest-backend
     - name: Check Dependency Updates
       run: mvn versions:display-dependency-updates
-      working-directory: conquest-backend
