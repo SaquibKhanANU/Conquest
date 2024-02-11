@@ -28,7 +28,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file conquest-backend/pom.xml
+      run: mvn -B package --file pom.xml
       working-directory: conquest-backend
     - name: Check Dependency Updates
       run: mvn versions:display-dependency-updates
+      working-directory: conquest-backend
