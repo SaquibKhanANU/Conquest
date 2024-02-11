@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Change directory to frontend
-      run: cd frontend
+      run: cd conquest-frontend
     - run: npm install
       working-directory: frontend
     - run: npm run build --if-present
