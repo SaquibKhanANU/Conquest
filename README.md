@@ -1,3 +1,3 @@
-Backend: Java Spring Framework with Web, WebSockets, Lombok \
-Frontend: Reactjs with Vite, PixiJs
+Backend: Java, Spring Framework with Web, WebSockets, Lombok \
+Frontend: JavaScript, HTML, CSS, Reactjs with Vite, PixiJs
 
