@@ -1,0 +1,114 @@
+import "./CreateGame.css";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addLobby } from "../../actions/actions.ts";
+
+const CreateGame = () => {
+    const dispatch = useDispatch();
+
+    const [map, setMap] = useState("MEDIUM (M)");
+    const [mode, setMode] = useState("CLASSIC");
+    const [isPrivate, setIsPrivate] = useState("NO");
+    const [numPlayers, setNumPlayers] = useState(4);
+    const [lobbyName, setLobbyName] = useState("");
+    const handleLobbyNameChange = (event) => {
+        setLobbyName(event.target.value);
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (lobbyName.length >= 1) {
+            const gameLobbyData = {
+                lobbyName,
+                map,
+                mode,
+                isPrivate,
+                numPlayers,
+            };
+            console.log("Create game form submitted", gameLobbyData);
+            dispatch(addLobby(gameLobbyData));
+        }
+    };
+
+    return (
+        <div className="create-game-container">
+            <h1>Create game</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="create-game-body">
+                    <div className="create-lobby-option">
+                        <p>Lobby name:</p>
+                        <div>
+                            <input
+                                type="text"
+                                value={lobbyName}
+                                onChange={handleLobbyNameChange}
+                                maxLength={10}
+                                minLength={1}
+                            />
+                        </div>
+                    </div>
+                    <div className="create-lobby-option">
+                        <p>MAP:</p>
+                        <div className="dropdown">
+                            <button className="dropbtn">{map}</button>
+                            <div className="dropdown-content">
+                                <p onClick={() => setMap("SMALL (S)")}>
+                                    SMALL (S)
+                                </p>
+                                <p onClick={() => setMap("MEDIUM (M)")}>
+                                    MEDIUM (M)
+                                </p>
+                                <p onClick={() => setMap("LARGE (L)")}>
+                                    LARGE (L)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-lobby-option">
+                        <p>MODE:</p>
+                        <div className="dropdown">
+                            <button className="dropbtn">{mode}</button>
+                            <div className="dropdown-content">
+                                <p onClick={() => setMode("CLASSIC")}>
+                                    CLASSIC
+                                </p>
+                                <p onClick={() => setMode("KING OF THE HILL")}>
+                                    KING OF THE HILL
+                                </p>
+                                <p onClick={() => setMode("DOMINATION")}>
+                                    DOMINATION
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-lobby-option">
+                        <p>PRIVATE:</p>
+                        <div className="dropdown">
+                            <button className="dropbtn">{isPrivate}</button>
+                            <div className="dropdown-content">
+                                <p onClick={() => setIsPrivate("NO")}>NO</p>
+                                <p onClick={() => setIsPrivate("YES")}>YES</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-lobby-option">
+                        <p>Num Players:</p>
+                        <div className="dropdown">
+                            <button className="dropbtn">{numPlayers}</button>
+                            <div className="dropdown-content">
+                                <p onClick={() => setNumPlayers(2)}>2</p>
+                                <p onClick={() => setNumPlayers(3)}>3</p>
+                                <p onClick={() => setNumPlayers(4)}>4</p>
+                                <p onClick={() => setNumPlayers(5)}>5</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="add-button">
+                        <button type="submit">+</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default CreateGame;

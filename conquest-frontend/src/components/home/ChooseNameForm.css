@@ -3,6 +3,8 @@
     padding: 20px;
     border-radius: 25px;
     border: 1px solid var(--gold);
+    width: 400px;
+    height: 90px;
 }
 
 .name-input {
@@ -16,7 +18,7 @@
     font-family: var(--global-font);
     background-color: antiquewhite;
     color: black;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .name-form-container button {

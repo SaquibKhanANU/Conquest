@@ -31,11 +31,13 @@ const ChooseNameForm = () => {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const session = await connectToServer();
-        chooseUsername(name);
-        session.chooseName(name);
-        console.log("Connected to server:", session);
-        navigate("/gameBrowser");
+        if (name.length >= 3) {
+            const session = await connectToServer();
+            chooseUsername(name);
+            session.chooseName(name);
+            console.log("Connected to server:", session);
+            navigate("/gameBrowser");
+        }
     }
 
     const handleChange = (event) => {
@@ -62,6 +64,8 @@ const ChooseNameForm = () => {
                     onBlur={handleBlur}
                     autoComplete="off"
                     className="name-input"
+                    maxLength={24}
+                    minLength={3}
                 />
                 <button type="submit">
                     <p>&#8594;</p>

@@ -5,3 +5,9 @@ export const requestChooseUsername = (username) => ({
     payload: { username },
 });
 
+export const addLobby = (lobbyData) => {
+    return {
+        type: ActionType.ADD_LOBBY,
+        payload: lobbyData,
+    };
+};

@@ -1,0 +1,10 @@
+.profile-container {
+    background-color: black;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--gold);
+    width: 200px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
