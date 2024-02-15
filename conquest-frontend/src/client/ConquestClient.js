@@ -9,19 +9,19 @@ class ConquestClient {
         this.stompClient.debug = null;
     }
 
-    async connect() {
+    connect = async () => {
         return new Promise((resolve, reject) => {
             this.stompClient.connect(
                 {},
                 () => {
-                    resolve(this.stompClient); // Resolve with the connected stompClient
+                    resolve(new ConquestSession(this.stompClient)); // Resolve with the connected stompClient
                 },
                 (error) => {
                     reject(error);
                 }
             );
         });
-    }
+    };
 }
 
 class ConquestSession {
@@ -39,22 +39,20 @@ class ConquestSession {
         }
     }
 
-    chooseName(name) {
+    async disconnect() {
+        if (this.stompClient && this.stompClient.disconnect) {
+            await this.stompClient.disconnect();
+        } else {
+            console.log(
+                "Stomp client is not properly initialized or does not have a disconnect method."
+            );
+        }
+    }
+
+    async chooseName(name) {
         console.log("Choosing name:", name);
         this.sendMessage("/app/chooseName", name);
     }
 }
 
-// Testing
-const client = new ConquestClient("http://localhost:8080/ws");
-client
-    .connect()
-    .then((stompClient) => {
-        // After connecting, create a ConquestSession with the connected stompClient
-        const session = new ConquestSession(stompClient);
-        // Use the session to send messages
-        session.chooseName("Alice");
-    })
-    .catch((error) => {
-        console.log("Error connecting:", error);
-    });
+export default ConquestClient;

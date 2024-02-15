@@ -1,7 +1,7 @@
 import "./Home.css";
 import React from "react";
 import ChooseNameForm from "./ChooseNameForm";
-import BackgroundImage from "../../../assets/imgs/background_img.png";
+import BackgroundImage from "../../resources/imgs/background_img.png";
 
 const Home = () => {
     return (
