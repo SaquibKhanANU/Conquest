@@ -1,10 +1,23 @@
 import "./JoinGame.css";
-import React from "react";
+import { React, useEffect } from "react";
 import LobbyTile from "./LobbyTile";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useSession } from "../session/SessionContext";
 
 const JoinGame = () => {
+    const { session } = useSession();
     const lobbies = useSelector((state) => state.lobby.lobbies);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const fetchLobbies = async () => {
+            if (session) {
+                console.log("Fetching lobbies");
+                await session.getLobbies(dispatch);
+            }
+        };
+        fetchLobbies();
+    }, []);
 
     return (
         <div className="join-game-container">
@@ -32,7 +45,7 @@ const JoinGame = () => {
                 </div>
                 <div className="join-game-lobbies scroll-bar">
                     {lobbies.map((lobby) => (
-                        <div key={lobby.lobbyName}>
+                        <div key={lobby.lobbyId}>
                             <LobbyTile gameLobbyData={lobby} />
                         </div>
                     ))}

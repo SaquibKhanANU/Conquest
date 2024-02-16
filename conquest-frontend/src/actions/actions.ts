@@ -1,13 +1,15 @@
 import * as ActionType from "./actionTypes.js";
 
-export const requestChooseUsername = (username) => ({
-    type: ActionType.REQUEST_CHOOSE_USERNAME,
-    payload: { username },
-});
-
-export const addLobby = (lobbyData) => {
+export const setLobbies = (lobbiesData) => {
     return {
-        type: ActionType.ADD_LOBBY,
-        payload: lobbyData,
+        type: ActionType.SET_LOBBIES,
+        payload: lobbiesData,
     };
 };
+
+export const setPlayers = (playersData) => {
+    return {
+        type: ActionType.SET_PLAYERS,
+        payload: playersData,
+    };
+}

@@ -2,22 +2,21 @@ import "./GameBrowser.css";
 import BackgroundImage from "../../resources/imgs/game_browser_background_img.png";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useSession } from "../session/SessionContext";
 import CreateGame from "./CreateGame";
 import JoinGame from "./JoinGame";
 import Profile from "./Profile";
+import PlayersOnline from "./PlayersOnline";
 
 const GameBrowser = () => {
-    // const { session } = useSession();
-    const username = useSelector((state) => state.user.username);
+    const { session } = useSession();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (username === null) {
+        if (session === null) {
             navigate("/");
         }
-    }, [navigate, username]);
+    }, [navigate, session]);
 
     return (
         <div
@@ -33,8 +32,13 @@ const GameBrowser = () => {
                         <JoinGame />
                     </div>
                 </div>
-                <div className="game-browser-profile">
-                    <Profile />
+                <div className="game-browser">
+                    <div className="game-browser-profile">
+                        <Profile />
+                    </div>
+                    <div className="game-browser-profile">
+                        <PlayersOnline />
+                    </div>
                 </div>
             </div>
         </div>

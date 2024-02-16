@@ -1,31 +1,37 @@
 import "./CreateGame.css";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addLobby } from "../../actions/actions.ts";
+import { useSession } from "../session/SessionContext.js";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateGame = () => {
-    const dispatch = useDispatch();
+    const { session } = useSession();
 
     const [map, setMap] = useState("MEDIUM (M)");
     const [mode, setMode] = useState("CLASSIC");
     const [isPrivate, setIsPrivate] = useState("NO");
-    const [numPlayers, setNumPlayers] = useState(4);
+    const [maxPlayers, setMaxPlayers] = useState(4);
     const [lobbyName, setLobbyName] = useState("");
+    const [lobbyOwner, setLobbyOwner] = useState("");
+    const currentPlayers = [];
     const handleLobbyNameChange = (event) => {
         setLobbyName(event.target.value);
     };
     const handleSubmit = (event) => {
         event.preventDefault();
         if (lobbyName.length >= 1) {
+            const lobbyId = uuidv4(); // Generate unique lobby ID
+            let privateLobby = isPrivate === "YES" ? true : false;
             const gameLobbyData = {
                 lobbyName,
-                map,
+                lobbyOwner,
+                currentPlayers,
+                maxPlayers,
                 mode,
-                isPrivate,
-                numPlayers,
+                map,
+                privateLobby,
+                lobbyId,
             };
-            console.log("Create game form submitted", gameLobbyData);
-            dispatch(addLobby(gameLobbyData));
+            session.createLobby(gameLobbyData);
         }
     };
 
@@ -93,12 +99,12 @@ const CreateGame = () => {
                     <div className="create-lobby-option">
                         <p>Num Players:</p>
                         <div className="dropdown">
-                            <button className="dropbtn">{numPlayers}</button>
+                            <button className="dropbtn">{maxPlayers}</button>
                             <div className="dropdown-content">
-                                <p onClick={() => setNumPlayers(2)}>2</p>
-                                <p onClick={() => setNumPlayers(3)}>3</p>
-                                <p onClick={() => setNumPlayers(4)}>4</p>
-                                <p onClick={() => setNumPlayers(5)}>5</p>
+                                <p onClick={() => setMaxPlayers(2)}>2</p>
+                                <p onClick={() => setMaxPlayers(3)}>3</p>
+                                <p onClick={() => setMaxPlayers(4)}>4</p>
+                                <p onClick={() => setMaxPlayers(5)}>5</p>
                             </div>
                         </div>
                     </div>

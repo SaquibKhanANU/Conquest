@@ -1,3 +1,5 @@
+import * as ApiAction from "../actions/actions.ts";
+
 const SockJS = require("sockjs-client");
 const Stomp = require("stompjs");
 
@@ -49,9 +51,36 @@ class ConquestSession {
         }
     }
 
-    async chooseName(name) {
-        console.log("Choosing name:", name);
-        this.sendMessage("/app/chooseName", name);
+    async addPlayer(name) {
+        this.sendMessage("/app/addPlayer", name);
+    }
+
+    async getPlayers(dispatch) {
+        this.sendMessage("/app/getPlayers", "");
+        this.stompClient.subscribe("/topic/players", (response) => {
+            try {
+                const players = JSON.parse(response.body);
+                dispatch(ApiAction.setPlayers(players));
+            } catch (error) {
+                console.error("Error parsing players data:", error);
+            }
+        });
+    }
+
+    async createLobby(lobbyData) {
+        this.sendMessage("/app/createLobby", JSON.stringify(lobbyData));
+    }
+
+    async getLobbies(dispatch) {
+        this.sendMessage("/app/getLobbies", "");
+        this.stompClient.subscribe("/topic/lobbies", (response) => {
+            try {
+                const lobbies = JSON.parse(response.body);
+                dispatch(ApiAction.setLobbies(lobbies));
+            } catch (error) {
+                console.error("Error parsing lobbies data:", error);
+            }
+        });
     }
 }
 

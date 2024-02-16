@@ -1,4 +1,4 @@
-package com.Game.conquest.config;
+package com.Game.conquest.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,15 +1,21 @@
-import { ADD_LOBBY } from "../actions/actionTypes.js";
+import { SET_LOBBIES, SET_PLAYERS } from "../actions/actionTypes.js";
 
 const initialState = {
     lobbies: [],
+    players: [],
 };
 
 const lobbyReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_LOBBY:
+        case SET_LOBBIES:
             return {
                 ...state,
-                lobbies: [...state.lobbies, action.payload],
+                lobbies: action.payload,
+            };
+        case SET_PLAYERS:
+            return {
+                ...state,
+                players: action.payload,
             };
         default:
             return state;

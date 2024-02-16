@@ -1,7 +1,6 @@
 import "./ChooseNameForm.css";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { requestChooseUsername } from "../../actions/actions.ts";
 import ConquestClient from "../../client/ConquestClient.js";
 import { useSession } from "../session/SessionContext.js"; // Import the useSession hook
 import { useNavigate } from "react-router-dom";
@@ -14,12 +13,10 @@ const ChooseNameForm = () => {
     const [name, setName] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
-    function chooseUsername(name) {
-        dispatch(requestChooseUsername(name));
-    }
-
     async function connectToServer() {
-        const conquestClient = new ConquestClient("http://localhost:8080/ws");
+        const conquestClient = new ConquestClient(
+            "http://localhost:8080/conquest"
+        );
         try {
             const session = await conquestClient.connect();
             updateSession(session);
@@ -33,8 +30,7 @@ const ChooseNameForm = () => {
         event.preventDefault();
         if (name.length >= 3) {
             const session = await connectToServer();
-            chooseUsername(name);
-            session.chooseName(name);
+            session.addPlayer(name);
             console.log("Connected to server:", session);
             navigate("/gameBrowser");
         }
@@ -64,7 +60,7 @@ const ChooseNameForm = () => {
                     onBlur={handleBlur}
                     autoComplete="off"
                     className="name-input"
-                    maxLength={24}
+                    maxLength={12}
                     minLength={3}
                 />
                 <button type="submit">
