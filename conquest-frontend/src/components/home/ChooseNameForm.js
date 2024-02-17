@@ -1,9 +1,9 @@
 import "./ChooseNameForm.css";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import ConquestClient from "../../client/ConquestClient.js";
 import { useSession } from "../session/SessionContext.js"; // Import the useSession hook
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const ChooseNameForm = () => {
     const dispatch = useDispatch();
@@ -19,7 +19,6 @@ const ChooseNameForm = () => {
         );
         try {
             const session = await conquestClient.connect();
-            updateSession(session);
             return session;
         } catch (error) {
             console.error("Error connecting/choosing name:", error);
@@ -30,9 +29,11 @@ const ChooseNameForm = () => {
         event.preventDefault();
         if (name.length >= 3) {
             const session = await connectToServer();
-            session.addPlayer(name);
-            console.log("Connected to server:", session);
+            await session.subscribe(dispatch);
+            await session.savePlayer(name);
+            updateSession(session);
             navigate("/gameBrowser");
+            console.log("Connected to server:", session);
         }
     }
 
@@ -50,6 +51,7 @@ const ChooseNameForm = () => {
 
     return (
         <div className="name-form-container">
+            <div className="name-form-title">WELCOME</div>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

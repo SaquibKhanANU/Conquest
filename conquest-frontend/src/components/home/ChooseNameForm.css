@@ -4,7 +4,16 @@
     border-radius: 25px;
     border: 1px solid var(--gold);
     width: 400px;
-    height: 90px;
+    min-height: 90px;
+    padding-top: 10px;
+}
+
+.name-form-title {
+    font-size: 24px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color: var(--gold);
+    text-align: center;
 }
 
 .name-input {

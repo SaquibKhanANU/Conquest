@@ -1,4 +1,4 @@
-import * as ApiAction from "../actions/actions.ts";
+import * as ApiAction from "../redux/actions/actions.ts";
 
 const SockJS = require("sockjs-client");
 const Stomp = require("stompjs");
@@ -31,6 +31,8 @@ class ConquestSession {
         this.stompClient = stompClient;
     }
 
+    // UTIL FUNCTIONS
+
     sendMessage(destination, message) {
         if (this.stompClient && this.stompClient.send) {
             this.stompClient.send(destination, {}, message);
@@ -51,36 +53,39 @@ class ConquestSession {
         }
     }
 
-    async addPlayer(name) {
-        this.sendMessage("/app/addPlayer", name);
-    }
-
-    async getPlayers(dispatch) {
-        this.sendMessage("/app/getPlayers", "");
-        this.stompClient.subscribe("/topic/players", (response) => {
-            try {
-                const players = JSON.parse(response.body);
-                dispatch(ApiAction.setPlayers(players));
-            } catch (error) {
-                console.error("Error parsing players data:", error);
-            }
+    async subscribe(dispatch) {
+        this.stompClient.subscribe("/topic/players", (message) => {
+            console.log("Received message:", message.body);
+            const players = JSON.parse(message.body);
+            console.log("Received players:", players);
+            dispatch(ApiAction.setPlayers(players));
         });
     }
 
-    async createLobby(lobbyData) {
-        this.sendMessage("/app/createLobby", JSON.stringify(lobbyData));
+    // PLAYERS
+
+    async findAllPlayers() {
+        this.sendMessage("/app/players/getPlayers", "");
     }
 
-    async getLobbies(dispatch) {
-        this.sendMessage("/app/getLobbies", "");
-        this.stompClient.subscribe("/topic/lobbies", (response) => {
-            try {
-                const lobbies = JSON.parse(response.body);
-                dispatch(ApiAction.setLobbies(lobbies));
-            } catch (error) {
-                console.error("Error parsing lobbies data:", error);
-            }
-        });
+    // Function to call the findById endpoint
+    async findPlayerById(id) {
+        this.sendMessage(`/app/api/players/${id}`, "");
+    }
+
+    // Function to call the save endpoint
+    async savePlayer(playerName) {
+        console.log("Saving player:", playerName);
+        this.sendMessage("/app/players/savePlayer", playerName);
+    }
+
+    // Function to call the deleteById endpoint
+    async deletePlayerById(id) {
+        this.stompClient.send(
+            `/app/api/players/${id}`,
+            { method: "DELETE" },
+            ""
+        );
     }
 }
 

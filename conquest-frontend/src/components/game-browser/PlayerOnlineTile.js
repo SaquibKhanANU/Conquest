@@ -6,8 +6,8 @@ const PlayerOnlineTile = ({ username }) => {
         <div className="player-online-tile-container">
             <div className="player-online-tile-body">
                 <div className="player-online-tile-username">{username}</div>
-                <div>
-                    <button>Invite</button>
+                <div className="player-online-tile-button">
+                    <button>+</button>
                 </div>
             </div>
         </div>

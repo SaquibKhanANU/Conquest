@@ -1,27 +1,46 @@
 import "./PlayersOnline.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import PlayerOnlineTile from "./PlayerOnlineTile";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useSession } from "../session/SessionContext";
 
 const PlayersOnline = () => {
     const { session } = useSession();
     const players = useSelector((state) => state.lobby.players);
-    const dispatch = useDispatch();
+
+    const fetchPlayers = async () => {
+        console.log("Fetching players...");
+        await session.findAllPlayers();
+    };
+
+    const fetchPlayersCallback = useCallback(async () => {
+        if (session) {
+            console.log("Fetching players...");
+            fetchPlayers();
+        }
+    }, []);
 
     useEffect(() => {
-        const fetchPlayers = async () => {
-            if (session) {
-                console.log("Fetching players");
-                await session.getPlayers(dispatch);
-            }
-        };
-        fetchPlayers();
-    }, []);
+        fetchPlayersCallback();
+        const intervalId = setInterval(fetchPlayersCallback, 30000);
+        return () => clearInterval(intervalId);
+    }, [fetchPlayersCallback]);
+
+    const handleRefresh = () => {
+        if (session) {
+            console.log("Refreshing players...");
+            fetchPlayers();
+        }
+    };
 
     return (
         <div className="players-online-container">
-            <div>PLAYERS ONLINE</div>
+            <div className="players-online-header">
+                <div>PLAYERS ONLINE</div>
+                <div>
+                    <button onClick={handleRefresh}>&#10227;</button>
+                </div>
+            </div>
             <div className="players-online-body scroll-bar">
                 {players.map((player) => (
                     <div key={player.playerId}>

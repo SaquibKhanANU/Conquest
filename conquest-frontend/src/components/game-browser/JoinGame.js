@@ -1,23 +1,10 @@
 import "./JoinGame.css";
-import { React, useEffect } from "react";
+import { React } from "react";
 import LobbyTile from "./LobbyTile";
-import { useSelector, useDispatch } from "react-redux";
-import { useSession } from "../session/SessionContext";
+import { useSelector } from "react-redux";
 
 const JoinGame = () => {
-    const { session } = useSession();
     const lobbies = useSelector((state) => state.lobby.lobbies);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        const fetchLobbies = async () => {
-            if (session) {
-                console.log("Fetching lobbies");
-                await session.getLobbies(dispatch);
-            }
-        };
-        fetchLobbies();
-    }, []);
 
     return (
         <div className="join-game-container">

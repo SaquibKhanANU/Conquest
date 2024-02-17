@@ -1,38 +1,19 @@
 import "./CreateGame.css";
 import React, { useState } from "react";
-import { useSession } from "../session/SessionContext.js";
-import { v4 as uuidv4 } from "uuid";
 
 const CreateGame = () => {
-    const { session } = useSession();
-
     const [map, setMap] = useState("MEDIUM (M)");
     const [mode, setMode] = useState("CLASSIC");
     const [isPrivate, setIsPrivate] = useState("NO");
     const [maxPlayers, setMaxPlayers] = useState(4);
     const [lobbyName, setLobbyName] = useState("");
-    const [lobbyOwner, setLobbyOwner] = useState("");
-    const currentPlayers = [];
+
     const handleLobbyNameChange = (event) => {
         setLobbyName(event.target.value);
     };
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (lobbyName.length >= 1) {
-            const lobbyId = uuidv4(); // Generate unique lobby ID
-            let privateLobby = isPrivate === "YES" ? true : false;
-            const gameLobbyData = {
-                lobbyName,
-                lobbyOwner,
-                currentPlayers,
-                maxPlayers,
-                mode,
-                map,
-                privateLobby,
-                lobbyId,
-            };
-            session.createLobby(gameLobbyData);
-        }
     };
 
     return (

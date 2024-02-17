@@ -7,11 +7,33 @@
 }
 
 .player-online-tile-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: center;
+    display: flex;
+    justify-content: space-between;
     gap: 10px;
     overflow-x: hidden;
 }
 
+.player-online-tile-username {
+    justify-self: left;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.player-online-tile-button {
+    justify-self: center;
+}
+
+.player-online-tile-button button {
+    font-size: 26px;
+    margin: 0 0;
+    padding: 0 0;
+    border: none;
+    background-color: transparent;
+    color: var(--gold);
+    margin-bottom: 2px;
+}
+
+.player-online-tile-button button:hover {
+    color: white;
+    cursor: pointer;
+}

@@ -18,3 +18,27 @@
     flex-direction: column;
     overflow-y: scroll;
 }
+
+.players-online-header {
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.players-online-header button {
+    font-size: 21px;
+    margin: 0 0;
+    padding: 0 0;
+    border: none;
+    background-color: transparent;
+    color: var(--gold);
+    margin-bottom: 2px;
+}
+
+.players-online-header button:hover {
+    color: white;
+    cursor: pointer;
+}
