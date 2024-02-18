@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -39,6 +40,13 @@ public class PlayerController {
     public void removePlayer(Principal principal) {
         String playerId = principal.getName();
         playerService.remove(playerId);
+    }
+
+    @MessageMapping("/players/getCurrentPlayer")
+    @SendToUser("/queue/currentPlayer")
+    public Player getCurrentPlayer(Principal principal) {
+        String playerId = principal.getName();
+        return playerService.get(playerId);
     }
 
     @EventListener

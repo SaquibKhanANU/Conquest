@@ -19,7 +19,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // Register the "/ws" endpoint, enabling the SockJS protocol
         registry.addEndpoint("/conquest").setAllowedOriginPatterns("*").setHandshakeHandler(myHandshakeHandler()).withSockJS();
-
     }
 
     @Override

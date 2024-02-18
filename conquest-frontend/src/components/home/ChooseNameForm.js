@@ -19,9 +19,7 @@ const ChooseNameForm = () => {
         );
         try {
             const session = await conquestClient.connect();
-            await session.createOrUpdatePlayer(name);
-            await session.subscribe(dispatch);
-            updateSession(session);
+            return session;
         } catch (error) {
             console.error("Error connecting/choosing name:", error);
         }
@@ -32,6 +30,10 @@ const ChooseNameForm = () => {
         if (name.length >= 3) {
             try {
                 const session = await connectToServer();
+                await session.createOrUpdatePlayer(name);
+                await session.subscribe(dispatch);
+                await session.getCurrentPlayer();
+                updateSession(session);
                 navigate("/gameBrowser");
                 console.log("Connected to server:", session);
             } catch (error) {

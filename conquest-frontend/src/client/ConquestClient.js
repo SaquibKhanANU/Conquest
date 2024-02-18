@@ -54,6 +54,11 @@ class ConquestSession {
     }
 
     async subscribe(dispatch) {
+        this.stompClient.subscribe("/user/queue/currentPlayer", (message) => {
+            const player = JSON.parse(message.body);
+            console.log("Received current player:", player.playerName);
+            dispatch(ApiAction.setCurrentPlayer(player));
+        });
         this.stompClient.subscribe("/topic/players", (message) => {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
@@ -65,9 +70,15 @@ class ConquestSession {
         this.sendMessage("/app/players/getPlayersList", "");
     }
 
-    // Function to call the save endpoint
     async createOrUpdatePlayer(playerName) {
         this.sendMessage("/app/players/createOrUpdatePlayer", playerName);
+    }
+
+    async getCurrentPlayer() {
+        this.sendMessage(
+            "/app/players/getCurrentPlayer",
+            ""
+        );
     }
 
     // --- GameBrowser ---

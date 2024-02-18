@@ -8,17 +8,12 @@ const PlayersOnline = () => {
     const { session } = useSession();
     const players = useSelector((state) => state.lobby.players);
 
-    const fetchPlayers = async () => {
-        console.log("Fetching players...");
-        await session.getPlayersList();
-    };
-
     const fetchPlayersCallback = useCallback(async () => {
         if (session) {
             console.log("Fetching players...");
-            fetchPlayers();
+            await session.getPlayersList();
         }
-    }, []);
+    }, [session]);
 
     useEffect(() => {
         fetchPlayersCallback();
@@ -29,7 +24,7 @@ const PlayersOnline = () => {
     const handleRefresh = () => {
         if (session) {
             console.log("Refreshing players...");
-            fetchPlayers();
+            fetchPlayersCallback();
         }
     };
 

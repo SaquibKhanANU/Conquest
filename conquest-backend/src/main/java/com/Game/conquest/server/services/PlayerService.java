@@ -21,8 +21,8 @@ public class PlayerService {
         return playerRepository.contains(playerId);
     }
 
-    public void get(String playerId) {
-        playerRepository.get(playerId);
+    public Player get(String playerId) {
+        return playerRepository.get(playerId);
     }
 
     public void remove(String playerId) {
