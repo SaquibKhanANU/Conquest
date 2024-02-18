@@ -55,38 +55,22 @@ class ConquestSession {
 
     async subscribe(dispatch) {
         this.stompClient.subscribe("/topic/players", (message) => {
-            console.log("Received message:", message.body);
             const players = JSON.parse(message.body);
-            console.log("Received players:", players);
             dispatch(ApiAction.setPlayers(players));
         });
     }
 
-    // PLAYERS
-
-    async findAllPlayers() {
-        this.sendMessage("/app/players/getPlayers", "");
-    }
-
-    // Function to call the findById endpoint
-    async findPlayerById(id) {
-        this.sendMessage(`/app/api/players/${id}`, "");
+    // --- PLAYERS ---
+    async getPlayersList() {
+        this.sendMessage("/app/players/getPlayersList", "");
     }
 
     // Function to call the save endpoint
-    async savePlayer(playerName) {
-        console.log("Saving player:", playerName);
-        this.sendMessage("/app/players/savePlayer", playerName);
+    async createOrUpdatePlayer(playerName) {
+        this.sendMessage("/app/players/createOrUpdatePlayer", playerName);
     }
 
-    // Function to call the deleteById endpoint
-    async deletePlayerById(id) {
-        this.stompClient.send(
-            `/app/api/players/${id}`,
-            { method: "DELETE" },
-            ""
-        );
-    }
+    // --- GameBrowser ---
 }
 
 export default ConquestClient;

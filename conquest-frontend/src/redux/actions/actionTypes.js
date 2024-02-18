@@ -1,5 +1,6 @@
 // -- API ACTIONS TYPES
-
-// -- ACTIONS TYPES
+export const SET_CURRENT_PLAYER = "SET_CURRENT_PLAYER";
 export const SET_LOBBIES = "SET_LOBBIES";
 export const SET_PLAYERS = "SET_PLAYERS";
+
+// -- ACTIONS TYPES

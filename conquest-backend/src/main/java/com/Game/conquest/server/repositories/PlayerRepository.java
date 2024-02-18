@@ -1,45 +1,42 @@
 package com.Game.conquest.server.repositories;
 
 import com.Game.conquest.server.dataObjects.Player;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class PlayerRepository {
-    HashMap<UUID, Player> players = new HashMap<>();
-    private final Map<String, UUID> sessionUserMap = new ConcurrentHashMap<>();
+    private Map<String, Player> players = new ConcurrentHashMap<>();
 
-    // Method to associate session ID with user ID
-    public void associateSession(String userId, SimpMessageHeaderAccessor headerAccessor) {
-        String sessionId = headerAccessor.getSessionId();
-        sessionUserMap.put(sessionId, UUID.fromString(userId));
+    public Player createOrUpdate(String playerId, String username) {
+        Player player = players.computeIfAbsent(playerId, k -> new Player(playerId, username));
+        player.setPlayerId(playerId);
+        player.setPlayerName(username);
+        return player;
     }
 
-    public List<Player> findAll() {
-        return new ArrayList<>(players.values());
+    public boolean contains(String playerId) {
+        return players.containsKey(playerId);
     }
 
-    public void save(Player player) {
-        players.put(player.getPlayerId(), player);
+    public Player get(String playerId) {
+        Player player = players.get(playerId);
+        if (player == null) {
+            throw new NoSuchElementException("Player not found for ID: " + playerId);
+        }
+        return player;
     }
 
-    public void deleteById(UUID id) {
-        players.remove(id);
+    public void remove(String playerId) {
+        players.remove(playerId);
     }
 
-    public Player findById(UUID id) {
-        return players.get(id);
-    }
-
-    public UUID findPlayerIdBySessionId(String sessionId) {
-        return sessionUserMap.get(sessionId);
-    }
-
-    public void deleteBySessionId(String sessionId) {
-        sessionUserMap.remove(sessionId);
+    public Collection<Player> getList() {
+        return players.values();
     }
 
 }

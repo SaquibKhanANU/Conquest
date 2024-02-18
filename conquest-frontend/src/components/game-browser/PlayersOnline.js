@@ -10,7 +10,7 @@ const PlayersOnline = () => {
 
     const fetchPlayers = async () => {
         console.log("Fetching players...");
-        await session.findAllPlayers();
+        await session.getPlayersList();
     };
 
     const fetchPlayersCallback = useCallback(async () => {

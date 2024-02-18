@@ -4,41 +4,34 @@ package com.Game.conquest.server.services;
 import com.Game.conquest.server.dataObjects.Player;
 import com.Game.conquest.server.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.Collection;
 
 @Service
 public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public void associateSession(String userId, SimpMessageHeaderAccessor headerAccessor) {
-        playerRepository.associateSession(userId, headerAccessor);
-    }
-    public List<Player> findAll() {
-        return playerRepository.findAll();
+    public void createOrUpdate(String playerId, String username) {
+        playerRepository.createOrUpdate(playerId, username);
     }
 
-    public void save(Player player) {
-        playerRepository.save(player);
+    public boolean contains(String playerId) {
+        return playerRepository.contains(playerId);
     }
 
-    public void deleteById(UUID id) {
-        playerRepository.deleteById(id);
+    public void get(String playerId) {
+        playerRepository.get(playerId);
     }
 
-    public Player findById(UUID id) {
-        return playerRepository.findById(id);
+    public void remove(String playerId) {
+        playerRepository.remove(playerId);
     }
 
-    public UUID findPlayerIdBySessionId(String sessionId) {
-        return playerRepository.findPlayerIdBySessionId(sessionId);
+    public Collection<Player> getList() {
+        return playerRepository.getList();
     }
 
-    public void deleteBySessionId(String sessionId) {
-        playerRepository.deleteBySessionId(sessionId);
-    }
+
 }

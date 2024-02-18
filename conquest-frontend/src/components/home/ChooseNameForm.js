@@ -19,7 +19,9 @@ const ChooseNameForm = () => {
         );
         try {
             const session = await conquestClient.connect();
-            return session;
+            await session.createOrUpdatePlayer(name);
+            await session.subscribe(dispatch);
+            updateSession(session);
         } catch (error) {
             console.error("Error connecting/choosing name:", error);
         }
@@ -28,12 +30,16 @@ const ChooseNameForm = () => {
     async function handleSubmit(event) {
         event.preventDefault();
         if (name.length >= 3) {
-            const session = await connectToServer();
-            await session.subscribe(dispatch);
-            await session.savePlayer(name);
-            updateSession(session);
-            navigate("/gameBrowser");
-            console.log("Connected to server:", session);
+            try {
+                const session = await connectToServer();
+                navigate("/gameBrowser");
+                console.log("Connected to server:", session);
+            } catch (error) {
+                console.error("Error handling form submission:", error);
+                alert(
+                    "An error occurred while connecting to the server, Server may be disconnected. Please try again later."
+                );
+            }
         }
     }
 
