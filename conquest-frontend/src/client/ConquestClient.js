@@ -63,6 +63,11 @@ class ConquestSession {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
         });
+        this.stompClient.subscribe("/topic/lobbies", (message) => {
+            const lobbies = JSON.parse(message.body);
+            console.log("Received lobbies:", lobbies);
+            dispatch(ApiAction.setLobbies(lobbies));
+        });
     }
 
     // --- PLAYERS ---
@@ -74,14 +79,17 @@ class ConquestSession {
         this.sendMessage("/app/players/createOrUpdatePlayer", playerName);
     }
 
-    async getCurrentPlayer() {
-        this.sendMessage(
-            "/app/players/getCurrentPlayer",
-            ""
-        );
+    // --- GameBrowser ---
+    async getLobbiesList() {
+        this.sendMessage("/app/lobbies/getLobbiesList", "");
     }
 
-    // --- GameBrowser ---
+    async createGame(gameDefinitionJson) {
+        this.sendMessage(
+            "/app/lobbies/createLobby",
+            JSON.stringify(gameDefinitionJson)
+        );
+    }
 }
 
 export default ConquestClient;

@@ -32,7 +32,6 @@ const ChooseNameForm = () => {
                 const session = await connectToServer();
                 await session.createOrUpdatePlayer(name);
                 await session.subscribe(dispatch);
-                await session.getCurrentPlayer();
                 updateSession(session);
                 navigate("/gameBrowser");
                 console.log("Connected to server:", session);

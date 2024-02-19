@@ -2,7 +2,9 @@ import "./LobbyTile.css";
 import React from "react";
 
 const LobbyTile = ({ gameLobbyData }) => {
-    const { lobbyName, map, mode, maxPlayers, privateLobby } = gameLobbyData;
+    const { lobbyRules } = gameLobbyData;
+    const { lobbyName, map, mode, maxPlayers, privacy } = lobbyRules;
+    const isPrivate = privacy ? "YES" : "NO";
 
     return (
         <div className="lobby-tile-container">
@@ -20,7 +22,7 @@ const LobbyTile = ({ gameLobbyData }) => {
                     <p>1/{maxPlayers}</p>
                 </div>
                 <div>
-                    <p>{privateLobby}</p>
+                    <p>{isPrivate}</p>
                 </div>
                 <div>
                     <button>JOIN</button>

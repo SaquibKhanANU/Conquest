@@ -1,5 +1,6 @@
 import "./CreateGame.css";
 import React, { useState } from "react";
+import { useSession } from "../session/SessionContext";
 
 const CreateGame = () => {
     const [map, setMap] = useState("MEDIUM (M)");
@@ -7,6 +8,7 @@ const CreateGame = () => {
     const [isPrivate, setIsPrivate] = useState("NO");
     const [maxPlayers, setMaxPlayers] = useState(4);
     const [lobbyName, setLobbyName] = useState("");
+    const { session } = useSession();
 
     const handleLobbyNameChange = (event) => {
         setLobbyName(event.target.value);
@@ -14,6 +16,16 @@ const CreateGame = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const privacy = isPrivate === "YES";
+        const gameDefinitionJson = {
+            map,
+            mode,
+            privacy,
+            maxPlayers,
+            lobbyName,
+        };
+        console.log("Creating game with:", gameDefinitionJson);
+        session.createGame(gameDefinitionJson);
     };
 
     return (

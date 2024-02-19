@@ -13,8 +13,9 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public void createOrUpdate(String playerId, String username) {
-        playerRepository.createOrUpdate(playerId, username);
+    public Player createOrUpdate(String playerId, String username) {
+        Player player = playerRepository.createOrUpdate(playerId, username);
+        return player;
     }
 
     public boolean contains(String playerId) {

@@ -1,5 +1,5 @@
 import "./PlayersOnline.css";
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import PlayerOnlineTile from "./PlayerOnlineTile";
 import { useSelector } from "react-redux";
 import { useSession } from "../session/SessionContext";
@@ -8,23 +8,17 @@ const PlayersOnline = () => {
     const { session } = useSession();
     const players = useSelector((state) => state.lobby.players);
 
-    const fetchPlayersCallback = useCallback(async () => {
+    useEffect(() => {
         if (session) {
             console.log("Fetching players...");
-            await session.getPlayersList();
+            session.getPlayersList();
         }
     }, [session]);
-
-    useEffect(() => {
-        fetchPlayersCallback();
-        const intervalId = setInterval(fetchPlayersCallback, 30000);
-        return () => clearInterval(intervalId);
-    }, [fetchPlayersCallback]);
 
     const handleRefresh = () => {
         if (session) {
             console.log("Refreshing players...");
-            fetchPlayersCallback();
+            session.getPlayersList();
         }
     };
 

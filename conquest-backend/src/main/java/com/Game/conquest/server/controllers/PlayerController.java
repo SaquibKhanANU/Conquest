@@ -31,9 +31,10 @@ public class PlayerController {
     }
 
     @MessageMapping("/players/createOrUpdatePlayer")
-    public void createOrUpdatePlayer(@Payload String playerName, Principal principal) {
+    @SendToUser("/queue/currentPlayer")
+    public Player createOrUpdatePlayer(@Payload String playerName, Principal principal) {
         String playerId = principal.getName();
-        playerService.createOrUpdate(playerId, playerName);
+        return playerService.createOrUpdate(playerId, playerName);
     }
 
     @MessageMapping("/players/removePlayer")
@@ -42,17 +43,10 @@ public class PlayerController {
         playerService.remove(playerId);
     }
 
-    @MessageMapping("/players/getCurrentPlayer")
-    @SendToUser("/queue/currentPlayer")
-    public Player getCurrentPlayer(Principal principal) {
-        String playerId = principal.getName();
-        return playerService.get(playerId);
-    }
-
     @EventListener
     public void handleSessionDisconnect(SessionDisconnectEvent event) {
         String playerId = Objects.requireNonNull(event.getUser()).getName();
         playerService.remove(playerId);
-        getPlayersList();
+        messagingTemplate.convertAndSend("/topic/players", playerService.getList());
     }
 }
