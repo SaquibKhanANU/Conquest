@@ -1,0 +1,48 @@
+.actions-lobby-container {
+    background-color: black;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--gold);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 130px;
+    font-size: 14px;
+}
+
+.lobby-action-button {
+    font-size: 1.2em;
+    margin: 0 0;
+    padding: 0 0;
+    border: none;
+    color: var(--gold);
+    padding: 7px;
+    font-family: var(--global-font);
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: antiquewhite;
+}
+
+.lobby-action-button.red-hover:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.lobby-action-button.green-hover:hover {
+    color: green;
+    cursor: pointer;
+}
+
+.lobby-action-button .arrow-left {
+    transform: scaleX(-1);
+    display: inline-block; /* Ensures that the span can be transformed */
+}
+
+.lobby-api-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}

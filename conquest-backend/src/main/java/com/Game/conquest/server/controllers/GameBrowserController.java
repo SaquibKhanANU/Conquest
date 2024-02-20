@@ -2,6 +2,7 @@ package com.Game.conquest.server.controllers;
 
 
 import com.Game.conquest.server.converter.LobbyRulesConverter;
+import com.Game.conquest.server.dataObjects.Lobby;
 import com.Game.conquest.server.dataObjects.LobbyRules;
 import com.Game.conquest.server.dataObjects.Player;
 import com.Game.conquest.server.repositories.PlayerRepository;
@@ -40,6 +41,22 @@ public class GameBrowserController {
         Player lobbyOwner = playerRepository.get(principal.getName());
         lobbyService.create(lobbyOwner, lobbyRules);
         getLobbiesList();
+    }
+
+    @MessageMapping("/lobbies/removeLobby")
+    public void removeLobby(@Payload long lobbyId) {
+        lobbyService.remove(lobbyId);
+        getLobbiesList();
+    }
+
+    @MessageMapping("/lobby/joinLobby")
+    public void joinLobby(@Payload long lobbyId, Principal principal) {
+        Player player = playerRepository.get(principal.getName());
+        Lobby lobby = lobbyService.get(lobbyId);
+
+        synchronized (lobby) {
+            lobby.addPlayer(player);
+        }
     }
 
 }

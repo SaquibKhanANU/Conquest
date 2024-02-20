@@ -6,6 +6,10 @@ const LobbyTile = ({ gameLobbyData }) => {
     const { lobbyName, map, mode, maxPlayers, privacy } = lobbyRules;
     const isPrivate = privacy ? "YES" : "NO";
 
+    const handleJoinLobby = () => {
+        console.log("Joining lobby...");
+    };
+
     return (
         <div className="lobby-tile-container">
             <div className="lobby-tile-body">
@@ -25,7 +29,7 @@ const LobbyTile = ({ gameLobbyData }) => {
                     <p>{isPrivate}</p>
                 </div>
                 <div>
-                    <button>JOIN</button>
+                    <button onClick={handleJoinLobby}>JOIN</button>
                 </div>
             </div>
         </div>

@@ -1,0 +1,28 @@
+.lobby-player-tile-container {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    margin-bottom: 3px;
+}
+
+.lobby-player-tile-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.lobby-player-tile-body p {
+    text-align: center;
+}
+
+.ready {
+    color: green;
+    font-weight: bold;
+}
+
+.not-ready {
+    color: red;
+    font-weight: bold;
+}

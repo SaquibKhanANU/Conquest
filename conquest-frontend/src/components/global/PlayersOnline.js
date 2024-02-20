@@ -2,7 +2,7 @@ import "./PlayersOnline.css";
 import React, { useEffect } from "react";
 import PlayerOnlineTile from "./PlayerOnlineTile";
 import { useSelector } from "react-redux";
-import { useSession } from "../session/SessionContext";
+import { useSession } from "../contexts/SessionContext";
 
 const PlayersOnline = () => {
     const { session } = useSession();

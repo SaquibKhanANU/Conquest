@@ -1,0 +1,34 @@
+.game-lobby-container {
+    width: 100%;
+    height: 100vh;
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: aliceblue;
+}
+
+.game-lobby-body {
+    display: flex;
+    justify-content: space-between; /* Items spread out along the main axis */
+    align-items: flex-start; /* Items aligned at the start of the cross axis */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.lobby-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.lobby-players {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

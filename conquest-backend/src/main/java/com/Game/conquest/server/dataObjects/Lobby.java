@@ -2,6 +2,7 @@ package com.Game.conquest.server.dataObjects;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Synchronized;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,11 @@ public class Lobby {
         this.lobbyOwner = lobbyOwner;
         this.lobbyRules = lobbyRules;
         this.lobbyPlayers = new ArrayList<>(lobbyRules.getMaxPlayers());
+    }
+
+    @Synchronized
+    public void addPlayer(Player player) {
+        lobbyPlayers.add(player);
     }
 
 }
