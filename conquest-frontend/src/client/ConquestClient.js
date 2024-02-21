@@ -54,20 +54,28 @@ class ConquestSession {
     }
 
     async subscribe(dispatch) {
-        this.stompClient.subscribe("/user/queue/currentPlayer", (message) => {
-            const player = JSON.parse(message.body);
-            console.log("Received current player:", player.playerName);
-            dispatch(ApiAction.setCurrentPlayer(player));
-        });
         this.stompClient.subscribe("/topic/players", (message) => {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
         });
         this.stompClient.subscribe("/topic/lobbies", (message) => {
             const lobbies = JSON.parse(message.body);
-            console.log("Received lobbies:", lobbies);
             dispatch(ApiAction.setLobbies(lobbies));
         });
+        this.stompClient.subscribe(
+            "/user/queue/player/currentPlayer",
+            (message) => {
+                const player = JSON.parse(message.body);
+                dispatch(ApiAction.setCurrentPlayer(player));
+            }
+        );
+        this.stompClient.subscribe(
+            "/user/queue/player/currentLobby",
+            (message) => {
+                const lobby = JSON.parse(message.body);
+                dispatch(ApiAction.setCurrentLobby(lobby));
+            }
+        );
     }
 
     // --- PLAYERS ---
@@ -89,6 +97,23 @@ class ConquestSession {
             "/app/lobbies/createLobby",
             JSON.stringify(gameDefinitionJson)
         );
+    }
+
+    async joinLobby(lobbyId) {
+        this.sendMessage("/app/lobbies/joinLobby", lobbyId);
+    }
+
+    async createLobbyAndJoin(gameDefinitionJson) {
+        this.sendMessage(
+            "/app/lobbies/createLobbyAndJoin",
+            JSON.stringify(gameDefinitionJson)
+        );
+    
+    }
+
+    // --- GameLobby ---
+    async getLobbyData(lobbyId) {
+        this.sendMessage("/app/lobby/getLobbyData", lobbyId);
     }
 }
 

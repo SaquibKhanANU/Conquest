@@ -14,8 +14,7 @@ public class PlayerService {
     private PlayerRepository playerRepository;
 
     public Player createOrUpdate(String playerId, String username) {
-        Player player = playerRepository.createOrUpdate(playerId, username);
-        return player;
+        return playerRepository.createOrUpdate(playerId, username);
     }
 
     public boolean contains(String playerId) {

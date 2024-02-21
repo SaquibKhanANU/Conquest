@@ -33,8 +33,8 @@ public class LobbyRepository {
             throw new NoSuchElementException("Lobby not found for ID: " + lobbyId);
         }
         return lobbies.get(lobbyId);
-
     }
+
     public void remove(long lobbyId) {
         lobbies.remove(lobbyId);
     }

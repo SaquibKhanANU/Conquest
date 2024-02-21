@@ -10,15 +10,19 @@ import LobbyPlayersList from "./LobbyPlayersList";
 import LobbyActions from "./LobbyActions";
 import LobbySettings from "./LobbySettings";
 
-const GameLobby = ({ lobbyData }) => {
+const GameLobby = () => {
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
     const navigate = useNavigate();
     const { session } = useSession();
     const [player, setPlayer] = useState(currentPlayer);
+    const currentLobby = useSelector(
+        (state) => state.currentPlayer.currentLobby
+    );
 
     useEffect(() => {
+        console.log("Current lobby:", currentLobby);
         if (session === null) {
-            // navigate("/");
+            navigate("/");
         }
     }, [navigate, session]);
 
@@ -29,11 +33,17 @@ const GameLobby = ({ lobbyData }) => {
         >
             <div className="game-lobby-body">
                 <div className="lobby-settings">
-                    <LobbySettings />
+                    {currentLobby.lobbyRules && (
+                        <LobbySettings settings={currentLobby.lobbyRules} />
+                    )}
                 </div>
                 <div className="lobby-body">
                     <div>
-                        <LobbyPlayersList />
+                        {currentLobby.lobbyPlayers && (
+                            <LobbyPlayersList
+                                players={currentLobby.lobbyPlayers}
+                            />
+                        )}
                     </div>
                     <div>
                         <LobbyActions />

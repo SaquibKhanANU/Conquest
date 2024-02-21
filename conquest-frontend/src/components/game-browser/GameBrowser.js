@@ -13,12 +13,18 @@ const GameBrowser = () => {
     const { session } = useSession();
     const navigate = useNavigate();
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
+    const currentLobby = useSelector(
+        (state) => state.currentPlayer.currentLobby
+    );
 
     useEffect(() => {
         if (session === null) {
             navigate("/");
+        } else if (currentLobby.lobbyId !== undefined) {
+            console.log("Navigating to game lobby...");
+            navigate("/gameLobby");
         }
-    }, [navigate, session]);
+    }, [navigate, session, currentLobby]);
 
     return (
         <div

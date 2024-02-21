@@ -2,7 +2,7 @@ import "./LobbyPlayersList.css";
 import React from "react";
 import LobbyPlayerTile from "./LobbyPlayerTile";
 
-const LobbyPlayersList = () => {
+const LobbyPlayersList = ({ players }) => {
     return (
         <div className="players-list-container">
             <h1>PLAYERS</h1>
@@ -19,12 +19,11 @@ const LobbyPlayersList = () => {
                     </div>
                 </div>
                 <div className="players-list scroll-bar">
-                    <LobbyPlayerTile playerData={{ playerName: "Player 1" }} />
-                    {/* {lobbies.map((lobby) => (
-                        <div key={lobby.lobbyId}>
-                            <LobbyTile gameLobbyData={lobby} />
+                    {players.map((player) => (
+                        <div key={player.playerId}>
+                            <LobbyPlayerTile playerData={player} />
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </div>
         </div>

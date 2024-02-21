@@ -2,6 +2,7 @@ import "./CreateGame.css";
 import React, { useState } from "react";
 import { useSession } from "../contexts/SessionContext";
 
+
 const CreateGame = () => {
     const [map, setMap] = useState("MEDIUM (M)");
     const [mode, setMode] = useState("CLASSIC");
@@ -14,7 +15,7 @@ const CreateGame = () => {
         setLobbyName(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const privacy = isPrivate === "YES";
         const gameDefinitionJson = {
@@ -24,7 +25,7 @@ const CreateGame = () => {
             maxPlayers,
             lobbyName,
         };
-        session.createGame(gameDefinitionJson);
+        await session.createLobbyAndJoin(gameDefinitionJson);
     };
 
     return (

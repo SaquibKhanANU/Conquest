@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -36,11 +37,20 @@ public class GameBrowserController {
     }
 
     @MessageMapping("/lobbies/createLobby")
-    public void createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
+    public Lobby createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
         LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
         Player lobbyOwner = playerRepository.get(principal.getName());
-        lobbyService.create(lobbyOwner, lobbyRules);
+        Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
         getLobbiesList();
+        return lobby;
+    }
+
+    @MessageMapping("/lobbies/createLobbyAndJoin")
+    @SendToUser("/queue/player/currentLobby")
+    public Lobby createLobbyAndJoin(@Payload String gameDefinitionJson, Principal principal) throws Exception {
+        Lobby lobby = createLobby(gameDefinitionJson, principal);
+        joinLobby(lobby.getLobbyId(), principal);
+        return lobby;
     }
 
     @MessageMapping("/lobbies/removeLobby")
@@ -49,14 +59,14 @@ public class GameBrowserController {
         getLobbiesList();
     }
 
-    @MessageMapping("/lobby/joinLobby")
-    public void joinLobby(@Payload long lobbyId, Principal principal) {
+    @MessageMapping("/lobbies/joinLobby")
+    @SendToUser("/queue/player/currentLobby")
+    public Lobby joinLobby(@Payload long lobbyId, Principal principal) {
         Player player = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.get(lobbyId);
-
         synchronized (lobby) {
             lobby.addPlayer(player);
         }
+        return lobby;
     }
-
 }

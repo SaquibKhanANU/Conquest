@@ -1,13 +1,16 @@
 import "./LobbyTile.css";
 import React from "react";
+import { useSession } from "../contexts/SessionContext";
 
 const LobbyTile = ({ gameLobbyData }) => {
-    const { lobbyRules } = gameLobbyData;
+    const {session} = useSession();
+    const { lobbyId, lobbyRules } = gameLobbyData;
     const { lobbyName, map, mode, maxPlayers, privacy } = lobbyRules;
     const isPrivate = privacy ? "YES" : "NO";
 
-    const handleJoinLobby = () => {
-        console.log("Joining lobby...");
+    const handleJoinLobby = async() => {
+        console.log("Joining lobby...", gameLobbyData);
+        await session.joinLobby(lobbyId);
     };
 
     return (

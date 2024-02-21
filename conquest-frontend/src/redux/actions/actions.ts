@@ -10,6 +10,13 @@ export const setCurrentPlayer = (playerData) => {
     };
 };
 
+export const setCurrentLobby = (lobbyData) => {
+    return {
+        type: ActionType.SET_CURRENT_LOBBY,
+        payload: lobbyData,
+    };
+}
+
 export const setLobbies = (lobbiesData) => {
     return {
         type: ActionType.SET_LOBBIES,

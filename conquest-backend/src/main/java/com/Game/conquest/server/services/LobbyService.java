@@ -17,8 +17,8 @@ public class LobbyService {
     private LobbyRepository lobbyRepository;
 
     public Lobby create(Player lobbyOwner, LobbyRules lobbyRules) {
-        lobbyRepository.create(lobbyOwner, lobbyRules);
-        return null;
+        Lobby lobby = lobbyRepository.create(lobbyOwner, lobbyRules);
+        return lobby;
     }
 
     public boolean contains(long lobbyId) {
