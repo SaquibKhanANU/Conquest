@@ -2,12 +2,13 @@ import "./GameBrowser.css";
 import BackgroundImage from "../../resources/imgs/game_browser_background_img.png";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSession } from "../contexts/SessionContext";
+import { useSession } from "../global/contexts/SessionContext";
 import CreateGame from "./CreateGame";
 import JoinGame from "./JoinGame";
-import Profile from "../global/Profile";
-import PlayersOnline from "../global/PlayersOnline";
+import Profile from "../global/profile/Profile";
+import PlayersOnline from "../global/playersOnline/PlayersOnline";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const GameBrowser = () => {
     const { session } = useSession();
@@ -16,13 +17,14 @@ const GameBrowser = () => {
     const currentLobby = useSelector(
         (state) => state.currentPlayer.currentLobby
     );
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (session === null) {
             navigate("/");
         } else if (currentLobby.lobbyId !== undefined) {
-            console.log("Navigating to game lobby...");
-            navigate("/gameLobby");
+            session.joinLobby(currentLobby.lobbyId, dispatch);
+            navigate("/gameLobby/" + currentLobby.lobbyId);
         }
     }, [navigate, session, currentLobby]);
 

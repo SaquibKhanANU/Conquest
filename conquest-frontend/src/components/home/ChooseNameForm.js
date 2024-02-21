@@ -1,7 +1,7 @@
 import "./ChooseNameForm.css";
 import React, { useState } from "react";
 import ConquestClient from "../../client/ConquestClient.js";
-import { useSession } from "../contexts/SessionContext.js"; // Import the useSession hook
+import { useSession } from "../global/contexts/SessionContext.js"; // Import the useSession hook
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 

@@ -2,7 +2,7 @@ import "./JoinGame.css";
 import { React, useEffect } from "react";
 import LobbyTile from "./LobbyTile";
 import { useSelector } from "react-redux";
-import { useSession } from "../contexts/SessionContext";
+import { useSession } from "../global/contexts/SessionContext";
 
 const JoinGame = () => {
     const lobbies = useSelector((state) => state.lobby.lobbies);

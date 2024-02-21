@@ -37,19 +37,12 @@ public class GameBrowserController {
     }
 
     @MessageMapping("/lobbies/createLobby")
+    @SendToUser("/queue/player/currentLobby")
     public Lobby createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
         LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
         Player lobbyOwner = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
         getLobbiesList();
-        return lobby;
-    }
-
-    @MessageMapping("/lobbies/createLobbyAndJoin")
-    @SendToUser("/queue/player/currentLobby")
-    public Lobby createLobbyAndJoin(@Payload String gameDefinitionJson, Principal principal) throws Exception {
-        Lobby lobby = createLobby(gameDefinitionJson, principal);
-        joinLobby(lobby.getLobbyId(), principal);
         return lobby;
     }
 
@@ -59,14 +52,14 @@ public class GameBrowserController {
         getLobbiesList();
     }
 
-    @MessageMapping("/lobbies/joinLobby")
-    @SendToUser("/queue/player/currentLobby")
-    public Lobby joinLobby(@Payload long lobbyId, Principal principal) {
+    @MessageMapping("/lobby/joinLobby")
+    public void joinLobby(@Payload long lobbyId, Principal principal) {
         Player player = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.get(lobbyId);
         synchronized (lobby) {
             lobby.addPlayer(player);
         }
-        return lobby;
+        messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/player/currentLobby", lobby);
+        messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
     }
 }

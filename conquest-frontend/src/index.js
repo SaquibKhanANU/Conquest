@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store/store.ts";
-import { SessionProvider } from "./components/contexts/SessionContext.js";
+import { SessionProvider } from "./components/global/contexts/SessionContext.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

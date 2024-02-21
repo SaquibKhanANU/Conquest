@@ -92,29 +92,22 @@ class ConquestSession {
         this.sendMessage("/app/lobbies/getLobbiesList", "");
     }
 
-    async createGame(gameDefinitionJson) {
+    async createLobby(gameDefinitionJson) {
         this.sendMessage(
             "/app/lobbies/createLobby",
             JSON.stringify(gameDefinitionJson)
         );
     }
 
-    async joinLobby(lobbyId) {
-        this.sendMessage("/app/lobbies/joinLobby", lobbyId);
-    }
-
-    async createLobbyAndJoin(gameDefinitionJson) {
-        this.sendMessage(
-            "/app/lobbies/createLobbyAndJoin",
-            JSON.stringify(gameDefinitionJson)
-        );
-    
+    async joinLobby(lobbyId, dispatch) {
+        this.stompClient.subscribe(`/topic/lobby/${lobbyId}`, (message) => {
+            const lobby = JSON.parse(message.body);
+            dispatch(ApiAction.setCurrentLobby(lobby));
+        });
+        this.sendMessage("/app/lobby/joinLobby", lobbyId);
     }
 
     // --- GameLobby ---
-    async getLobbyData(lobbyId) {
-        this.sendMessage("/app/lobby/getLobbyData", lobbyId);
-    }
 }
 
 export default ConquestClient;

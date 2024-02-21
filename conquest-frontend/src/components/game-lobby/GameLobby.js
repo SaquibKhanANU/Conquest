@@ -1,11 +1,11 @@
 import "./GameLobby.css";
 import React, { useState, useEffect } from "react";
 import BackgroundImage from "../../resources/imgs/game_browser_background_img.png";
-import Profile from "../global/Profile";
-import PlayersOnline from "../global/PlayersOnline";
+import Profile from "../global/profile/Profile";
+import PlayersOnline from "../global/playersOnline/PlayersOnline";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useSession } from "../contexts/SessionContext";
+import { useSession } from "../global/contexts/SessionContext";
 import LobbyPlayersList from "./LobbyPlayersList";
 import LobbyActions from "./LobbyActions";
 import LobbySettings from "./LobbySettings";
@@ -20,7 +20,6 @@ const GameLobby = () => {
     );
 
     useEffect(() => {
-        console.log("Current lobby:", currentLobby);
         if (session === null) {
             navigate("/");
         }

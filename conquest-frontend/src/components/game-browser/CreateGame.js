@@ -1,7 +1,6 @@
 import "./CreateGame.css";
 import React, { useState } from "react";
-import { useSession } from "../contexts/SessionContext";
-
+import { useSession } from "../global/contexts/SessionContext";
 
 const CreateGame = () => {
     const [map, setMap] = useState("MEDIUM (M)");
@@ -25,7 +24,7 @@ const CreateGame = () => {
             maxPlayers,
             lobbyName,
         };
-        await session.createLobbyAndJoin(gameDefinitionJson);
+        session.createLobby(gameDefinitionJson);
     };
 
     return (
