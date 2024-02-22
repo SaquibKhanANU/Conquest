@@ -30,7 +30,7 @@ const ChooseNameForm = () => {
         if (name.length >= 3) {
             try {
                 const session = await connectToServer();
-                await session.subscribe(dispatch);
+                await session.subscribe(dispatch, navigate);
                 await session.createOrUpdatePlayer(name);
                 updateSession(session);
                 navigate("/gameBrowser");

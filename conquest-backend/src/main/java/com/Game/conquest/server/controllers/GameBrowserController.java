@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -37,13 +36,12 @@ public class GameBrowserController {
     }
 
     @MessageMapping("/lobbies/createLobby")
-    @SendToUser("/queue/player/currentLobby")
-    public Lobby createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
+    public void createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
         LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
         Player lobbyOwner = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
         getLobbiesList();
-        return lobby;
+        joinLobby(lobby.getLobbyId(), principal);
     }
 
     @MessageMapping("/lobbies/removeLobby")
@@ -58,8 +56,8 @@ public class GameBrowserController {
         Lobby lobby = lobbyService.get(lobbyId);
         synchronized (lobby) {
             lobby.addPlayer(player);
+            messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/player/currentLobby", lobby);
         }
-        messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/player/currentLobby", lobby);
         messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
     }
 }

@@ -14,15 +14,13 @@ const GameLobby = () => {
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
     const navigate = useNavigate();
     const { session } = useSession();
-    const [player, setPlayer] = useState(currentPlayer);
-    const currentLobby = useSelector(
-        (state) => state.currentPlayer.currentLobby
-    );
+    const [playersProfile, setPlayerProfile] = useState(currentPlayer);
+    const currentLobby = useSelector((state) => state.currentPlayer.currentLobby);
 
     useEffect(() => {
         if (session === null) {
             navigate("/");
-        }
+        } 
     }, [navigate, session]);
 
     return (
@@ -45,12 +43,12 @@ const GameLobby = () => {
                         )}
                     </div>
                     <div>
-                        <LobbyActions />
+                        <LobbyActions lobbyId={currentLobby.lobbyId} />
                     </div>
                 </div>
                 <div className="lobby-players">
                     <div>
-                        <Profile player={player} />
+                        <Profile player={playersProfile} />
                     </div>
                     <div>
                         <PlayersOnline />

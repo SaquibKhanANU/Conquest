@@ -39,7 +39,7 @@ const CreateGame = () => {
                                 type="text"
                                 value={lobbyName}
                                 onChange={handleLobbyNameChange}
-                                maxLength={10}
+                                maxLength={14}
                                 minLength={1}
                             />
                         </div>

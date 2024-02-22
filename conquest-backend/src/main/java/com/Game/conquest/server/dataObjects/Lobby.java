@@ -27,4 +27,19 @@ public class Lobby {
         lobbyPlayers.add(player);
     }
 
+    @Synchronized
+    public void removePlayer(Player player) {
+        lobbyPlayers.remove(player);
+    }
+
+    @Synchronized
+    public ArrayList<Player> getLobbyPlayers() {
+        return lobbyPlayers;
+    }
+
+    @Synchronized
+    public boolean isFull() {
+        return lobbyPlayers.size() == lobbyRules.getMaxPlayers();
+    }
+
 }

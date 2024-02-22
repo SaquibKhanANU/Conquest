@@ -8,25 +8,17 @@ import JoinGame from "./JoinGame";
 import Profile from "../global/profile/Profile";
 import PlayersOnline from "../global/playersOnline/PlayersOnline";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 const GameBrowser = () => {
     const { session } = useSession();
     const navigate = useNavigate();
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const currentLobby = useSelector(
-        (state) => state.currentPlayer.currentLobby
-    );
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (session === null) {
             navigate("/");
-        } else if (currentLobby.lobbyId !== undefined) {
-            session.joinLobby(currentLobby.lobbyId, dispatch);
-            navigate("/gameLobby/" + currentLobby.lobbyId);
-        }
-    }, [navigate, session, currentLobby]);
+        } 
+    }, [navigate, session]);
 
     return (
         <div

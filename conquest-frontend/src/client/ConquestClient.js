@@ -53,7 +53,7 @@ class ConquestSession {
         }
     }
 
-    async subscribe(dispatch) {
+    async subscribe(dispatch, navigate) {
         this.stompClient.subscribe("/topic/players", (message) => {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
@@ -74,6 +74,14 @@ class ConquestSession {
             (message) => {
                 const lobby = JSON.parse(message.body);
                 dispatch(ApiAction.setCurrentLobby(lobby));
+                this.stompClient.subscribe(
+                    `/topic/lobby/${lobby.lobbyId}`,
+                    (message) => {
+                        const updatedLobby = JSON.parse(message.body);
+                        dispatch(ApiAction.setCurrentLobby(updatedLobby));
+                    }
+                );
+                navigate("/gameLobby/" + lobby.lobbyId);
             }
         );
     }
@@ -99,15 +107,18 @@ class ConquestSession {
         );
     }
 
-    async joinLobby(lobbyId, dispatch) {
-        this.stompClient.subscribe(`/topic/lobby/${lobbyId}`, (message) => {
-            const lobby = JSON.parse(message.body);
-            dispatch(ApiAction.setCurrentLobby(lobby));
-        });
+    async joinLobby(lobbyId) {
         this.sendMessage("/app/lobby/joinLobby", lobbyId);
     }
 
     // --- GameLobby ---
+
+    // TODO: FIX THIS SO THERES NO DISPATCH
+    async leaveLobby(lobbyId, dispatch) {
+        dispatch(ApiAction.setCurrentLobby({}));
+        this.sendMessage("/app/lobby/leaveLobby", lobbyId);
+        this.stompClient.unsubscribe(`/topic/lobby/${lobbyId}`);
+    }
 }
 
 export default ConquestClient;
