@@ -10,7 +10,11 @@ const LobbyActions = ({ lobbyId }) => {
     const handleLeaveLobby = async () => {
         console.log("Leaving game...");
         session.leaveLobby(lobbyId);
-        navigate("/gameBrowser")
+    };
+
+    const handleDisbandLobby = async () => {
+        console.log("Disbanding game...");
+        session.disbandLobby(lobbyId);
     };
 
     return (
@@ -20,7 +24,10 @@ const LobbyActions = ({ lobbyId }) => {
                     Start Game &#10148;
                 </button>
 
-                <button className="lobby-action-button red-hover">
+                <button
+                    className="lobby-action-button red-hover"
+                    onClick={handleDisbandLobby}
+                >
                     DISBAND Game &#10005;
                 </button>
                 <button

@@ -27,10 +27,11 @@ public class LobbyController {
         Player player = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.get(lobbyId);
         synchronized (lobby) {
-            lobby.removePlayer(player);
-            if (lobby.getLobbyPlayers().isEmpty()) {
-                lobbyService.remove(lobbyId);
+            if (lobby.getLobbyPlayers().isEmpty() || checkLobbyOwner(lobbyId, principal)) {
+                disbandLobby(lobbyId, principal);
+                return;
             }
+            lobby.removePlayer(player);
             player.setLobbyId(-1);
         }
         messagingTemplate.convertAndSendToUser(principal.getName(), "/queue/player/currentLobby", "{}");
@@ -40,10 +41,21 @@ public class LobbyController {
     @MessageMapping("/lobby/disbandLobby")
     public void disbandLobby(@Payload long lobbyId, Principal principal) {
         Lobby lobby = lobbyService.get(lobbyId);
+        if (!checkLobbyOwner(lobbyId, principal)) {
+            return;
+        }
         synchronized (lobby) {
             lobby.getLobbyPlayers().forEach(player -> player.setLobbyId(-1));
+            lobby.getLobbyPlayers().forEach(player -> messagingTemplate.convertAndSendToUser(player.getPlayerId(),
+                    "/queue/player/currentLobby", "{}"));
             lobbyService.remove(lobbyId);
         }
         messagingTemplate.convertAndSend("/topic/lobbies", lobbyService.getList());
+    }
+
+    public boolean checkLobbyOwner(long lobbyId, Principal principal) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        Player playerPrincipal = playerRepository.get(principal.getName());
+        return lobby.getLobbyOwner().getPlayerId().equals(playerPrincipal.getPlayerId());
     }
 }

@@ -75,7 +75,13 @@ class ConquestSession {
             (message) => {
                 const lobby = JSON.parse(message.body);
                 dispatch(ApiAction.setCurrentLobby(lobby));
-                if (lobby.lobbyId !== undefined) {
+                if (lobby.lobbyId === undefined) {
+                    navigate("/gameBrowser");
+                    this.stompClient.unsubscribe(
+                        `/topic/lobby/${lobby.lobbyId}`
+                    );
+                }
+                else if (lobby.lobbyId !== undefined) {
                     this.stompClient.subscribe(
                         `/topic/lobby/${lobby.lobbyId}`,
                         (message) => {
@@ -116,10 +122,12 @@ class ConquestSession {
 
     // --- GameLobby ---
 
-    // TODO: FIX THIS SO THERES NO DISPATCH
     async leaveLobby(lobbyId) {
-        await this.sendMessage("/app/lobby/leaveLobby", lobbyId);
-        this.stompClient.unsubscribe(`/topic/lobby/${lobbyId}`);
+        this.sendMessage("/app/lobby/leaveLobby", lobbyId);
+    }
+
+    async disbandLobby(lobbyId) {
+        this.sendMessage("/app/lobby/disbandLobby", lobbyId);
     }
 }
 

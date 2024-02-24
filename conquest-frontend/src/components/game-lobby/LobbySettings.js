@@ -2,9 +2,10 @@ import "./LobbySettings.css";
 import React, { useState } from "react";
 import civilizationsJson from "../../resources/jsonData/civilizations.json";
 
-const LobbySettings = ({ settings }) => {
+const LobbySettings = ({ settings, owner }) => {
     const [civilization, setCivilization] = useState(civilizationsJson[0]);
     const { lobbyName, map, maxPlayers, mode, privacy } = settings;
+    const { playerName } = owner;
     const isPrivate = privacy ? "YES" : "NO";
 
     return (
@@ -14,6 +15,10 @@ const LobbySettings = ({ settings }) => {
                 <div className="profile-info">
                     <p className="silver-text">LOBBY NAME:</p>
                     <p>{lobbyName}</p>
+                </div>
+                <div className="profile-info">
+                    <p className="silver-text">LOBBY OWNER:</p>
+                    <p>{playerName}</p>
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">MAP:</p>

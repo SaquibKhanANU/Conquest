@@ -20,7 +20,6 @@ public class WebSocketEventListener {
     private SimpMessagingTemplate messagingTemplate;
     @Autowired
     private PlayerService playerService;
-
     @Autowired
     private LobbyController lobbyController;
 

@@ -31,7 +31,7 @@ const GameLobby = () => {
             <div className="game-lobby-body">
                 <div className="lobby-settings">
                     {currentLobby.lobbyRules && (
-                        <LobbySettings settings={currentLobby.lobbyRules} />
+                        <LobbySettings settings={currentLobby.lobbyRules} owner={currentLobby.lobbyOwner} />
                     )}
                 </div>
                 <div className="lobby-body">
