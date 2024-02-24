@@ -14,17 +14,13 @@ import java.security.Principal;
 
 @Controller
 public class LobbyController {
-    private LobbyService lobbyService;
-    private SimpMessagingTemplate messagingTemplate;
-    private PlayerRepository playerRepository;
 
     @Autowired
-    public LobbyController(LobbyService lobbyService, SimpMessagingTemplate messagingTemplate,
-                                 PlayerRepository playerRepository) {
-        this.lobbyService = lobbyService;
-        this.messagingTemplate = messagingTemplate;
-        this.playerRepository = playerRepository;
-    }
+    private LobbyService lobbyService;
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @MessageMapping("/lobby/leaveLobby")
     public void leaveLobby(@Payload long lobbyId, Principal principal) {
@@ -35,7 +31,19 @@ public class LobbyController {
             if (lobby.getLobbyPlayers().isEmpty()) {
                 lobbyService.remove(lobbyId);
             }
+            player.setLobbyId(-1);
         }
+        messagingTemplate.convertAndSendToUser(principal.getName(), "/queue/player/currentLobby", "{}");
         messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
+    }
+
+    @MessageMapping("/lobby/disbandLobby")
+    public void disbandLobby(@Payload long lobbyId, Principal principal) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        synchronized (lobby) {
+            lobby.getLobbyPlayers().forEach(player -> player.setLobbyId(-1));
+            lobbyService.remove(lobbyId);
+        }
+        messagingTemplate.convertAndSend("/topic/lobbies", lobbyService.getList());
     }
 }

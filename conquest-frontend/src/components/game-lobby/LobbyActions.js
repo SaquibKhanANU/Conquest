@@ -1,17 +1,15 @@
 import "./LobbyActions.css";
 import React from "react";
 import { useSession } from "../global/contexts/SessionContext";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LobbyActions = ({ lobbyId }) => {
     const { session } = useSession();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLeaveLobby = async () => {
         console.log("Leaving game...");
-        session.leaveLobby(lobbyId, dispatch);
+        session.leaveLobby(lobbyId);
         navigate("/gameBrowser")
     };
 

@@ -66,6 +66,7 @@ class ConquestSession {
             "/user/queue/player/currentPlayer",
             (message) => {
                 const player = JSON.parse(message.body);
+                console.log("Received current player: ", player);
                 dispatch(ApiAction.setCurrentPlayer(player));
             }
         );
@@ -74,14 +75,16 @@ class ConquestSession {
             (message) => {
                 const lobby = JSON.parse(message.body);
                 dispatch(ApiAction.setCurrentLobby(lobby));
-                this.stompClient.subscribe(
-                    `/topic/lobby/${lobby.lobbyId}`,
-                    (message) => {
-                        const updatedLobby = JSON.parse(message.body);
-                        dispatch(ApiAction.setCurrentLobby(updatedLobby));
-                    }
-                );
-                navigate("/gameLobby/" + lobby.lobbyId);
+                if (lobby.lobbyId !== undefined) {
+                    this.stompClient.subscribe(
+                        `/topic/lobby/${lobby.lobbyId}`,
+                        (message) => {
+                            const updatedLobby = JSON.parse(message.body);
+                            dispatch(ApiAction.setCurrentLobby(updatedLobby));
+                        }
+                    );
+                    navigate("/gameLobby/" + lobby.lobbyId);
+                }
             }
         );
     }
@@ -114,9 +117,8 @@ class ConquestSession {
     // --- GameLobby ---
 
     // TODO: FIX THIS SO THERES NO DISPATCH
-    async leaveLobby(lobbyId, dispatch) {
-        dispatch(ApiAction.setCurrentLobby({}));
-        this.sendMessage("/app/lobby/leaveLobby", lobbyId);
+    async leaveLobby(lobbyId) {
+        await this.sendMessage("/app/lobby/leaveLobby", lobbyId);
         this.stompClient.unsubscribe(`/topic/lobby/${lobbyId}`);
     }
 }
