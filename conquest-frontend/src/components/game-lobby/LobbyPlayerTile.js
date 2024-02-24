@@ -1,7 +1,7 @@
 import "./LobbyPlayerTile.css";
 import React from "react";
 
-const LobbyPlayerTile = ({ playerData }) => {
+const LobbyPlayerTile = ({ playerData, ready, civilization }) => {
     const { playerName } = playerData;
     return (
         <div className="lobby-player-tile-container">
@@ -10,11 +10,16 @@ const LobbyPlayerTile = ({ playerData }) => {
                     <p>{playerName}</p>
                 </div>
                 <div>
-                    <p>ROME</p>
+                    <p style={{ color: civilization.color }}>
+                        {civilization.name}
+                    </p>
                 </div>
                 <div>
-                    <p className="ready">&#10003;</p>
-                    <p className="not-ready">&#10005;</p>
+                    {ready ? (
+                        <p className="ready">&#10003;</p>
+                    ) : (
+                        <p className="not-ready">&#10005;</p>
+                    )}
                 </div>
             </div>
         </div>

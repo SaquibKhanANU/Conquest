@@ -1,21 +1,16 @@
 import "./LobbyTile.css";
 import React from "react";
 import { useSession } from "../global/contexts/SessionContext";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const LobbyTile = ({ gameLobbyData }) => {
     const { session } = useSession();
-    const { lobbyId, lobbyRules } = gameLobbyData;
+    const { lobbyId, lobbyRules, lobbyPlayers } = gameLobbyData;
     const { lobbyName, map, mode, maxPlayers, privacy } = lobbyRules;
     const isPrivate = privacy ? "YES" : "NO";
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleJoinLobby = async () => {
         console.log("Joining lobby...", gameLobbyData);
-        session.joinLobby(lobbyId, dispatch);
-        navigate(`/gameLobby/${lobbyId}`);
+        session.joinLobby(lobbyId);
     };
 
     return (
@@ -31,7 +26,7 @@ const LobbyTile = ({ gameLobbyData }) => {
                     <p>{mode}</p>
                 </div>
                 <div>
-                    <p>1/{maxPlayers}</p>
+                    <p>{lobbyPlayers.length}/{maxPlayers}</p>
                 </div>
                 <div>
                     <p>{isPrivate}</p>

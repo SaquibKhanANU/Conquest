@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import * as ApiAction from "../redux/actions/actions.ts";
 
 const SockJS = require("sockjs-client");
@@ -74,14 +75,14 @@ class ConquestSession {
             "/user/queue/player/currentLobby",
             (message) => {
                 const lobby = JSON.parse(message.body);
+                console.log("Received current lobby: ", lobby);
                 dispatch(ApiAction.setCurrentLobby(lobby));
                 if (lobby.lobbyId === undefined) {
                     navigate("/gameBrowser");
                     this.stompClient.unsubscribe(
                         `/topic/lobby/${lobby.lobbyId}`
                     );
-                }
-                else if (lobby.lobbyId !== undefined) {
+                } else if (lobby.lobbyId !== undefined) {
                     this.stompClient.subscribe(
                         `/topic/lobby/${lobby.lobbyId}`,
                         (message) => {
@@ -128,6 +129,14 @@ class ConquestSession {
 
     async disbandLobby(lobbyId) {
         this.sendMessage("/app/lobby/disbandLobby", lobbyId);
+    }
+
+    async readyUp(lobbyId) {
+        this.sendMessage("/app/lobby/readyUp", lobbyId);
+    }
+
+    async chooseCivilization(civilization) {
+        this.sendMessage("/app/lobby/chooseCivilization", JSON.stringify(civilization));
     }
 }
 

@@ -1,11 +1,14 @@
 import "./LobbyActions.css";
 import React from "react";
 import { useSession } from "../global/contexts/SessionContext";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const LobbyActions = ({ lobbyId }) => {
+const LobbyActions = ({ lobbyId, lobbyOwner, playersReady }) => {
     const { session } = useSession();
-    const navigate = useNavigate();
+    const { playerId } = lobbyOwner;
+    const currentPlayer = useSelector((state) => state.currentPlayer.player);
+    const isOwner = playerId === currentPlayer.playerId;
+    const isReady = playersReady.includes(currentPlayer.playerId);
 
     const handleLeaveLobby = async () => {
         console.log("Leaving game...");
@@ -17,29 +20,53 @@ const LobbyActions = ({ lobbyId }) => {
         session.disbandLobby(lobbyId);
     };
 
+    const handleReadyUp = async () => {
+        console.log("Ready up...");
+        session.readyUp(lobbyId);
+    };
+
     return (
         <div className="actions-lobby-container">
             <div className="lobby-api-actions">
-                <button className="lobby-action-button green-hover">
-                    Start Game &#10148;
-                </button>
-
-                <button
-                    className="lobby-action-button red-hover"
-                    onClick={handleDisbandLobby}
-                >
-                    DISBAND Game &#10005;
-                </button>
-                <button
-                    className="lobby-action-button red-hover"
-                    onClick={handleLeaveLobby}
-                >
-                    Leave Game <span className="arrow-left">&#10148;</span>
-                </button>
+                {isOwner ? (
+                    <button
+                        className="lobby-action-button red-hover"
+                        onClick={handleDisbandLobby}
+                    >
+                        DISBAND Game &#10005;
+                    </button>
+                ) : (
+                    <button
+                        className="lobby-action-button red-hover"
+                        onClick={handleLeaveLobby}
+                    >
+                        Leave Game <span className="arrow-left">&#10005;</span>
+                    </button>
+                )}
             </div>
-            <button className="lobby-action-button green-hover">
-                Ready Up &#10003;
-            </button>
+            <div className="lobby-api-actions">
+                <button
+                    className={`lobby-action-button ${
+                        !isReady ? "green-hover" : "red-hover"
+                    }`}
+                    onClick={handleReadyUp}
+                >
+                    {!isReady ? (
+                        <>
+                            Ready <span>&#10003;</span>
+                        </>
+                    ) : (
+                        <>
+                            Unready <span>&#10005;</span>
+                        </>
+                    )}
+                </button>
+                {isOwner && (
+                    <button className="lobby-action-button green-hover">
+                        Start Game &#10148;
+                    </button>
+                )}
+            </div>
         </div>
     );
 };

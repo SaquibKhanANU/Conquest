@@ -1,12 +1,23 @@
 import "./LobbySettings.css";
 import React, { useState } from "react";
 import civilizationsJson from "../../resources/jsonData/civilizations.json";
+import { useSession } from "../global/contexts/SessionContext";
 
-const LobbySettings = ({ settings, owner }) => {
-    const [civilization, setCivilization] = useState(civilizationsJson[0]);
-    const { lobbyName, map, maxPlayers, mode, privacy } = settings;
-    const { playerName } = owner;
+const LobbySettings = ({
+    lobbyRules,
+    lobbyOwner,
+    lobbyPlayersLength,
+    civilization,
+}) => {
+    const { session } = useSession();
+    const { lobbyName, map, maxPlayers, mode, privacy } = lobbyRules;
+    const { playerName } = lobbyOwner;
     const isPrivate = privacy ? "YES" : "NO";
+
+    const handleChooseCivilization = (civ) => {
+        console.log("Choosing civilization...");
+        session.chooseCivilization(civ);
+    };
 
     return (
         <div className="profile-container">
@@ -30,7 +41,9 @@ const LobbySettings = ({ settings, owner }) => {
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">MAX PLAYERS:</p>
-                    <p>{maxPlayers}</p>
+                    <p>
+                        {lobbyPlayersLength}/{maxPlayers}
+                    </p>
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">PRIVATE:</p>
@@ -49,7 +62,10 @@ const LobbySettings = ({ settings, owner }) => {
                             {civilizationsJson.map((civ) => (
                                 <p
                                     key={civ.name}
-                                    onClick={() => setCivilization(civ)}
+                                    onClick={handleChooseCivilization.bind(
+                                        this,
+                                        civ
+                                    )}
                                     style={{ color: civ.color }} // Applying color style
                                 >
                                     {civ.name}

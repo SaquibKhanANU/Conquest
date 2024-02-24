@@ -1,5 +1,6 @@
 package com.Game.conquest.server.controllers;
 
+import com.Game.conquest.server.dataObjects.Civilization;
 import com.Game.conquest.server.dataObjects.Lobby;
 import com.Game.conquest.server.dataObjects.Player;
 import com.Game.conquest.server.repositories.PlayerRepository;
@@ -53,9 +54,42 @@ public class LobbyController {
         messagingTemplate.convertAndSend("/topic/lobbies", lobbyService.getList());
     }
 
+    @MessageMapping("/lobby/readyUp")
+    public void readyPlayer(@Payload long lobbyId, Principal principal) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        synchronized (lobby) {
+            if (checkPlayerAlreadyReady(lobbyId, principal)) {
+                lobby.removeReadyPlayer(principal.getName());
+            } else {
+                lobby.addReadyPlayer(principal.getName());
+            }
+            messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
+        }
+    }
+
+    @MessageMapping("/lobby/chooseCivilization")
+    public void chooseCivilization(@Payload Civilization civilization, Principal principal) {
+        Player player = playerRepository.get(principal.getName());
+        Lobby lobby = lobbyService.get(player.getLobbyId());
+        synchronized (lobby) {
+            if (lobby.checkCivilizationAlreadyChosen(civilization)) {
+                return;
+            }
+            lobby.setPlayerCivilization(player.getPlayerId(), civilization);
+            messagingTemplate.convertAndSend("/topic/lobby/" + player.getLobbyId(), lobby);
+        }
+    }
+
+    // TODO move this checks to a appropriate class
+
     public boolean checkLobbyOwner(long lobbyId, Principal principal) {
         Lobby lobby = lobbyService.get(lobbyId);
         Player playerPrincipal = playerRepository.get(principal.getName());
         return lobby.getLobbyOwner().getPlayerId().equals(playerPrincipal.getPlayerId());
+    }
+
+    public boolean checkPlayerAlreadyReady(long lobbyId, Principal principal) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        return lobby.getPlayersReady().contains(principal.getName());
     }
 }

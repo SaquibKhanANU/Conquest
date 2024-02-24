@@ -15,12 +15,14 @@ const GameLobby = () => {
     const navigate = useNavigate();
     const { session } = useSession();
     const [playersProfile, setPlayerProfile] = useState(currentPlayer);
-    const currentLobby = useSelector((state) => state.currentPlayer.currentLobby);
+    const currentLobby = useSelector(
+        (state) => state.currentPlayer.currentLobby
+    );
 
     useEffect(() => {
         if (session === null) {
             navigate("/");
-        } 
+        }
     }, [navigate, session]);
 
     return (
@@ -28,33 +30,43 @@ const GameLobby = () => {
             className="game-lobby-container"
             style={{ backgroundImage: `url(${BackgroundImage})` }}
         >
-            <div className="game-lobby-body">
-                <div className="lobby-settings">
-                    {currentLobby.lobbyRules && (
-                        <LobbySettings settings={currentLobby.lobbyRules} owner={currentLobby.lobbyOwner} />
-                    )}
-                </div>
-                <div className="lobby-body">
-                    <div>
-                        {currentLobby.lobbyPlayers && (
+            {currentLobby.lobbyId !== undefined && (
+                <div className="game-lobby-body">
+                    <div className="lobby-settings">
+                        <LobbySettings
+                            lobbyRules={currentLobby.lobbyRules}
+                            lobbyOwner={currentLobby.lobbyOwner}
+                            lobbyPlayersLength={currentLobby.lobbyPlayers.length}
+                            civilization={currentLobby.playerCivilizations[currentPlayer.playerId]}
+                        />
+                    </div>
+                    <div className="lobby-body">
+                        <div>
                             <LobbyPlayersList
                                 players={currentLobby.lobbyPlayers}
+                                playersReady = {currentLobby.playersReady}
+                                playerCivilizations={currentLobby.playerCivilizations}
                             />
-                        )}
+                        </div>
+                        <div>
+                            <LobbyActions
+                                lobbyId={currentLobby.lobbyId}
+                                lobbyOwner={currentLobby.lobbyOwner}
+                                playersReady={currentLobby.playersReady}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <LobbyActions lobbyId={currentLobby.lobbyId} />
+                    <div className="lobby-players">
+                        <div>
+                            <Profile player={playersProfile} />
+                        </div>
+                        <div>
+                            <PlayersOnline />
+                        </div>
                     </div>
                 </div>
-                <div className="lobby-players">
-                    <div>
-                        <Profile player={playersProfile} />
-                    </div>
-                    <div>
-                        <PlayersOnline />
-                    </div>
-                </div>
-            </div>
+            )}
+            ;
         </div>
     );
 };

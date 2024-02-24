@@ -35,12 +35,14 @@ public class GameBrowserController {
         LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
         Player lobbyOwner = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
-        getLobbiesList();
         joinLobby(lobby.getLobbyId(), principal);
     }
 
     @MessageMapping("/lobby/joinLobby")
     public void joinLobby(@Payload long lobbyId, Principal principal) {
+        if (checkLobbyHasMaxPlayers(lobbyId)) {
+            return;
+        }
         Player player = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.get(lobbyId);
         synchronized (lobby) {
@@ -49,5 +51,12 @@ public class GameBrowserController {
         }
         messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/player/currentLobby", lobby);
         messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
+        getLobbiesList();
+    }
+    // TODO move this checks to a appropriate class
+
+    public boolean checkLobbyHasMaxPlayers(Long lobbyId) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        return lobby.getLobbyPlayers().size() == lobby.getLobbyRules().getMaxPlayers();
     }
 }

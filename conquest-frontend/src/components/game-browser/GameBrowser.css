@@ -17,12 +17,6 @@
     margin-top: 20px;
 }
 
-/* .game-browser {
-    
-    width: 400px;
-    height: 90px;
-} */
-
 .game-browser {
     display: flex;
     flex-direction: column;
