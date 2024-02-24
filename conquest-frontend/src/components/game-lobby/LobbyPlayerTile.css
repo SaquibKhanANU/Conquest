@@ -26,3 +26,10 @@
     color: red;
     font-weight: bold;
 }
+
+.lobby-player-tile-body:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.02); /* Adjust the scale factor as needed */
+    transition: transform 0.1s linear;
+    cursor: pointer;
+}

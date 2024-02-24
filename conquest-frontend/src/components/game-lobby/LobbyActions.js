@@ -25,6 +25,10 @@ const LobbyActions = ({ lobbyId, lobbyOwner, playersReady }) => {
         session.readyUp(lobbyId);
     };
 
+    const handleStartGame = async () => {
+        // session.startGame(lobbyId);
+    }
+
     return (
         <div className="actions-lobby-container">
             <div className="lobby-api-actions">

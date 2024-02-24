@@ -2,7 +2,12 @@ import "./LobbyPlayersList.css";
 import React from "react";
 import LobbyPlayerTile from "./LobbyPlayerTile";
 
-const LobbyPlayersList = ({ players, playersReady, playerCivilizations }) => {
+const LobbyPlayersList = ({
+    players,
+    playersReady,
+    playerCivilizations,
+    setPlayer,
+}) => {
     return (
         <div className="players-list-container">
             <h1>PLAYERS</h1>
@@ -20,11 +25,16 @@ const LobbyPlayersList = ({ players, playersReady, playerCivilizations }) => {
                 </div>
                 <div className="players-list scroll-bar">
                     {players.map((player) => (
-                        <div key={player.playerId}>
+                        <div
+                            key={player.playerId}
+                            onClick={() => setPlayer(player)}
+                        >
                             <LobbyPlayerTile
                                 playerData={player}
                                 ready={playersReady.includes(player.playerId)}
-                                civilization={playerCivilizations[(player.playerId)]}
+                                civilization={
+                                    playerCivilizations[player.playerId]
+                                }
                             />
                         </div>
                     ))}

@@ -25,6 +25,10 @@ const GameLobby = () => {
         }
     }, [navigate, session]);
 
+    const handlePlayerClick = (player) => {
+        setPlayerProfile(player);
+    };
+
     return (
         <div
             className="game-lobby-container"
@@ -46,6 +50,7 @@ const GameLobby = () => {
                                 players={currentLobby.lobbyPlayers}
                                 playersReady = {currentLobby.playersReady}
                                 playerCivilizations={currentLobby.playerCivilizations}
+                                setPlayer={handlePlayerClick}
                             />
                         </div>
                         <div>

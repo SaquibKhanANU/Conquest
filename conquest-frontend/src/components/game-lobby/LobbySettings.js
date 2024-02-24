@@ -50,14 +50,20 @@ const LobbySettings = ({
                     <p>{isPrivate}</p>
                 </div>
                 <div className="profile-info">
+                    <p className="silver-text">TIME REMAINING:</p>
+                    <p>5:00</p>
+                </div>
+                <div className="profile-info">
                     <p className="silver-text">CIVILIZATION:</p>
                     <div className="dropdown choose-civ-dropdown">
-                        <button
-                            className="dropbtn choose-civ"
-                            style={{ color: civilization.color }}
-                        >
-                            {civilization.name}
-                        </button>
+                        {civilization && (
+                            <button
+                                className="dropbtn choose-civ"
+                                style={{ color: civilization.color }}
+                            >
+                                {civilization.name}
+                            </button>
+                        )}
                         <div className="dropdown-content">
                             {civilizationsJson.map((civ) => (
                                 <p

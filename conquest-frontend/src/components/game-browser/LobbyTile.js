@@ -26,13 +26,20 @@ const LobbyTile = ({ gameLobbyData }) => {
                     <p>{mode}</p>
                 </div>
                 <div>
-                    <p>{lobbyPlayers.length}/{maxPlayers}</p>
+                    <p>
+                        {lobbyPlayers.length}/{maxPlayers}
+                    </p>
                 </div>
                 <div>
                     <p>{isPrivate}</p>
                 </div>
                 <div>
-                    <button onClick={handleJoinLobby}>JOIN</button>
+                    <button
+                        className="join-game-button"
+                        onClick={handleJoinLobby}
+                    >
+                       &#10148;
+                    </button>
                 </div>
             </div>
         </div>
