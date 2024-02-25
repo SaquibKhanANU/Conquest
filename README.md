@@ -1,4 +1,4 @@
-Backend: Java, Spring Framework with Web, WebSockets, Lombok \
+Backend: Java, Spring Boot with Web, WebSockets, Lombok \
 Frontend: JavaScript, HTML, CSS, Reactjs 
 
 LOBBY DEMO: 
