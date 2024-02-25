@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.util.Timer;
 
 @Controller
 @EnableScheduling
@@ -26,6 +27,8 @@ public class GameBrowserController {
     private SimpMessagingTemplate messagingTemplate;
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private LobbyController lobbyController;
 
     @MessageMapping("/lobbies/getLobbiesList")
     public void getLobbiesList() {
@@ -37,6 +40,7 @@ public class GameBrowserController {
         LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
         Player lobbyOwner = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
+        startCountdown(lobby.getLobbyId(), principal);
         joinLobby(lobby.getLobbyId(), principal);
     }
 
@@ -56,10 +60,37 @@ public class GameBrowserController {
         getLobbiesList();
     }
 
+    @MessageMapping("/lobby/getTimer")
+    public void startCountdown(@Payload long lobbyId, Principal principal) {
+        Lobby lobby = lobbyService.get(lobbyId);
+        Timer timer = new Timer();
+        lobby.setTimer(timer);
+        timer.scheduleAtFixedRate(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                synchronized (lobby) {
+                    messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
+                    lobby.decrementCountdown();
+                    if (lobby.getCountdown() < 0) {
+                        timer.cancel();
+                        if (!lobby.isLobbyReady() && lobby.getLobbyPlayers().size() >= 1) {
+                            lobbyController.disbandLobby(lobbyId, principal);
+                        } else if (lobby.isLobbyReady()) {
+                            System.out.println("Lobby is ready to start");
+                        }
+                    }
+                }
+            }
+        }, 0, 1000);
+
+    }
+
+
     // TODO move this checks to a appropriate class
 
     public boolean checkLobbyHasMaxPlayers(Long lobbyId) {
         Lobby lobby = lobbyService.get(lobbyId);
         return lobby.getLobbyPlayers().size() == lobby.getLobbyRules().getMaxPlayers();
     }
+
 }

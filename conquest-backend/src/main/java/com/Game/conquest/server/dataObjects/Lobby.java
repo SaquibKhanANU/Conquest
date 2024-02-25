@@ -9,7 +9,6 @@ import lombok.Synchronized;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -34,6 +33,7 @@ public class Lobby {
         this.lobbyPlayers = new ArrayList<>(lobbyRules.getMaxPlayers());
         this.playersReady = new ArrayList<>(lobbyRules.getMaxPlayers());
         this.playerCivilizations = new ConcurrentHashMap<>(lobbyRules.getMaxPlayers());
+        this.countdown = lobbyRules.getTimeLimit();
     }
 
     @Synchronized
@@ -55,11 +55,13 @@ public class Lobby {
     }
 
     @Synchronized
+    @JsonIgnore
     public boolean isFull() {
         return lobbyPlayers.size() == lobbyRules.getMaxPlayers();
     }
 
     @Synchronized
+    @JsonIgnore
     public boolean isLobbyReady() {
         return playersReady.size() == lobbyRules.getMaxPlayers();
     }
@@ -103,19 +105,15 @@ public class Lobby {
         return lobbyOwner.getPlayerId().equals(playerId);
     }
 
-    public void startCountdown(int seconds) {
-        this.timer = new Timer();
-        this.countdown = seconds;
-        timer.scheduleAtFixedRate(new TimerTask() {
+    public void decrementCountdown() {
+        countdown--;
+    }
 
-            @Override
-            public void run() {
-                countdown--;
-                if (countdown <= 0) {
-                    // Handle countdown completion here, such as ending the lobby
-                    timer.cancel(); // Stop the timer
-                }
-            }
-        }, 0, 1000); // Run the task every second
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public void endTimer() {
+        timer.cancel();
     }
 }

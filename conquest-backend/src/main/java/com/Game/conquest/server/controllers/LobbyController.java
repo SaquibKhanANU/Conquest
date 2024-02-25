@@ -32,10 +32,10 @@ public class LobbyController {
                 disbandLobby(lobbyId, principal);
                 return;
             }
-            lobby.removePlayer(player);
             player.setLobbyId(-1);
+            lobby.removePlayer(player);
+            messagingTemplate.convertAndSendToUser(player.getPlayerId(), "/queue/player/currentLobby", "{}");
         }
-        messagingTemplate.convertAndSendToUser(principal.getName(), "/queue/player/currentLobby", "{}");
         messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
     }
 
@@ -49,6 +49,8 @@ public class LobbyController {
             lobby.getLobbyPlayers().forEach(player -> player.setLobbyId(-1));
             lobby.getLobbyPlayers().forEach(player -> messagingTemplate.convertAndSendToUser(player.getPlayerId(),
                     "/queue/player/currentLobby", "{}"));
+            lobby.getLobbyPlayers().clear();
+            lobby.endTimer();
             lobbyService.remove(lobbyId);
         }
         messagingTemplate.convertAndSend("/topic/lobbies", lobbyService.getList());

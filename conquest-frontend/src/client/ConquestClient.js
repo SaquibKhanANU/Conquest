@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 import * as ApiAction from "../redux/actions/actions.ts";
 
 const SockJS = require("sockjs-client");
@@ -55,6 +54,7 @@ class ConquestSession {
     }
 
     async subscribe(dispatch, navigate) {
+        let subscriptionId = null;
         this.stompClient.subscribe("/topic/players", (message) => {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
@@ -73,19 +73,26 @@ class ConquestSession {
         );
         this.stompClient.subscribe(
             "/user/queue/player/currentLobby",
-            (message) => {
+            async (message) => {
                 const lobby = JSON.parse(message.body);
                 dispatch(ApiAction.setCurrentLobby(lobby));
                 if (lobby.lobbyId === undefined) {
+                    if (subscriptionId) {
+                        subscriptionId.unsubscribe();
+                    }
                     navigate("/gameBrowser");
-                    this.stompClient.unsubscribe(
-                        `/topic/lobby/${lobby.lobbyId}`
-                    );
                 } else if (lobby.lobbyId !== undefined) {
-                    this.stompClient.subscribe(
+                    if (subscriptionId) {
+                        subscriptionId.unsubscribe();
+                    }
+                    subscriptionId = this.stompClient.subscribe(
                         `/topic/lobby/${lobby.lobbyId}`,
                         (message) => {
                             const updatedLobby = JSON.parse(message.body);
+                            console.log(
+                                "Received updated lobby: ",
+                                updatedLobby
+                            );
                             dispatch(ApiAction.setCurrentLobby(updatedLobby));
                         }
                     );
@@ -143,6 +150,10 @@ class ConquestSession {
 
     async kickPlayer(playerId) {
         this.sendMessage("/app/lobby/kickPlayer", playerId);
+    }
+
+    async getTimer(lobbyId) {
+        this.sendMessage("/app/lobby/getTimer", lobbyId);
     }
 }
 

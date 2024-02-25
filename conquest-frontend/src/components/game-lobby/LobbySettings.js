@@ -1,5 +1,5 @@
 import "./LobbySettings.css";
-import React, { useState } from "react";
+import React from "react";
 import civilizationsJson from "../../resources/jsonData/civilizations.json";
 import { useSession } from "../global/contexts/SessionContext";
 
@@ -18,6 +18,12 @@ const LobbySettings = ({
     const handleChooseCivilization = (civ) => {
         console.log("Choosing civilization...");
         session.chooseCivilization(civ);
+    };
+
+    const formatTimer = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
     };
 
     return (
@@ -52,7 +58,7 @@ const LobbySettings = ({
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">TIME REMAINING:</p>
-                    <p>{timer}</p>
+                    <p>{formatTimer(timer)}</p>
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">CIVILIZATION:</p>

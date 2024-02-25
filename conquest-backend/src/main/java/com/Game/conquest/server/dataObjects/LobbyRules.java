@@ -47,4 +47,9 @@ public class LobbyRules {
                 new Civilization("Viking", "red")
         );
     }
+
+    @JsonIgnore
+    public int getTimeLimit() {
+        return 180;
+    }
 }
