@@ -42,6 +42,7 @@ const GameLobby = () => {
                             lobbyOwner={currentLobby.lobbyOwner}
                             lobbyPlayersLength={currentLobby.lobbyPlayers.length}
                             civilization={currentLobby.playerCivilizations[currentPlayer.playerId]}
+                            timer={currentLobby.countdown}
                         />
                     </div>
                     <div className="lobby-body">

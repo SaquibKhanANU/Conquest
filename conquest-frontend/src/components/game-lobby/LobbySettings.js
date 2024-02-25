@@ -8,6 +8,7 @@ const LobbySettings = ({
     lobbyOwner,
     lobbyPlayersLength,
     civilization,
+    timer,
 }) => {
     const { session } = useSession();
     const { lobbyName, map, maxPlayers, mode, privacy } = lobbyRules;
@@ -51,7 +52,7 @@ const LobbySettings = ({
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">TIME REMAINING:</p>
-                    <p>5:00</p>
+                    <p>{timer}</p>
                 </div>
                 <div className="profile-info">
                     <p className="silver-text">CIVILIZATION:</p>

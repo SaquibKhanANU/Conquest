@@ -75,7 +75,6 @@ class ConquestSession {
             "/user/queue/player/currentLobby",
             (message) => {
                 const lobby = JSON.parse(message.body);
-                console.log("Received current lobby: ", lobby);
                 dispatch(ApiAction.setCurrentLobby(lobby));
                 if (lobby.lobbyId === undefined) {
                     navigate("/gameBrowser");
@@ -136,7 +135,14 @@ class ConquestSession {
     }
 
     async chooseCivilization(civilization) {
-        this.sendMessage("/app/lobby/chooseCivilization", JSON.stringify(civilization));
+        this.sendMessage(
+            "/app/lobby/chooseCivilization",
+            JSON.stringify(civilization)
+        );
+    }
+
+    async kickPlayer(playerId) {
+        this.sendMessage("/app/lobby/kickPlayer", playerId);
     }
 }
 

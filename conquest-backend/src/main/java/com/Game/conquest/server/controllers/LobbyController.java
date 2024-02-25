@@ -80,6 +80,23 @@ public class LobbyController {
         }
     }
 
+    @MessageMapping("/lobby/kickPlayer")
+    public void kickPlayer(@Payload String playerId) {
+        Player player = playerRepository.get(playerId);
+        Lobby lobby = lobbyService.get(player.getLobbyId());
+        if (lobby.checkLobbyOwner(playerId)) {
+            return;
+        }
+        synchronized (lobby) {
+            lobby.removePlayer(player);
+            player.setLobbyId(-1);
+        }
+        messagingTemplate.convertAndSendToUser(player.getPlayerId(), "/queue/player/currentLobby", "{}");
+        messagingTemplate.convertAndSend("/topic/lobby/" + lobby.getLobbyId(), lobby);
+    }
+
+
+
     // TODO move this checks to a appropriate class
 
     public boolean checkLobbyOwner(long lobbyId, Principal principal) {

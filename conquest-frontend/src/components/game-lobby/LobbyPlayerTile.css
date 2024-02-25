@@ -4,10 +4,12 @@
     border-top: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     margin-bottom: 3px;
+    position: relative;
 }
 
 .lobby-player-tile-body {
     display: grid;
+    flex-direction: row;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
@@ -31,5 +33,26 @@
     background-color: rgba(0, 0, 0, 0.7);
     transform: scale(1.02); /* Adjust the scale factor as needed */
     transition: transform 0.1s linear;
+    cursor: pointer;
+}
+
+.button-container {
+    position: absolute; /* Set position to absolute */
+    top: 0;
+    right: 0;
+}
+
+.button-container button {
+    background-color: rgba(255, 0, 0, 0.7);
+    border: none;
+    height: 56px;
+    padding-right: 12px;
+    font-family: var(--global-font);
+    font-size: 14px;
+}
+
+.button-container button:hover {
+    background-color: rgba(255, 0, 0, 1);
+    color: white;
     cursor: pointer;
 }

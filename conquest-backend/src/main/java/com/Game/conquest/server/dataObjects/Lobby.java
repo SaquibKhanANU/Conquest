@@ -1,5 +1,6 @@
 package com.Game.conquest.server.dataObjects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +8,8 @@ import lombok.Synchronized;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -20,6 +23,10 @@ public class Lobby {
     private ArrayList<Player> lobbyPlayers;
     private ArrayList<String> playersReady;
     private Map<String, Civilization> playerCivilizations;
+    private int countdown;
+    @JsonIgnore
+    private Timer timer;
+
     public Lobby(long lobbyId, Player lobbyOwner, LobbyRules lobbyRules) {
         this.lobbyId = lobbyId;
         this.lobbyOwner = lobbyOwner;
@@ -88,8 +95,27 @@ public class Lobby {
         playerCivilizations.put(playerId, randomCivilization);
     }
 
-    @Synchronized
     public boolean checkCivilizationAlreadyChosen(Civilization civilization) {
         return playerCivilizations.containsValue(civilization);
+    }
+
+    public boolean checkLobbyOwner(String playerId) {
+        return lobbyOwner.getPlayerId().equals(playerId);
+    }
+
+    public void startCountdown(int seconds) {
+        this.timer = new Timer();
+        this.countdown = seconds;
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                countdown--;
+                if (countdown <= 0) {
+                    // Handle countdown completion here, such as ending the lobby
+                    timer.cancel(); // Stop the timer
+                }
+            }
+        }, 0, 1000); // Run the task every second
     }
 }
