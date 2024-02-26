@@ -26,5 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+      working-directory: conquest-frontend
     - run: npm run build --if-present
+      working-directory: conquest-frontend
     - run: npm test
+      working-directory: conquest-frontend
+
