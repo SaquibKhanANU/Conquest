@@ -54,51 +54,58 @@ class ConquestSession {
     }
 
     async subscribe(dispatch, navigate) {
-        let subscriptionId = null;
-        this.stompClient.subscribe("/topic/players", (message) => {
+        const subscriptions = {}; // Object to store subscription IDs
+
+        const handlePlayersMessage = (message) => {
             const players = JSON.parse(message.body);
             dispatch(ApiAction.setPlayers(players));
-        });
-        this.stompClient.subscribe("/topic/lobbies", (message) => {
+        };
+
+        const handleLobbiesMessage = (message) => {
             const lobbies = JSON.parse(message.body);
             dispatch(ApiAction.setLobbies(lobbies));
-        });
+        };
+
+        const handleCurrentPlayerMessage = (message) => {
+            const player = JSON.parse(message.body);
+            console.log("Received current player: ", player);
+            dispatch(ApiAction.setCurrentPlayer(player));
+        };
+
+        const handleCurrentLobbyMessage = async (message) => {
+            const lobby = JSON.parse(message.body);
+            dispatch(ApiAction.setCurrentLobby(lobby));
+
+            // Unsubscribe previous subscription if exists
+            if (subscriptions.lobby) {
+                subscriptions.lobby.unsubscribe();
+            }
+
+            if (lobby.lobbyId === undefined) {
+                navigate("/gameBrowser");
+            } else {
+                navigate("/gameLobby/" + lobby.lobbyId);
+                subscriptions.lobby = this.stompClient.subscribe(
+                    `/topic/lobby/${lobby.lobbyId}`,
+                    (message) => {
+                        const updatedLobby = JSON.parse(message.body);
+                        console.log("Received updated lobby: ", updatedLobby);
+                        dispatch(ApiAction.setCurrentLobby(updatedLobby));
+                    }
+                );
+            }
+        };
+
+        // Subscribe to topics
+        this.stompClient.subscribe("/topic/players", handlePlayersMessage);
+        this.stompClient.subscribe("/topic/lobbies", handleLobbiesMessage);
         this.stompClient.subscribe(
             "/user/queue/player/currentPlayer",
-            (message) => {
-                const player = JSON.parse(message.body);
-                console.log("Received current player: ", player);
-                dispatch(ApiAction.setCurrentPlayer(player));
-            }
+            handleCurrentPlayerMessage
         );
         this.stompClient.subscribe(
             "/user/queue/player/currentLobby",
-            async (message) => {
-                const lobby = JSON.parse(message.body);
-                dispatch(ApiAction.setCurrentLobby(lobby));
-                if (lobby.lobbyId === undefined) {
-                    if (subscriptionId) {
-                        subscriptionId.unsubscribe();
-                    }
-                    navigate("/gameBrowser");
-                } else if (lobby.lobbyId !== undefined) {
-                    if (subscriptionId) {
-                        subscriptionId.unsubscribe();
-                    }
-                    subscriptionId = this.stompClient.subscribe(
-                        `/topic/lobby/${lobby.lobbyId}`,
-                        (message) => {
-                            const updatedLobby = JSON.parse(message.body);
-                            console.log(
-                                "Received updated lobby: ",
-                                updatedLobby
-                            );
-                            dispatch(ApiAction.setCurrentLobby(updatedLobby));
-                        }
-                    );
-                    navigate("/gameLobby/" + lobby.lobbyId);
-                }
-            }
+            handleCurrentLobbyMessage
         );
     }
 

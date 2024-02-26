@@ -37,14 +37,14 @@ const LobbyActions = ({ lobbyId, lobbyOwner, playersReady }) => {
                         className="lobby-action-button red-hover"
                         onClick={handleDisbandLobby}
                     >
-                        DISBAND Game &#10005;
+                        DISBAND Lobby &#10005;
                     </button>
                 ) : (
                     <button
                         className="lobby-action-button red-hover"
                         onClick={handleLeaveLobby}
                     >
-                        Leave Game <span className="arrow-left">&#10005;</span>
+                        Leave Lobby <span className="arrow-left">&#10005;</span>
                     </button>
                 )}
             </div>

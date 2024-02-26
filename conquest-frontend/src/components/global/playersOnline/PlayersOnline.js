@@ -26,9 +26,9 @@ const PlayersOnline = () => {
         <div className="players-online-container">
             <div className="players-online-header">
                 <div>PLAYERS ONLINE</div>
-                <div>
+                {/* <div>
                     <button onClick={handleRefresh}>&#10227;</button>
-                </div>
+                </div> */}
             </div>
             <div className="players-online-body scroll-bar">
                 {players.map((player) => (
