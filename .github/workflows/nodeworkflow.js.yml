@@ -24,8 +24,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: conquest-frontend/package-lock.json
-    - run: cd conquest-frontend
-    - run: npm start
+    - run: npm ci
+      working-directory: conquest-frontend
     - run: npm build --if-present
+      working-directory: conquest-frontend
     - run: npm test
+      working-directory: conquest-frontend
 
