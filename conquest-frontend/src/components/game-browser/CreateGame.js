@@ -1,6 +1,7 @@
 import "./CreateGame.css";
 import React, { useState } from "react";
 import { useSession } from "../global/contexts/SessionContext";
+import DropdownOption from "../global/basic/DropdownOption";
 
 const CreateGame = () => {
     const [map, setMap] = useState("MEDIUM (M)");
@@ -48,62 +49,30 @@ const CreateGame = () => {
                             />
                         </div>
                     </div>
-                    <div className="create-lobby-option">
-                        <p>MAP:</p>
-                        <div className="dropdown">
-                            <button className="dropbtn">{map}</button>
-                            <div className="dropdown-content">
-                                <p onClick={() => setMap("SMALL (S)")}>
-                                    SMALL (S)
-                                </p>
-                                <p onClick={() => setMap("MEDIUM (M)")}>
-                                    MEDIUM (M)
-                                </p>
-                                <p onClick={() => setMap("LARGE (L)")}>
-                                    LARGE (L)
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="create-lobby-option">
-                        <p>MODE:</p>
-                        <div className="dropdown">
-                            <button className="dropbtn">{mode}</button>
-                            <div className="dropdown-content">
-                                <p onClick={() => setMode("CLASSIC")}>
-                                    CLASSIC
-                                </p>
-                                <p onClick={() => setMode("KING OF THE HILL")}>
-                                    KING OF THE HILL
-                                </p>
-                                <p onClick={() => setMode("DOMINATION")}>
-                                    DOMINATION
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="create-lobby-option">
-                        <p>PRIVATE:</p>
-                        <div className="dropdown">
-                            <button className="dropbtn">{isPrivate}</button>
-                            <div className="dropdown-content">
-                                <p onClick={() => setIsPrivate("NO")}>NO</p>
-                                <p onClick={() => setIsPrivate("YES")}>YES</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="create-lobby-option">
-                        <p>Num Players:</p>
-                        <div className="dropdown">
-                            <button className="dropbtn">{maxPlayers}</button>
-                            <div className="dropdown-content">
-                                <p onClick={() => setMaxPlayers(2)}>2</p>
-                                <p onClick={() => setMaxPlayers(3)}>3</p>
-                                <p onClick={() => setMaxPlayers(4)}>4</p>
-                                <p onClick={() => setMaxPlayers(5)}>5</p>
-                            </div>
-                        </div>
-                    </div>
+                    <DropdownOption
+                        label="MAP:"
+                        currentValue={map}
+                        setValue={setMap}
+                        options={["SMALL (S)", "MEDIUM (M)", "LARGE (L)"]}
+                    />
+                    <DropdownOption
+                        label="MODE:"
+                        currentValue={mode}
+                        setValue={setMode}
+                        options={["CLASSIC", "KING OF THE HILL", "DOMINATION"]}
+                    />
+                    <DropdownOption
+                        label="PRIVATE:"
+                        currentValue={isPrivate}
+                        setValue={setIsPrivate}
+                        options={["NO", "YES"]}
+                    />
+                    <DropdownOption
+                        label="Num Players:"
+                        currentValue={maxPlayers}
+                        setValue={setMaxPlayers}
+                        options={[2, 3, 4, 5]}
+                    />
                     <div className="add-button">
                         <button type="submit">+</button>
                     </div>

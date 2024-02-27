@@ -33,7 +33,6 @@ const ChooseNameForm = () => {
                 await session.subscribe(dispatch, navigate);
                 await session.createOrUpdatePlayer(name);
                 updateSession(session);
-                navigate("/gameBrowser");
                 console.log("Connected to server:", session);
             } catch (error) {
                 console.error("Error handling form submission:", error);

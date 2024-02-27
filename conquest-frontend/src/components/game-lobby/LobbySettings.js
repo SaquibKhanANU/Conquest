@@ -39,32 +39,6 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
         },
         { label: "PRIVATE:", value: isPrivate.toString() },
         { label: "TIME REMAINING:", value: formatTimer(countdown) },
-        {
-            label: "CIVILIZATION:",
-            value: (
-                <div className="dropdown choose-civ-dropdown">
-                    {civilization && (
-                        <button
-                            className="dropbtn choose-civ"
-                            style={{ color: civilization.color }}
-                        >
-                            {civilization.name}
-                        </button>
-                    )}
-                    <div className="dropdown-content">
-                        {civilizationsJson.map((civ) => (
-                            <p
-                                key={civ.name}
-                                onClick={() => handleChooseCivilization(civ)}
-                                style={{ color: civ.color }}
-                            >
-                                {civ.name}
-                            </p>
-                        ))}
-                    </div>
-                </div>
-            ),
-        },
     ];
 
     return (
@@ -77,6 +51,32 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
                         <p>{info.value}</p>
                     </div>
                 ))}
+                <div className="profile-info">
+                    <p className="silver-text">CIVILIZATION:</p>
+                    <div className="dropdown choose-civ-dropdown">
+                        {civilization && (
+                            <button
+                                className="dropbtn choose-civ"
+                                style={{ color: civilization.color }}
+                            >
+                                {civilization.name}
+                            </button>
+                        )}
+                        <div className="dropdown-content">
+                            {civilizationsJson.map((civ) => (
+                                <p
+                                    key={civ.name}
+                                    onClick={() =>
+                                        handleChooseCivilization(civ)
+                                    }
+                                    style={{ color: civ.color }}
+                                >
+                                    {civ.name}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

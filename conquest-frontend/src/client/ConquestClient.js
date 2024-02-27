@@ -33,9 +33,19 @@ class ConquestSession {
 
     // UTIL FUNCTIONS
 
-    sendMessage(destination, message) {
+    async sendMessage(destination, message) {
         if (this.stompClient && this.stompClient.send) {
             this.stompClient.send(destination, {}, message);
+        } else {
+            console.log(
+                "Stomp client is not properly initialized or does not have a send method."
+            );
+        }
+    }
+
+    async sendEmptyMessage(destination) {
+        if (this.stompClient && this.stompClient.send) {
+            this.stompClient.send(destination);
         } else {
             console.log(
                 "Stomp client is not properly initialized or does not have a send method."
@@ -70,6 +80,7 @@ class ConquestSession {
             const player = JSON.parse(message.body);
             console.log("Received current player: ", player);
             dispatch(ApiAction.setCurrentPlayer(player));
+            navigate("/gameBrowser");
         };
 
         const handleCurrentLobbyMessage = async (message) => {
@@ -111,7 +122,7 @@ class ConquestSession {
 
     // --- PLAYERS ---
     async getPlayersList() {
-        this.sendMessage("/app/players/getPlayersList", "");
+        this.sendEmptyMessage("/app/players/getPlayersList");
     }
 
     async createOrUpdatePlayer(playerName) {
@@ -120,12 +131,12 @@ class ConquestSession {
 
     // --- GameBrowser ---
     async getLobbiesList() {
-        this.sendMessage("/app/lobbies/getLobbiesList", "");
+        this.sendEmptyMessage("/app/lobbies/getLobbiesList");
     }
 
     async createLobby(gameDefinitionJson) {
         this.sendMessage(
-            "/app/lobbies/createLobby",
+            "/app/lobby/createLobby",
             JSON.stringify(gameDefinitionJson)
         );
     }
@@ -144,8 +155,8 @@ class ConquestSession {
         this.sendMessage("/app/lobby/disbandLobby", lobbyId);
     }
 
-    async readyUp(lobbyId) {
-        this.sendMessage("/app/lobby/readyUp", lobbyId);
+    async readyUp() {
+        this.sendEmptyMessage("/app/lobby/readyUp");
     }
 
     async chooseCivilization(civilization) {
@@ -157,10 +168,6 @@ class ConquestSession {
 
     async kickPlayer(playerId) {
         this.sendMessage("/app/lobby/kickPlayer", playerId);
-    }
-
-    async getTimer(lobbyId) {
-        this.sendMessage("/app/lobby/getTimer", lobbyId);
     }
 }
 

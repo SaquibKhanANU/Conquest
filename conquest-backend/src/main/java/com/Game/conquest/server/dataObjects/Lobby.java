@@ -55,18 +55,6 @@ public class Lobby {
     }
 
     @Synchronized
-    @JsonIgnore
-    public boolean isFull() {
-        return lobbyPlayers.size() == lobbyRules.getMaxPlayers();
-    }
-
-    @Synchronized
-    @JsonIgnore
-    public boolean isLobbyReady() {
-        return playersReady.size() == lobbyRules.getMaxPlayers();
-    }
-
-    @Synchronized
     public void addReadyPlayer(String player) {
         playersReady.add(player);
     }
@@ -85,6 +73,14 @@ public class Lobby {
         return playerCivilizations.get(playerId);
     }
 
+    public void decrementCountdown() {
+        countdown--;
+    }
+
+    public void endTimer() {
+        timer.cancel();
+    }
+
     @Synchronized
     public void setPlayerRandomCivilization(String playerId) {
         ArrayList<Civilization> civilizations = new ArrayList<>(lobbyRules.getCivilizations());
@@ -97,23 +93,28 @@ public class Lobby {
         playerCivilizations.put(playerId, randomCivilization);
     }
 
+
+    // --- boolean checks ---
+    @JsonIgnore
+    public boolean checkLobbyOwner(String playerId) {
+        return lobbyOwner.getPlayerId().equals(playerId);
+    }
+    @JsonIgnore
+    public boolean checkLobbyFull() {
+        return lobbyPlayers.size() == lobbyRules.getMaxPlayers();
+    }
+    @JsonIgnore
     public boolean checkCivilizationAlreadyChosen(Civilization civilization) {
         return playerCivilizations.containsValue(civilization);
     }
 
-    public boolean checkLobbyOwner(String playerId) {
-        return lobbyOwner.getPlayerId().equals(playerId);
+    @JsonIgnore
+    public boolean isLobbyReady() {
+        return playersReady.size() == lobbyRules.getMaxPlayers();
     }
 
-    public void decrementCountdown() {
-        countdown--;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
-    public void endTimer() {
-        timer.cancel();
+    @JsonIgnore
+    public boolean checkPlayerReady(String playerId) {
+        return playersReady.contains(playerId);
     }
 }

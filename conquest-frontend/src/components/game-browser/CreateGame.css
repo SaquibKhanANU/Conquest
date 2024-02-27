@@ -48,18 +48,21 @@
 }
 
 .add-button button {
+    background-color: rgb(147, 117, 71, 0.8);
     border: none;
-    border-radius: 100px;
-    background-color: dimgrey;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+    color: antiquewhite;
+    text-align: center;
+    font-family: var(--global-font);
+    display: inline-block;
     cursor: pointer;
+    border-radius: 100px;
     margin-top: 22.5px;
 }
 
 .create-game-body button:hover {
-    background-color: var(--gold);
+    background-color: rgb(147, 117, 71, 1);
+    transform: scale(1.01);
+    transition: transform 0.1s linear;
 }
 
 /* Style the dropdown button */
