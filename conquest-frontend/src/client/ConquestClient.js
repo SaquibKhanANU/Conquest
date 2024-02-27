@@ -86,15 +86,16 @@ class ConquestSession {
         const handleCurrentLobbyMessage = async (message) => {
             const lobby = JSON.parse(message.body);
             dispatch(ApiAction.setCurrentLobby(lobby));
-
-            // Unsubscribe previous subscription if exists
             if (subscriptions.lobby) {
                 subscriptions.lobby.unsubscribe();
+                subscriptions.lobby = undefined;
             }
-
-            if (lobby.lobbyId === undefined) {
+            if (
+                lobby.lobbyId === undefined &&
+                subscriptions.game === undefined
+            ) {
                 navigate("/gameBrowser");
-            } else {
+            } else if (subscriptions.game === undefined) {
                 navigate("/gameLobby/" + lobby.lobbyId);
                 subscriptions.lobby = this.stompClient.subscribe(
                     `/topic/lobby/${lobby.lobbyId}`,
@@ -102,6 +103,29 @@ class ConquestSession {
                         const updatedLobby = JSON.parse(message.body);
                         console.log("Received updated lobby: ", updatedLobby);
                         dispatch(ApiAction.setCurrentLobby(updatedLobby));
+                    }
+                );
+            }
+        };
+
+        const handleCurrentGameMessage = (message) => {
+            const game = JSON.parse(message.body);
+            console.log("Received current game: ", game);
+            dispatch(ApiAction.setCurrentGame(game));
+            if (subscriptions.game) {
+                subscriptions.game.unsubscribe();
+                subscriptions.game = undefined;
+            }
+            if (game.gameId === undefined) {
+                navigate("/gameBrowser");
+            } else {
+                navigate("/game/" + game.gameId);
+                subscriptions.game = this.stompClient.subscribe(
+                    `/topic/game/${game.gameId}`,
+                    (message) => {
+                        const updatedGame = JSON.parse(message.body);
+                        console.log("Received updated game: ", updatedGame);
+                        dispatch(ApiAction.setCurrentGame(updatedGame));
                     }
                 );
             }
@@ -117,6 +141,10 @@ class ConquestSession {
         this.stompClient.subscribe(
             "/user/queue/player/currentLobby",
             handleCurrentLobbyMessage
+        );
+        this.stompClient.subscribe(
+            "/user/queue/player/currentGame",
+            handleCurrentGameMessage
         );
     }
 
@@ -153,6 +181,10 @@ class ConquestSession {
 
     async disbandLobby(lobbyId) {
         this.sendMessage("/app/lobby/disbandLobby", lobbyId);
+    }
+
+    async startGame(lobbyId) {
+        this.sendMessage("/app/lobby/startGame", lobbyId);
     }
 
     async readyUp() {

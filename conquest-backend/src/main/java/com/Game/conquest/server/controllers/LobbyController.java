@@ -1,10 +1,8 @@
 package com.Game.conquest.server.controllers;
 
-import com.Game.conquest.server.converter.LobbyRulesConverter;
-import com.Game.conquest.server.dataObjects.Civilization;
-import com.Game.conquest.server.dataObjects.Lobby;
-import com.Game.conquest.server.dataObjects.LobbyRules;
-import com.Game.conquest.server.dataObjects.Player;
+
+import com.Game.conquest.server.converter.GenericConverter;
+import com.Game.conquest.server.dataObjects.*;
 import com.Game.conquest.server.repositories.PlayerRepository;
 import com.Game.conquest.server.services.LobbyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ public class LobbyController {
 
     @MessageMapping("/lobby/createLobby")
     public void createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
-        LobbyRules lobbyRules = LobbyRulesConverter.fromJson(gameDefinitionJson);
+        LobbyRules lobbyRules = GenericConverter.fromJson(gameDefinitionJson, LobbyRules.class);
         Player lobbyOwner = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.create(lobbyOwner, lobbyRules);
         startCountdown(lobby.getLobbyId(), principal);
@@ -84,6 +82,28 @@ public class LobbyController {
             lobbyService.remove(lobbyId);
         }
         getLobbiesList();
+    }
+
+    @MessageMapping("/lobby/startGame")
+    public void startGame(@Payload long lobbyId, Principal principal) {
+        System.out.println("Starting game");
+        Lobby lobby = lobbyService.get(lobbyId);
+        Game game = new Game(lobbyId, new GameState());
+        if (!lobby.checkLobbyOwner(principal.getName())) {
+            System.out.println("ABCDEF");
+            return;
+        }
+        if (!lobby.isLobbyReady()) {
+            System.out.println("ABCDEFG");
+            return;
+        }
+        synchronized (lobby) {
+            lobby.getLobbyPlayers().forEach(player -> {
+                    messagingTemplate.convertAndSendToUser(player.getPlayerId(),
+                            "/queue/player/currentGame", game);
+            });
+            disbandLobby(lobbyId, principal);
+        }
     }
 
     @MessageMapping("/lobby/readyUp")

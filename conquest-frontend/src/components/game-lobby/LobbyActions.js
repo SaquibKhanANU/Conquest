@@ -25,7 +25,7 @@ const LobbyActions = ({ currentLobby, currentPlayer }) => {
     };
 
     const handleStartGame = async () => {
-        // session.startGame(lobbyId);
+        session.startGame(lobbyId);
     }
 
     return (

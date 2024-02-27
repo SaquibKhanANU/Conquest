@@ -32,7 +32,6 @@ public class LobbyRules {
         this.lobbyName = LobbyName;
     }
 
-
     @JsonIgnore
     public List<Civilization> getCivilizations() {
         return Arrays.asList(

@@ -1,8 +1,13 @@
-import { SET_CURRENT_PLAYER, SET_CURRENT_LOBBY } from "../actions/actionTypes.js";
+import {
+    SET_CURRENT_PLAYER,
+    SET_CURRENT_LOBBY,
+    SET_CURRENT_GAME,
+} from "../actions/actionTypes.js";
 
 const initialState = {
     player: {},
     currentLobby: {},
+    currentGame: {},
 };
 
 const currentPlayerReducer = (state = initialState, action) => {
@@ -12,11 +17,15 @@ const currentPlayerReducer = (state = initialState, action) => {
                 ...state,
                 player: action.payload,
             };
-            
         case SET_CURRENT_LOBBY:
             return {
                 ...state,
                 currentLobby: action.payload,
+            };
+        case SET_CURRENT_GAME:
+            return {
+                ...state,
+                currentGame: action.payload,
             };
         default:
             return state;

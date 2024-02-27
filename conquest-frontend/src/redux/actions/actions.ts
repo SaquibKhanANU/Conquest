@@ -17,6 +17,13 @@ export const setCurrentLobby = (lobbyData) => {
     };
 }
 
+export const setCurrentGame = (gameData) => {
+    return {
+        type: ActionType.SET_CURRENT_GAME,
+        payload: gameData,
+    };
+}
+
 export const setLobbies = (lobbiesData) => {
     return {
         type: ActionType.SET_LOBBIES,
