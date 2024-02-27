@@ -12,12 +12,12 @@ import LobbySettings from "./LobbySettings";
 
 const GameLobby = () => {
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const navigate = useNavigate();
-    const { session } = useSession();
-    const [playersProfile, setPlayerProfile] = useState(currentPlayer);
     const currentLobby = useSelector(
         (state) => state.currentPlayer.currentLobby
     );
+    const { session } = useSession();
+    const navigate = useNavigate();
+    const [playersProfile, setPlayerProfile] = useState(currentPlayer);
 
     useEffect(() => {
         if (session === null) {
@@ -38,41 +38,27 @@ const GameLobby = () => {
                 <div className="game-lobby-body">
                     <div className="lobby-settings">
                         <LobbySettings
-                            lobbyRules={currentLobby.lobbyRules}
-                            lobbyOwner={currentLobby.lobbyOwner}
-                            lobbyPlayersLength={currentLobby.lobbyPlayers.length}
-                            civilization={currentLobby.playerCivilizations[currentPlayer.playerId]}
-                            timer={currentLobby.countdown}
+                            currentLobby={currentLobby}
+                            currentPlayer={currentPlayer}
                         />
                     </div>
                     <div className="lobby-body">
-                        <div>
-                            <LobbyPlayersList
-                                players={currentLobby.lobbyPlayers}
-                                playersReady = {currentLobby.playersReady}
-                                playerCivilizations={currentLobby.playerCivilizations}
-                                setPlayer={handlePlayerClick}
-                            />
-                        </div>
-                        <div>
-                            <LobbyActions
-                                lobbyId={currentLobby.lobbyId}
-                                lobbyOwner={currentLobby.lobbyOwner}
-                                playersReady={currentLobby.playersReady}
-                            />
-                        </div>
+                        <LobbyPlayersList
+                            currentLobby={currentLobby}
+                            currentPlayer={currentPlayer}
+                            setPlayer={handlePlayerClick}
+                        />
+                        <LobbyActions
+                            currentLobby={currentLobby}
+                            currentPlayer={currentPlayer}
+                        />
                     </div>
                     <div className="lobby-players">
-                        <div>
-                            <Profile player={playersProfile} />
-                        </div>
-                        <div>
-                            <PlayersOnline />
-                        </div>
+                        <Profile player={playersProfile} />
+                        <PlayersOnline />
                     </div>
                 </div>
             )}
-            ;
         </div>
     );
 };

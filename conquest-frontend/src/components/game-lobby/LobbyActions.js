@@ -1,14 +1,13 @@
 import "./LobbyActions.css";
 import React from "react";
 import { useSession } from "../global/contexts/SessionContext";
-import { useSelector } from "react-redux";
 
-const LobbyActions = ({ lobbyId, lobbyOwner, playersReady }) => {
+const LobbyActions = ({ currentLobby, currentPlayer }) => {
+    const { lobbyId, playersReady, lobbyOwner } = currentLobby;
+    const { playerId } = currentPlayer;
     const { session } = useSession();
-    const { playerId } = lobbyOwner;
-    const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const isOwner = playerId === currentPlayer.playerId;
-    const isReady = playersReady.includes(currentPlayer.playerId);
+    const isOwner = lobbyOwner.playerId === playerId;
+    const isReady = playersReady.includes(playerId);
 
     const handleLeaveLobby = async () => {
         console.log("Leaving game...");
@@ -32,41 +31,26 @@ const LobbyActions = ({ lobbyId, lobbyOwner, playersReady }) => {
     return (
         <div className="actions-lobby-container">
             <div className="lobby-api-actions">
-                {isOwner ? (
-                    <button
-                        className="lobby-action-button red-hover"
-                        onClick={handleDisbandLobby}
-                    >
-                        DISBAND Lobby &#10005;
-                    </button>
-                ) : (
-                    <button
-                        className="lobby-action-button red-hover"
-                        onClick={handleLeaveLobby}
-                    >
-                        Leave Lobby <span className="arrow-left">&#10005;</span>
-                    </button>
-                )}
+                <button
+                    className={`lobby-action-button red-hover`}
+                    onClick={isOwner ? handleDisbandLobby : handleLeaveLobby}
+                >
+                    {isOwner ? "DISBAND Lobby" : "Leave Lobby"}{" "}
+                    <span>&#10005;</span>
+                </button>
             </div>
             <div className="lobby-api-actions">
                 <button
                     className={`lobby-action-button ${
-                        !isReady ? "green-hover" : "red-hover"
+                        isReady ? "red-hover" : "green-hover"
                     }`}
                     onClick={handleReadyUp}
                 >
-                    {!isReady ? (
-                        <>
-                            Ready <span>&#10003;</span>
-                        </>
-                    ) : (
-                        <>
-                            Unready <span>&#10005;</span>
-                        </>
-                    )}
+                    {isReady ? "Unready" : "Ready"}{" "}
+                    <span>{isReady ? String.fromCharCode(10005) : "✓"}</span>
                 </button>
                 {isOwner && (
-                    <button className="lobby-action-button green-hover">
+                    <button className="lobby-action-button green-hover" onClick={handleStartGame}>
                         Start Game &#10148;
                     </button>
                 )}

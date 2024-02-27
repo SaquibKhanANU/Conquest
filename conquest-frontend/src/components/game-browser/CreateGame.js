@@ -16,6 +16,10 @@ const CreateGame = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (lobbyName.length === 0) {
+            alert("Please enter a lobby name");
+            return;
+        }
         const privacy = isPrivate === "YES";
         const gameDefinitionJson = {
             map,

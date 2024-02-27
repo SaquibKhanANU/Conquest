@@ -74,7 +74,7 @@ public class LobbyController {
         Player player = playerRepository.get(principal.getName());
         Lobby lobby = lobbyService.get(player.getLobbyId());
         synchronized (lobby) {
-            if (lobby.checkCivilizationAlreadyChosen(civilization)) {
+            if (lobby.checkCivilizationAlreadyChosen(civilization) || lobby.getPlayersReady().contains(player.getPlayerId())) {
                 return;
             }
             lobby.setPlayerCivilization(player.getPlayerId(), civilization);
