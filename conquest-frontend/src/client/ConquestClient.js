@@ -76,6 +76,11 @@ class ConquestSession {
             dispatch(ApiAction.setLobbies(lobbies));
         };
 
+        const handleGamesMessage = (message) => {
+            const games = JSON.parse(message.body);
+            dispatch(ApiAction.setGames(games));
+        };
+
         const handleCurrentPlayerMessage = (message) => {
             const player = JSON.parse(message.body);
             console.log("Received current player: ", player);
@@ -134,6 +139,7 @@ class ConquestSession {
         // Subscribe to topics
         this.stompClient.subscribe("/topic/players", handlePlayersMessage);
         this.stompClient.subscribe("/topic/lobbies", handleLobbiesMessage);
+        this.stompClient.subscribe("/topic/games", handleGamesMessage);
         this.stompClient.subscribe(
             "/user/queue/player/currentPlayer",
             handleCurrentPlayerMessage
@@ -160,6 +166,10 @@ class ConquestSession {
     // --- GameBrowser ---
     async getLobbiesList() {
         this.sendEmptyMessage("/app/lobbies/getLobbiesList");
+    }
+
+    async getGamesList() {
+        this.sendEmptyMessage("/app/lobbies/getGamesList");
     }
 
     async createLobby(gameDefinitionJson) {

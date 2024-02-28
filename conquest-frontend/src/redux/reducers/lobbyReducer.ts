@@ -1,8 +1,9 @@
-import { SET_LOBBIES, SET_PLAYERS } from "../actions/actionTypes.js";
+import { SET_LOBBIES, SET_PLAYERS, SET_GAMES } from "../actions/actionTypes.js";
 
 const initialState = {
     lobbies: [],
     players: [],
+    games: [],
 };
 
 const lobbyReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const lobbyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 players: action.payload,
+            };
+        case SET_GAMES:
+            return {
+                ...state,
+                games: action.payload,
             };
         default:
             return state;

@@ -37,3 +37,10 @@ export const setPlayers = (playersData) => {
         payload: playersData,
     };
 };
+
+export const setGames = (gamesData) => {
+    return {
+        type: ActionType.SET_GAMES,
+        payload: gamesData,
+    };
+}

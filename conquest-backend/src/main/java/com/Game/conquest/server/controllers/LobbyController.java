@@ -4,6 +4,7 @@ package com.Game.conquest.server.controllers;
 import com.Game.conquest.server.converter.GenericConverter;
 import com.Game.conquest.server.dataObjects.*;
 import com.Game.conquest.server.repositories.PlayerRepository;
+import com.Game.conquest.server.services.GameService;
 import com.Game.conquest.server.services.LobbyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,9 +23,11 @@ public class LobbyController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
     @Autowired
-    private PlayerRepository playerRepository;
+    private PlayerRepository playerRepository; // TODO switch to playerService
     @Autowired
     private GameBrowserController gameBrowserController;
+    @Autowired
+    private GameService gameService;
 
     @MessageMapping("/lobby/createLobby")
     public void createLobby(@Payload String gameDefinitionJson, Principal principal) throws Exception {
@@ -48,7 +51,7 @@ public class LobbyController {
         }
         messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/player/currentLobby", lobby);
         messagingTemplate.convertAndSend("/topic/lobby/" + lobbyId, lobby);
-        getLobbiesList();
+        gameBrowserController.getLobbiesList();
     }
 
     @MessageMapping("/lobby/leaveLobby")
@@ -81,29 +84,29 @@ public class LobbyController {
             lobby.endTimer();
             lobbyService.remove(lobbyId);
         }
-        getLobbiesList();
+        gameBrowserController.getLobbiesList();
     }
 
     @MessageMapping("/lobby/startGame")
     public void startGame(@Payload long lobbyId, Principal principal) {
-        System.out.println("Starting game");
         Lobby lobby = lobbyService.get(lobbyId);
-        Game game = new Game(lobbyId, new GameState());
         if (!lobby.checkLobbyOwner(principal.getName())) {
-            System.out.println("ABCDEF");
             return;
         }
         if (!lobby.isLobbyReady()) {
-            System.out.println("ABCDEFG");
             return;
         }
+        Game game = gameService.create(lobby);
         synchronized (lobby) {
+            lobby.getLobbyPlayers().forEach(player -> player.setGameId(game.getGameId()));
             lobby.getLobbyPlayers().forEach(player -> {
                     messagingTemplate.convertAndSendToUser(player.getPlayerId(),
                             "/queue/player/currentGame", game);
             });
             disbandLobby(lobbyId, principal);
         }
+        gameBrowserController.getLobbiesList();
+        gameBrowserController.getGamesList();
     }
 
     @MessageMapping("/lobby/readyUp")
@@ -149,12 +152,9 @@ public class LobbyController {
         messagingTemplate.convertAndSend("/topic/lobby/" + lobby.getLobbyId(), lobby);
     }
 
-    @MessageMapping("/lobbies/getLobbiesList")
-    public void getLobbiesList() {
-        messagingTemplate.convertAndSend("/topic/lobbies", lobbyService.getList());
-    }
 
-    public void startCountdown(@Payload long lobbyId, Principal principal) {
+
+    private void startCountdown(@Payload long lobbyId, Principal principal) {
         Lobby lobby = lobbyService.get(lobbyId);
         Timer timer = new Timer();
         lobby.setTimer(timer);
@@ -175,5 +175,17 @@ public class LobbyController {
                 }
             }
         }, 0, 1000);
+    }
+
+    private void sendLobbyToPlayers(Lobby lobby) {
+        lobby.getLobbyPlayers().forEach(player -> {
+            messagingTemplate.convertAndSendToUser(player.getPlayerId(), "/queue/player/currentLobby", lobby);
+        });
+    }
+
+    private void sendGameToPlayers(Game game) {
+        game.getGamePlayers().forEach(player -> {
+            messagingTemplate.convertAndSendToUser(player.getPlayerId(), "/queue/player/currentGame", game);
+        });
     }
 }

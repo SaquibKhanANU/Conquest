@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 
-.lobby-action-button .arrow-left {
+.arrow-left {
     transform: scaleX(-1);
     display: inline-block; /* Ensures that the span can be transformed */
 }

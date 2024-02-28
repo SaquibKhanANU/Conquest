@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../global/contexts/SessionContext";
 import CreateGame from "./CreateGame";
-import JoinGame from "./JoinGame";
 import Profile from "../global/profile/Profile";
 import PlayersOnline from "../global/playersOnline/PlayersOnline";
 import { useSelector } from "react-redux";
+import BrowserListContainer from "./BrowserListContainer";
 
 const GameBrowser = () => {
     const { session } = useSession();
@@ -17,7 +17,7 @@ const GameBrowser = () => {
     useEffect(() => {
         if (session === null) {
             navigate("/");
-        } 
+        }
     }, [navigate, session]);
 
     return (
@@ -31,7 +31,7 @@ const GameBrowser = () => {
                         <CreateGame />
                     </div>
                     <div className="game-browser-join">
-                        <JoinGame />
+                        <BrowserListContainer />
                     </div>
                 </div>
                 <div className="game-browser">

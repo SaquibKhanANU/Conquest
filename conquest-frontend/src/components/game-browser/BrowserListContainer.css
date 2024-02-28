@@ -1,0 +1,88 @@
+.browser-list-container {
+    background-color: gray;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--gold);
+}
+
+.browser-list-container h1 {
+    padding: 0 0;
+    margin: 0 0;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.browser-list-button-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    color: antiquewhite;
+    border: none;
+    padding: 5px 15px;
+    text-align: center;
+    font-family: var(--global-font);
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.browser-list-button-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    color: antiquewhite;
+    border: none;
+    padding: 5px 15px;
+    text-align: center;
+    font-family: var(--global-font);
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.browser-list-header button:hover {
+    color: rgba(147, 117, 71, 1);
+    transform: scale(1.05);
+    transition: transform 0.1s linear;
+}
+
+.browser-list-header h1 {
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.browser-list-header {
+    width: 100%;
+    display: block;
+    position: relative;
+    text-align: center;
+    align-items: center;
+}
+
+.join-game-button {
+    background-color: rgb(147, 117, 71, 0.5);
+    border: none;
+    color: antiquewhite;
+    padding: 5px 15px;
+    text-align: center;
+    font-family: var(--global-font);
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.join-game-button:hover {
+    background-color: rgb(147, 117, 71, 0.7);
+    transform: scale(1.05);
+    transition: transform 0.1s linear;
+}

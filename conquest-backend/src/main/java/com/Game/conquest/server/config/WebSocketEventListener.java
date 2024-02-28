@@ -1,6 +1,7 @@
 package com.Game.conquest.server.config;
 
 
+import com.Game.conquest.server.controllers.GameController;
 import com.Game.conquest.server.controllers.LobbyController;
 import com.Game.conquest.server.dataObjects.Player;
 import com.Game.conquest.server.services.PlayerService;
@@ -22,6 +23,8 @@ public class WebSocketEventListener {
     private PlayerService playerService;
     @Autowired
     private LobbyController lobbyController;
+    @Autowired
+    private GameController gameController;
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
@@ -37,6 +40,9 @@ public class WebSocketEventListener {
         }
         if (player.isInLobby()) {
             lobbyController.leaveLobby(player.getLobbyId(), principal);
+        }
+        if (player.isInGame()) {
+            gameController.leaveGame(player.getGameId(), principal);
         }
         playerService.remove(player.getPlayerId());
         messagingTemplate.convertAndSend("/topic/players", playerService.getList());

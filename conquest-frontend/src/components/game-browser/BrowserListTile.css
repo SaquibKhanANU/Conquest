@@ -1,0 +1,20 @@
+.browser-list-tile-container {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    margin-bottom: 3px;
+}
+
+.browser-list-tile-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 5px;
+}
+
+.browser-list-tile-body p {
+    color: white;
+    text-align: center;
+}
