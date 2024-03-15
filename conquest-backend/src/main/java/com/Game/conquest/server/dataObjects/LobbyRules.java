@@ -13,10 +13,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class LobbyRules {
-    @JsonProperty("map")
-    private String map;
-    @JsonProperty("mode")
-    private String mode;
     @JsonProperty("privacy")
     private boolean isPrivate;
     @JsonProperty("maxPlayers")
@@ -24,9 +20,7 @@ public class LobbyRules {
     @JsonProperty("lobbyName")
     private String lobbyName;
 
-    public LobbyRules(String LobbyName, String map, String mode, boolean isPrivate, int maxPlayers) {
-        this.map = map;
-        this.mode = mode;
+    public LobbyRules(String LobbyName, boolean isPrivate, int maxPlayers) {
         this.isPrivate = isPrivate;
         this.maxPlayers = maxPlayers;
         this.lobbyName = LobbyName;

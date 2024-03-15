@@ -4,10 +4,8 @@ import { useSession } from "../global/contexts/SessionContext";
 import DropdownOption from "../global/basic/DropdownOption";
 
 const CreateGame = () => {
-    const [map, setMap] = useState("MEDIUM (M)");
-    const [mode, setMode] = useState("CLASSIC");
     const [isPrivate, setIsPrivate] = useState("NO");
-    const [maxPlayers, setMaxPlayers] = useState(4);
+    const [maxPlayers, setMaxPlayers] = useState(3);
     const [lobbyName, setLobbyName] = useState("");
     const { session } = useSession();
 
@@ -23,8 +21,6 @@ const CreateGame = () => {
         }
         const privacy = isPrivate === "YES";
         const gameDefinitionJson = {
-            map,
-            mode,
             privacy,
             maxPlayers,
             lobbyName,
@@ -50,28 +46,16 @@ const CreateGame = () => {
                         </div>
                     </div>
                     <DropdownOption
-                        label="MAP:"
-                        currentValue={map}
-                        setValue={setMap}
-                        options={["SMALL (S)", "MEDIUM (M)", "LARGE (L)"]}
-                    />
-                    <DropdownOption
-                        label="MODE:"
-                        currentValue={mode}
-                        setValue={setMode}
-                        options={["CLASSIC", "KING OF THE HILL", "DOMINATION"]}
+                        label="Num Players:"
+                        currentValue={maxPlayers}
+                        setValue={setMaxPlayers}
+                        options={[3, 4, 5, 6, 7]}
                     />
                     <DropdownOption
                         label="PRIVATE:"
                         currentValue={isPrivate}
                         setValue={setIsPrivate}
                         options={["NO", "YES"]}
-                    />
-                    <DropdownOption
-                        label="Num Players:"
-                        currentValue={maxPlayers}
-                        setValue={setMaxPlayers}
-                        options={[2, 3, 4, 5]}
                     />
                     <div className="add-button">
                         <button type="submit">+</button>

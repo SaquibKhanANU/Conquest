@@ -29,11 +29,9 @@ const BrowserListContainer = () => {
     const lobbies = useSelector((state) => state.lobby.lobbies);
     const games = useSelector((state) => state.lobby.games);
 
-    const headersGamesList = ["LOBBY NAME", "MAP", "MODE", "PLAYERS"];
+    const headersGamesList = ["LOBBY NAME", "PLAYERS"];
     const headersLobbiesList = [
         "LOBBY NAME",
-        "MAP",
-        "MODE",
         "PLAYERS",
         "PRIVATE",
         "JOIN",
@@ -41,8 +39,6 @@ const BrowserListContainer = () => {
 
     const lobbiesData = lobbies.map((lobby) => ({
         lobbyName: lobby.lobbyRules.lobbyName,
-        map: lobby.lobbyRules.map,
-        mode: lobby.lobbyRules.mode,
         players: `${lobby.lobbyPlayers.length}/${lobby.lobbyRules.maxPlayers}`,
         isPrivate: lobby.lobbyRules.isPrivate ? "Yes" : "No",
         join: (
@@ -57,8 +53,6 @@ const BrowserListContainer = () => {
 
     const gamesData = games.map((game) => ({
         lobbyName: game.lobbyRules.lobbyName,
-        map: game.lobbyRules.map,
-        mode: game.lobbyRules.mode,
         players: `${game.gamePlayers.length}/${game.lobbyRules.maxPlayers}`,
     }));
 

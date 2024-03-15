@@ -12,7 +12,7 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
         countdown,
     } = currentLobby;
     const { playerId } = currentPlayer;
-    const { lobbyName, map, maxPlayers, mode, privacy } = lobbyRules;
+    const { lobbyName, maxPlayers, privacy } = lobbyRules;
     const { session } = useSession();
     const isPrivate = privacy ? "YES" : "NO";
     const civilization = playerCivilizations[playerId];
@@ -31,8 +31,6 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
     const profileInfoData = [
         { label: "LOBBY NAME:", value: lobbyName },
         { label: "LOBBY OWNER:", value: lobbyOwner.playerName },
-        { label: "MAP:", value: map },
-        { label: "MODE:", value: mode },
         {
             label: "MAX PLAYERS:",
             value: `${lobbyPlayers.length}/${maxPlayers}`,

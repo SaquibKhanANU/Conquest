@@ -15,13 +15,6 @@ const PlayersOnline = () => {
         }
     }, [session]);
 
-    const handleRefresh = () => {
-        if (session) {
-            console.log("Refreshing players...");
-            session.getPlayersList();
-        }
-    };
-
     return (
         <div className="players-online-container">
             <div className="players-online-header">

@@ -18,7 +18,7 @@ public class Game {
 
     public Game(Lobby lobby) {
         this.gameId = lobby.getLobbyId();
-        this.lobbyRules = new LobbyRules(lobby.getLobbyRules().getLobbyName(), lobby.getLobbyRules().getMap(), lobby.getLobbyRules().getMode(), lobby.getLobbyRules().isPrivate(), lobby.getLobbyRules().getMaxPlayers());
+        this.lobbyRules = new LobbyRules(lobby.getLobbyRules().getLobbyName(), lobby.getLobbyRules().isPrivate(), lobby.getLobbyRules().getMaxPlayers());
         this.gamePlayers = new ArrayList<>(lobby.getLobbyPlayers()); // Creating a new ArrayList of Players
     }
 
