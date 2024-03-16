@@ -137,6 +137,20 @@ public class LobbyController {
         }
     }
 
+    @MessageMapping("/lobby/chooseCivilizationSide")
+    public void chooseCivilizationSide(@Payload String civilizationSide, Principal principal) {
+        Player player = playerRepository.get(principal.getName());
+        Lobby lobby = lobbyService.get(player.getLobbyId());
+        System.out.println("Choosing side" + civilizationSide);
+        synchronized (lobby) {
+            if (lobby.getPlayerCivilization(player.getPlayerId()).checkSideChosen(civilizationSide) || lobby.getPlayersReady().contains(player.getPlayerId())) {
+                return;
+            }
+            lobby.getPlayerCivilization(player.getPlayerId()).setSide(civilizationSide);
+            messagingTemplate.convertAndSend("/topic/lobby/" + player.getLobbyId(), lobby);
+        }
+    }
+
     @MessageMapping("/lobby/kickPlayer")
     public void kickPlayer(@Payload String playerId) {
         Player player = playerRepository.get(playerId);

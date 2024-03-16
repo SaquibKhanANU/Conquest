@@ -22,7 +22,7 @@ const BrowserListContainer = () => {
         setShowFirstComponent((prevState) => !prevState);
     };
 
-    const handleJoinLobby2 = async (lobbyId) => {
+    const handleJoinLobby = async (lobbyId) => {
         session.joinLobby(lobbyId);
     };
 
@@ -44,7 +44,7 @@ const BrowserListContainer = () => {
         join: (
             <button
                 className="join-game-button"
-                onClick={() => handleJoinLobby2(lobby.lobbyId)}
+                onClick={() => handleJoinLobby(lobby.lobbyId)}
             >
                 &#10148;
             </button>

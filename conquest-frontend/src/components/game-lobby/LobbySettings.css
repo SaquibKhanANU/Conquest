@@ -5,3 +5,8 @@
 .choose-civ-dropdown {
     margin-top: -7px;
 }
+
+.choose-side-button:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}

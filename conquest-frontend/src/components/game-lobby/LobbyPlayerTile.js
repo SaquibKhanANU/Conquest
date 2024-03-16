@@ -21,6 +21,7 @@ const LobbyPlayerTile = ({ playerData, ready, civilization, isOwner }) => {
             <div className="lobby-player-tile-body">
                 <p>{playerName}</p>
                 <p style={{ color: civilization.color }}>{civilization.name}</p>
+                <p>{civilization.side}</p>
                 {ready ? (
                     <p className="ready">&#10003;</p>
                 ) : (

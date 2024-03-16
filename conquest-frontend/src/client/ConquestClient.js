@@ -208,6 +208,10 @@ class ConquestSession {
         );
     }
 
+    async chooseSide(side) {
+        this.sendMessage("/app/lobby/chooseCivilizationSide", side);
+    }
+
     async kickPlayer(playerId) {
         this.sendMessage("/app/lobby/kickPlayer", playerId);
     }

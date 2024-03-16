@@ -11,7 +11,8 @@ const LobbyPlayersList = ({ currentLobby, currentPlayer, setPlayer }) => {
             <div className="players-list-body">
                 <div className="players-list-headers">
                     <p>PLAYER NAME</p>
-                    <p>COUNTRY</p>
+                    <p>CIVILIZATION</p>
+                    <p>SIDE</p>
                     <p>STATUS</p>
                 </div>
                 <div className="players-list scroll-bar">

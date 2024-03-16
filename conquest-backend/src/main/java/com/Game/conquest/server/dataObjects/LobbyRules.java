@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,19 +27,22 @@ public class LobbyRules {
         this.lobbyName = LobbyName;
     }
 
-    @JsonIgnore
     public List<Civilization> getCivilizations() {
-        return Arrays.asList(
-                new Civilization("Byzantine", "purple"),
-                new Civilization("Roman", "navy"),
-                new Civilization("Persian", "gold"),
-                new Civilization("Greek", "blue"),
-                new Civilization("Mongol", "green"),
-                new Civilization("Aztec", "lime"),
-                new Civilization("Babylonian", "brown"),
-                new Civilization("Egyptian", "orange"),
-                new Civilization("Viking", "red")
+        List<String> civilizationNames = Arrays.asList(
+                "Byzantine", "Roman", "Persian", "Greek", "Mongol",
+                "Aztec", "Babylonian", "Egyptian", "Viking"
         );
+        List<String> colors = Arrays.asList(
+                "purple", "navy", "gold", "blue", "green",
+                "lime", "brown", "orange", "red"
+        );
+        List<Civilization> civilizations = new ArrayList<>();
+
+        for (int i = 0; i < civilizationNames.size(); i++) {
+            String name = civilizationNames.get(i);
+            civilizations.add(new Civilization(name, colors.get(i), "A"));
+        }
+        return civilizations;
     }
 
     @JsonIgnore

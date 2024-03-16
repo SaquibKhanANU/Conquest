@@ -1,6 +1,5 @@
 import "./LobbySettings.css";
 import React from "react";
-import civilizationsJson from "../../resources/jsonData/civilizations.json";
 import { useSession } from "../global/contexts/SessionContext";
 
 const LobbySettings = ({ currentLobby, currentPlayer }) => {
@@ -12,7 +11,7 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
         countdown,
     } = currentLobby;
     const { playerId } = currentPlayer;
-    const { lobbyName, maxPlayers, privacy } = lobbyRules;
+    const { lobbyName, maxPlayers, privacy, civilizations } = lobbyRules;
     const { session } = useSession();
     const isPrivate = privacy ? "YES" : "NO";
     const civilization = playerCivilizations[playerId];
@@ -20,6 +19,12 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
     const handleChooseCivilization = (civ) => {
         console.log("Choosing civilization...");
         session.chooseCivilization(civ);
+    };
+
+    const handleChooseSide = (side) => {
+        console.log("Choosing side...");
+        side = side === "A" ? "B" : "A";
+        session.chooseSide(side);
     };
 
     const formatTimer = (time) => {
@@ -61,7 +66,7 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
                             </button>
                         )}
                         <div className="dropdown-content">
-                            {civilizationsJson.map((civ) => (
+                            {civilizations.map((civ) => (
                                 <p
                                     key={civ.name}
                                     onClick={() =>
@@ -73,6 +78,18 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
                                 </p>
                             ))}
                         </div>
+                    </div>
+                </div>
+                <div className="profile-info">
+                    <p className="silver-text">SIDE:</p>
+                    <div className="dropdown choose-civ-dropdown">
+                        <button
+                            className="choose-side-button"
+                            onClick={() => handleChooseSide(civilization.side)}
+                            style={{ color: civilization.color }}
+                        >
+                            {civilization.side}
+                        </button>
                     </div>
                 </div>
             </div>
