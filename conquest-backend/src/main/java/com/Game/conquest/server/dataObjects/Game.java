@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class Game {
 
-    // TODO: FIX THIS CONSTRUCTOR
+    // TODO: FIX THIS CONSTRUCTOR to add game state
     private long gameId;
     private LobbyRules lobbyRules;
     private ArrayList<Player> gamePlayers;
@@ -19,7 +19,7 @@ public class Game {
     public Game(Lobby lobby) {
         this.gameId = lobby.getLobbyId();
         this.lobbyRules = new LobbyRules(lobby.getLobbyRules().getLobbyName(), lobby.getLobbyRules().isPrivate(), lobby.getLobbyRules().getMaxPlayers());
-        this.gamePlayers = new ArrayList<>(lobby.getLobbyPlayers()); // Creating a new ArrayList of Players
+        this.gamePlayers = new ArrayList<>(lobby.getLobbyPlayers());
     }
 
     public void removePlayer(Player player) {

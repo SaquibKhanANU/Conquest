@@ -83,13 +83,17 @@ const LobbySettings = ({ currentLobby, currentPlayer }) => {
                 <div className="profile-info">
                     <p className="silver-text">SIDE:</p>
                     <div className="dropdown choose-civ-dropdown">
-                        <button
-                            className="choose-side-button"
-                            onClick={() => handleChooseSide(civilization.side)}
-                            style={{ color: civilization.color }}
-                        >
-                            {civilization.side}
-                        </button>
+                        {civilization && (
+                            <button
+                                className="choose-side-button"
+                                onClick={() =>
+                                    handleChooseSide(civilization.side)
+                                }
+                                style={{ color: civilization.color }}
+                            >
+                                {civilization.side}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

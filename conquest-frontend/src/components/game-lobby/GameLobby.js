@@ -9,6 +9,7 @@ import { useSession } from "../global/contexts/SessionContext";
 import LobbyPlayersList from "./LobbyPlayersList";
 import LobbyActions from "./LobbyActions";
 import LobbySettings from "./LobbySettings";
+import BoardImageLobby from "./BoardImageLobby";
 
 const GameLobby = () => {
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
@@ -19,15 +20,15 @@ const GameLobby = () => {
     const navigate = useNavigate();
     const [playersProfile, setPlayerProfile] = useState(currentPlayer);
 
+    const handlePlayerClick = (player) => {
+        setPlayerProfile(player);
+    };
+
     useEffect(() => {
         if (session === null) {
             navigate("/");
         }
     }, [navigate, session]);
-
-    const handlePlayerClick = (player) => {
-        setPlayerProfile(player);
-    };
 
     return (
         <div
@@ -51,6 +52,11 @@ const GameLobby = () => {
                         <LobbyActions
                             currentLobby={currentLobby}
                             currentPlayer={currentPlayer}
+                        />
+                        <BoardImageLobby
+                            currentLobby={currentLobby}
+                            currentPlayer={currentPlayer}
+                            player={playersProfile}
                         />
                     </div>
                     <div className="lobby-players">

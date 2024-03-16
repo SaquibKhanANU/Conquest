@@ -29,12 +29,11 @@ public class LobbyRules {
 
     public List<Civilization> getCivilizations() {
         List<String> civilizationNames = Arrays.asList(
-                "Byzantine", "Roman", "Persian", "Greek", "Mongol",
-                "Aztec", "Babylonian", "Egyptian", "Viking"
+                "Alexandria", "Babylon", "Ephesos", "Gizah", "Halikarn",
+                "Olympia", "Rhodos"
         );
         List<String> colors = Arrays.asList(
-                "purple", "navy", "gold", "blue", "green",
-                "lime", "brown", "orange", "red"
+                "red", "blue", "green", "yellow", "purple", "orange", "pink"
         );
         List<Civilization> civilizations = new ArrayList<>();
 

@@ -22,29 +22,33 @@ const BrowserListContainer = () => {
         setShowFirstComponent((prevState) => !prevState);
     };
 
-    const handleJoinLobby = async (lobbyId) => {
-        session.joinLobby(lobbyId);
+    const handleJoinLobby = async (lobbyId, isPrivate) => {
+        if (!isPrivate) {
+            session.joinLobby(lobbyId);
+        } else {
+            const password = prompt("Enter password");
+            if (password) {
+                session.joinLobby(lobbyId);
+            }
+        }
     };
 
     const lobbies = useSelector((state) => state.lobby.lobbies);
     const games = useSelector((state) => state.lobby.games);
 
-    const headersGamesList = ["LOBBY NAME", "PLAYERS"];
-    const headersLobbiesList = [
-        "LOBBY NAME",
-        "PLAYERS",
-        "PRIVATE",
-        "JOIN",
-    ];
+    const headersGamesList = ["LOBBY NAME", "PLAYERS", "PRIVATE"];
+    const headersLobbiesList = ["LOBBY NAME", "PLAYERS", "PRIVATE", "JOIN"];
 
     const lobbiesData = lobbies.map((lobby) => ({
         lobbyName: lobby.lobbyRules.lobbyName,
         players: `${lobby.lobbyPlayers.length}/${lobby.lobbyRules.maxPlayers}`,
-        isPrivate: lobby.lobbyRules.isPrivate ? "Yes" : "No",
+        isPrivate: lobby.lobbyRules.privacy ? "YES" : "NO",
         join: (
             <button
                 className="join-game-button"
-                onClick={() => handleJoinLobby(lobby.lobbyId)}
+                onClick={() =>
+                    handleJoinLobby(lobby.lobbyId, lobby.lobbyRules.privacy)
+                }
             >
                 &#10148;
             </button>
@@ -54,6 +58,7 @@ const BrowserListContainer = () => {
     const gamesData = games.map((game) => ({
         lobbyName: game.lobbyRules.lobbyName,
         players: `${game.gamePlayers.length}/${game.lobbyRules.maxPlayers}`,
+        isPrivate: game.lobbyRules.privacy ? "Yes" : "No",
     }));
 
     return (
