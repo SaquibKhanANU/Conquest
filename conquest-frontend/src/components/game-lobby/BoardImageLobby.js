@@ -9,7 +9,6 @@ const BoardImageLobby = ({ currentLobby, currentPlayer, player }) => {
     return (
         <div className="conquest-container">
             <img
-                className="board-image"
                 src={
                     process.env.PUBLIC_URL +
                     "/imgs/boards/" +

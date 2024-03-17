@@ -1,0 +1,22 @@
+.built-cards-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Adjust the width of each card */
+    overflow-y: hidden;
+    overflow-x: auto; /* Add horizontal scroll bar */
+}
+
+.built-cards-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.built-cards-card {
+    width: 100%;
+    height: 24px;
+}
+
+.built-cards-current-player .built-cards-card {
+    width: 100%;
+    height: 36px;
+}

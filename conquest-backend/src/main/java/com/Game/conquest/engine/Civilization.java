@@ -1,4 +1,4 @@
-package com.Game.conquest.server.dataObjects;
+package com.Game.conquest.engine;
 
 import lombok.Getter;
 import lombok.Setter;

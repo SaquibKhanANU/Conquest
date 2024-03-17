@@ -1,0 +1,11 @@
+.built-wonder-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Add any additional styles you need */
+}
+
+.built-wonder-container img {
+    width: 60%;
+    height: auto;
+}

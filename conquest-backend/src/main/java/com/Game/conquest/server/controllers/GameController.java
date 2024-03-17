@@ -52,4 +52,11 @@ public class GameController {
         }
         gameBrowserController.getGamesList();
     }
+
+
+    @MessageMapping("/game/arrangeBoards")
+    private void arrangeBoards(long gameId, Principal principal) {
+        Game game = gameService.get(gameId);
+
+    }
 }

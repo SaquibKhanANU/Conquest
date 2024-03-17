@@ -49,7 +49,7 @@ const CreateGame = () => {
                         label="Num Players:"
                         currentValue={maxPlayers}
                         setValue={setMaxPlayers}
-                        options={[3, 4, 5, 6, 7]}
+                        options={[1, 2, 3, 4, 5, 6, 7]}
                     />
                     <DropdownOption
                         label="PRIVATE:"

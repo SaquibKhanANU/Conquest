@@ -1,6 +1,7 @@
 package com.Game.conquest.server.controllers;
 
 
+import com.Game.conquest.engine.Civilization;
 import com.Game.conquest.server.converter.GenericConverter;
 import com.Game.conquest.server.dataObjects.*;
 import com.Game.conquest.server.repositories.PlayerRepository;

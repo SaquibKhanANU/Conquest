@@ -1,0 +1,13 @@
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    align-self: center;
+    gap: 10px;
+}
+
+.cards-container .cC {
+    width: 5px;
+    height: auto;
+}
