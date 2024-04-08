@@ -1,0 +1,1668 @@
+{
+  "deck" :
+  {
+    "age1": {
+      "cards": [
+        {
+          "name": "Clay Pit",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "O/C",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 1
+          },
+          "image": "claypit.png"
+        },
+        {
+          "name": "Clay Pool",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "C",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "claypool.png"
+        },
+        {
+          "name": "Excavation",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "S/C",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 1
+          },
+          "image": "excavation.png"
+        },
+        {
+          "name": "Forest Cave",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "W/O",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 1,
+            "7": 1
+          },
+          "image": "forestcave.png"
+        },
+        {
+          "name": "Lumber Yard",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "W",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "lumberyard.png"
+        },
+        {
+          "name": "Mine",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "S/O",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 1
+          },
+          "image": "mine.png"
+        },
+        {
+          "name": "Ore Vein",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "O",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "orevein.png"
+        },
+        {
+          "name": "Stone Pit",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "S",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "stonepit.png"
+        },
+        {
+          "name": "Timber Yard",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "W/S",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 1
+          },
+          "image": "timberyard.png"
+        },
+        {
+          "name": "Tree Farm",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "W/C",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 1
+          },
+          "image": "treefarm.png"
+        },
+        {
+          "name": "Glassworks",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "G",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "glassworks.png"
+        },
+        {
+          "name": "Loom",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "L",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "loom.png"
+        },
+        {
+          "name": "Press",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "P",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "press.png"
+        },
+        {
+          "name": "East Trading Post",
+          "cardType": "YELLOW",
+          "ability": {
+            "discount": {
+              "resourceTypes": "CSOW",
+              "providers": [
+                "RIGHT"
+              ],
+              "discountedPrice": 1
+            }
+          },
+          "children": [
+            "Forum"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "easttradingpost.png"
+        },
+        {
+          "name": "Marketplace",
+          "cardType": "YELLOW",
+          "ability": {
+            "discount": {
+              "resourceTypes": "LGP",
+              "providers": [
+                "LEFT",
+                "RIGHT"
+              ]
+            }
+          },
+          "children": [
+            "Caravansery"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "marketplace.png"
+        },
+        {
+          "name": "Tavern",
+          "cardType": "YELLOW",
+          "ability": {
+            "gold": 5
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 3
+          },
+          "image": "tavern.png"
+        },
+        {
+          "name": "West Trading Post",
+          "cardType": "YELLOW",
+          "ability": {
+            "discount": {
+              "resourceTypes": "CSOW",
+              "providers": [
+                "LEFT"
+              ],
+              "discountedPrice": 1
+            }
+          },
+          "children": [
+            "Forum"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "westtradingpost.png"
+        },
+        {
+          "name": "Altar",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 2
+          },
+          "children": [
+            "Temple"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "altar.png"
+        },
+        {
+          "name": "Baths",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 3
+          },
+          "cost": {
+            "resources": "S"
+          },
+          "children": [
+            "Aquaduct"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "baths.png"
+        },
+        {
+          "name": "Pawnshop",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 3
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "pawnshop.png"
+        },
+        {
+          "name": "Theater",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 2
+          },
+          "children": [
+            "Statue"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "theater.png"
+        },
+        {
+          "name": "Apothecary",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "COMPASS"
+          },
+          "cost": {
+            "resources": "L"
+          },
+          "children": [
+            "Stables",
+            "Dispensary"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "apothecary.png"
+        },
+        {
+          "name": "Scriptorium",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "TABLET"
+          },
+          "cost": {
+            "resources": "P"
+          },
+          "children": [
+            "Courthouse",
+            "Library"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "scriptorium.png"
+        },
+        {
+          "name": "Workshop",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "WHEEL"
+          },
+          "cost": {
+            "resources": "G"
+          },
+          "children": [
+            "Archery Range",
+            "Laboratory"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "workshop.png"
+        },
+        {
+          "name": "Barracks",
+          "cardType": "RED",
+          "ability": {
+            "military": 1
+          },
+          "cost": {
+            "resources": "O"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "barracks.png"
+        },
+        {
+          "name": "Guard Tower",
+          "cardType": "RED",
+          "ability": {
+            "military": 1
+          },
+          "cost": {
+            "resources": "C"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "guardtower.png"
+        },
+        {
+          "name": "Stockade",
+          "cardType": "RED",
+          "ability": {
+            "military": 1
+          },
+          "cost": {
+            "resources": "W"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "stockade.png"
+        }
+      ],
+      "backImage": "age1.png"
+    },
+    "age2": {
+      "cards": [
+        {
+          "name": "Brickyard",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "CC",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "brickyard.png"
+        },
+        {
+          "name": "Foundry",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "OO",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "foundry.png"
+        },
+        {
+          "name": "Quarry",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "SS",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "quarry.png"
+        },
+        {
+          "name": "Sawmill",
+          "cardType": "BROWN",
+          "ability": {
+            "production": {
+              "resources": "WW",
+              "isSellable": true
+            }
+          },
+          "cost": {
+            "gold": 1
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "sawmill.png"
+        },
+        {
+          "name": "Glassworks",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "G",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "glassworks.png"
+        },
+        {
+          "name": "Loom",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "L",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "loom.png"
+        },
+        {
+          "name": "Press",
+          "cardType": "GREY",
+          "ability": {
+            "production": {
+              "resources": "P",
+              "isSellable": true
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "press.png"
+        },
+        {
+          "name": "Bazar",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF",
+                "LEFT",
+                "RIGHT"
+              ],
+              "gold": 2,
+              "type": "CARD",
+              "colors": [
+                "GREY"
+              ]
+            }
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "bazar.png"
+        },
+        {
+          "name": "Caravansery",
+          "cardType": "YELLOW",
+          "ability": {
+            "production": {
+              "resources": "W/S/O/C",
+              "isSellable": false
+            }
+          },
+          "cost": {
+            "resources": "WW"
+          },
+          "parents": [
+            "Marketplace"
+          ],
+          "children": [
+            "Lighthouse"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 3,
+            "7": 3
+          },
+          "image": "caravansery.png"
+        },
+        {
+          "name": "Forum",
+          "cardType": "YELLOW",
+          "ability": {
+            "production": {
+              "resources": "G/P/L",
+              "isSellable": false
+            }
+          },
+          "cost": {
+            "resources": "CC"
+          },
+          "parents": [
+            "East Trading Post",
+            "West Trading Post"
+          ],
+          "children": [
+            "Haven"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 3
+          },
+          "image": "forum.png"
+        },
+        {
+          "name": "Vineyard",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF",
+                "LEFT",
+                "RIGHT"
+              ],
+              "gold": 1,
+              "type": "CARD",
+              "colors": [
+                "BROWN"
+              ]
+            }
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "vineyard.png"
+        },
+        {
+          "name": "Aqueduct",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 5
+          },
+          "cost": {
+            "resources": "SSS"
+          },
+          "parents": [
+            "Baths"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "aqueduct.png"
+        },
+        {
+          "name": "Courthouse",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 4
+          },
+          "cost": {
+            "resources": "CCL"
+          },
+          "parents": [
+            "Scriptorium"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "courthouse.png"
+        },
+        {
+          "name": "Statue",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 4
+          },
+          "cost": {
+            "resources": "WOO"
+          },
+          "parents": [
+            "Theater"
+          ],
+          "children": [
+            "Gardens"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "statue.png"
+        },
+        {
+          "name": "Temple",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 3
+          },
+          "cost": {
+            "resources": "WCG"
+          },
+          "parents": [
+            "Altar"
+          ],
+          "children": [
+            "Pantheon"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "temple.png"
+        },
+        {
+          "name": "Dispensary",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "COMPASS"
+          },
+          "cost": {
+            "resources": "OOG"
+          },
+          "parents": [
+            "Apothecary"
+          ],
+          "children": [
+            "Arena",
+            "Lodge"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "dispensary.png"
+        },
+        {
+          "name": "Laboratory",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "WHEEL"
+          },
+          "cost": {
+            "resources": "CCP"
+          },
+          "parents": [
+            "Workshop"
+          ],
+          "children": [
+            "Siege Workshop",
+            "Observatory"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "laboratory.png"
+        },
+        {
+          "name": "Library",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "TABLET"
+          },
+          "cost": {
+            "resources": "SSL"
+          },
+          "parents": [
+            "Scriptorium"
+          ],
+          "children": [
+            "Senate",
+            "University"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "library.png"
+        },
+        {
+          "name": "School",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "TABLET"
+          },
+          "cost": {
+            "resources": "WP"
+          },
+          "children": [
+            "Academy",
+            "Study"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "school.png"
+        },
+        {
+          "name": "Archery Range",
+          "cardType": "RED",
+          "ability": {
+            "military": 2
+          },
+          "cost": {
+            "resources": "WWO"
+          },
+          "parents": [
+            "Workshop"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "archeryrange.png"
+        },
+        {
+          "name": "Stables",
+          "cardType": "RED",
+          "ability": {
+            "military": 2
+          },
+          "cost": {
+            "resources": "WOC"
+          },
+          "parents": [
+            "Apothecary"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "stables.png"
+        },
+        {
+          "name": "Training Ground",
+          "cardType": "RED",
+          "ability": {
+            "military": 2
+          },
+          "cost": {
+            "resources": "WOO"
+          },
+          "children": [
+            "Circus"
+          ],
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 3
+          },
+          "image": "trainingground.png"
+        },
+        {
+          "name": "Walls",
+          "cardType": "RED",
+          "ability": {
+            "military": 2
+          },
+          "cost": {
+            "resources": "SSS"
+          },
+          "children": [
+            "Fortifications"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "walls.png"
+        }
+      ],
+      "backImage": "age2.png"
+    },
+    "age3": {
+      "cards": [
+        {
+          "name": "Arena",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF"
+              ],
+              "type": "BUILT_WONDER_STAGES",
+              "gold": 3,
+              "points": 1
+            }
+          },
+          "cost": {
+            "resources": "SSO"
+          },
+          "parents": [
+            "Dispensary"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 3
+          },
+          "image": "arena.png"
+        },
+        {
+          "name": "Chamber of Commerce",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF"
+              ],
+              "type": "CARD",
+              "gold": 2,
+              "points": 2,
+              "colors": [
+                "GREY"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "CCP"
+          },
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "chamberofcommerce.png"
+        },
+        {
+          "name": "Haven",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF"
+              ],
+              "type": "CARD",
+              "gold": 1,
+              "points": 1,
+              "colors": [
+                "BROWN"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "WOL"
+          },
+          "parents": [
+            "Forum"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "haven.png"
+        },
+        {
+          "name": "Lighthouse",
+          "cardType": "YELLOW",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF"
+              ],
+              "type": "CARD",
+              "gold": 1,
+              "points": 1,
+              "colors": [
+                "YELLOW"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "SG"
+          },
+          "parents": [
+            "Caravansery"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "lighthouse.png"
+        },
+        {
+          "name": "Gardens",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 5
+          },
+          "cost": {
+            "resources": "WCC"
+          },
+          "parents": [
+            "Statue"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "gardens.png"
+        },
+        {
+          "name": "Palace",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 8
+          },
+          "cost": {
+            "resources": "WSOCGPL"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "palace.png"
+        },
+        {
+          "name": "Pantheon",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 7
+          },
+          "cost": {
+            "resources": "OCCGPL"
+          },
+          "parents": [
+            "Temple"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "pantheon.png"
+        },
+        {
+          "name": "Senate",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 6
+          },
+          "cost": {
+            "resources": "WWSO"
+          },
+          "parents": [
+            "Library"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "senate.png"
+        },
+        {
+          "name": "Town Hall",
+          "cardType": "BLUE",
+          "ability": {
+            "points": 6
+          },
+          "cost": {
+            "resources": "SSOG"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 3,
+            "7": 3
+          },
+          "image": "townhall.png"
+        },
+        {
+          "name": "Academy",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "COMPASS"
+          },
+          "cost": {
+            "resources": "SSSG"
+          },
+          "parents": [
+            "School"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "academy.png"
+        },
+        {
+          "name": "Lodge",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "COMPASS"
+          },
+          "cost": {
+            "resources": "CCPL"
+          },
+          "parents": [
+            "Dispensary"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 2,
+            "7": 2
+          },
+          "image": "lodge.png"
+        },
+        {
+          "name": "Observatory",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "WHEEL"
+          },
+          "cost": {
+            "resources": "OOGL"
+          },
+          "parents": [
+            "Laboratory"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "observatory.png"
+        },
+        {
+          "name": "Study",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "WHEEL"
+          },
+          "cost": {
+            "resources": "WPL"
+          },
+          "parents": [
+            "School"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "study.png"
+        },
+        {
+          "name": "University",
+          "cardType": "GREEN",
+          "ability": {
+            "science": "TABLET"
+          },
+          "cost": {
+            "resources": "WWGP"
+          },
+          "parents": [
+            "Library"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "university.png"
+        },
+        {
+          "name": "Arsenal",
+          "cardType": "RED",
+          "ability": {
+            "military": 3
+          },
+          "cost": {
+            "resources": "WWOL"
+          },
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 3
+          },
+          "image": "arsenal.png"
+        },
+        {
+          "name": "Circus",
+          "cardType": "RED",
+          "ability": {
+            "military": 3
+          },
+          "cost": {
+            "resources": "SSSO"
+          },
+          "parents": [
+            "Training Ground"
+          ],
+          "countPerNPlayer": {
+            "3": 0,
+            "4": 1,
+            "5": 2,
+            "6": 3,
+            "7": 3
+          },
+          "image": "circus.png"
+        },
+        {
+          "name": "Fortifications",
+          "cardType": "RED",
+          "ability": {
+            "military": 3
+          },
+          "cost": {
+            "resources": "SOOO"
+          },
+          "parents": [
+            "Walls"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2
+          },
+          "image": "fortifications.png"
+        },
+        {
+          "name": "Siege Workshop",
+          "cardType": "RED",
+          "ability": {
+            "military": 3
+          },
+          "cost": {
+            "resources": "WCCC"
+          },
+          "parents": [
+            "Laboratory"
+          ],
+          "countPerNPlayer": {
+            "3": 1,
+            "4": 1,
+            "5": 2,
+            "6": 2,
+            "7": 2
+          },
+          "image": "siegeworkshop.png"
+        }
+      ],
+      "backImage": "age3.png",
+      "guildCards": [
+        {
+          "name": "Builders Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "SELF",
+                "RIGHT"
+              ],
+              "type": "BUILT_WONDER_STAGES",
+              "points": 1
+            }
+          },
+          "cost": {
+            "resources": "SSCCG"
+          },
+          "image": "buildersguild.png"
+        },
+        {
+          "name": "Craftsmens Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 2,
+              "colors": [
+                "GREY"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "SSOO"
+          },
+          "image": "craftsmensguild.png"
+        },
+        {
+          "name": "Magistrates Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "BLUE"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "WWWSL"
+          },
+          "image": "magistratesguild.png"
+        },
+        {
+          "name": "Philosophers Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "GREEN"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "CCCPL"
+          },
+          "image": "philosophersguild.png"
+        },
+        {
+          "name": "Scientists Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "science": "any"
+          },
+          "cost": {
+            "resources": "WWOOP"
+          },
+          "image": "scientistsguild.png"
+        },
+        {
+          "name": "Shipowners Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "SELF"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "BROWN",
+                "GREY",
+                "PURPLE"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "WWWGP"
+          },
+          "image": "shipownersguild.png"
+        },
+        {
+          "name": "Spies Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "RED"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "CCCG"
+          },
+          "image": "spiesguild.png"
+        },
+        {
+          "name": "Strategists Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "DEFEAT_TOKEN",
+              "points": 1
+            }
+          },
+          "cost": {
+            "resources": "SOOL"
+          },
+          "image": "strategistsguild.png"
+        },
+        {
+          "name": "Traders Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "YELLOW"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "GPL"
+          },
+          "image": "tradersguild.png"
+        },
+        {
+          "name": "Workers Guild",
+          "cardType": "PURPLE",
+          "ability": {
+            "network": {
+              "boards": [
+                "LEFT",
+                "RIGHT"
+              ],
+              "type": "CARD",
+              "points": 1,
+              "colors": [
+                "BROWN"
+              ]
+            }
+          },
+          "cost": {
+            "resources": "WSOOC"
+          },
+          "image": "workersguild.png"
+        }
+      ]
+    }
+  }
+}

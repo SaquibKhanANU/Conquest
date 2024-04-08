@@ -1,4 +1,4 @@
 package com.Game.conquest.engine;
 
-public class PlayerState {
+public class Settings {
 }

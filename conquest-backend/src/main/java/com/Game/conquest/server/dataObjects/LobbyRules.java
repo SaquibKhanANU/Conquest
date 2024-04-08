@@ -1,6 +1,5 @@
 package com.Game.conquest.server.dataObjects;
 
-import com.Game.conquest.engine.Civilization;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

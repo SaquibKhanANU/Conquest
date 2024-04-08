@@ -1,0 +1,484 @@
+{
+  "wonders": [
+    {
+      "name": "Alexandria",
+      "sides": {
+        "A": {
+          "initialResource": "G",
+          "stages": [
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "OO"
+              },
+              "ability": {
+                "production": {
+                  "resources": "W/S/O/C",
+                  "isSellable": false
+                }
+              }
+            },
+            {
+              "cost": {
+                "resources": "GG"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "alexandriaA.png"
+        },
+        "B": {
+          "initialResource": "G",
+          "stages": [
+            {
+              "cost": {
+                "resources": "CC"
+              },
+              "ability": {
+                "production": {
+                  "resources": "W/S/O/C",
+                  "isSellable": false
+                }
+              }
+            },
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "production": {
+                  "resources": "G/P/L",
+                  "isSellable": false
+                }
+              }
+            },
+            {
+              "cost": {
+                "resources": "SSS"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "alexandriaB.png"
+        }
+      }
+    },
+    {
+      "name": "Babylon",
+      "sides": {
+        "A": {
+          "initialResource": "C",
+          "stages": [
+            {
+              "cost": {
+                "resources": "CC"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "WWW"
+              },
+              "ability": {
+                "science": "any"
+              }
+            },
+            {
+              "cost": {
+                "resources": "CCCC"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "babylonA.png"
+        },
+        "B": {
+          "initialResource": "C",
+          "stages": [
+            {
+              "cost": {
+                "resources": "CL"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "WWG"
+              },
+              "ability": {
+                "action": "PLAY_LAST_CARD"
+              }
+            },
+            {
+              "cost": {
+                "resources": "CCCP"
+              },
+              "ability": {
+                "science": "any"
+              }
+            }
+          ],
+          "image": "babylonB.png"
+        }
+      }
+    },
+    {
+      "name": "Ephesos",
+      "sides": {
+        "A": {
+          "initialResource": "P",
+          "stages": [
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "gold": 9
+              }
+            },
+            {
+              "cost": {
+                "resources": "PP"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "ephesosA.png"
+        },
+        "B": {
+          "initialResource": "P",
+          "stages": [
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "gold": 4,
+                "points": 2
+              }
+            },
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "gold": 4,
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "GPL"
+              },
+              "ability": {
+                "gold": 4,
+                "points": 5
+              }
+            }
+          ],
+          "image": "ephesosB.png"
+        }
+      }
+    },
+    {
+      "name": "Gizah",
+      "sides": {
+        "A": {
+          "initialResource": "S",
+          "stages": [
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "WWW"
+              },
+              "ability": {
+                "points": 5
+              }
+            },
+            {
+              "cost": {
+                "resources": "SSSS"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "gizahA.png"
+        },
+        "B": {
+          "initialResource": "S",
+          "stages": [
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "SSS"
+              },
+              "ability": {
+                "points": 5
+              }
+            },
+            {
+              "cost": {
+                "resources": "CCC"
+              },
+              "ability": {
+                "points": 5
+              }
+            },
+            {
+              "cost": {
+                "resources": "SSSSP"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "gizahB.png"
+        }
+      }
+    },
+    {
+      "name": "Halikarnassus",
+      "sides": {
+        "A": {
+          "initialResource": "L",
+          "stages": [
+            {
+              "cost": {
+                "resources": "CC"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "OOO"
+              },
+              "ability": {
+                "action": "PLAY_DISCARDED"
+              }
+            },
+            {
+              "cost": {
+                "resources": "LL"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "halikarnassusA.png"
+        },
+        "B": {
+          "initialResource": "L",
+          "stages": [
+            {
+              "cost": {
+                "resources": "OO"
+              },
+              "ability": {
+                "points": 2,
+                "action": "PLAY_DISCARDED"
+              }
+            },
+            {
+              "cost": {
+                "resources": "CCC"
+              },
+              "ability": {
+                "points": 1,
+                "action": "PLAY_DISCARDED"
+              }
+            },
+            {
+              "cost": {
+                "resources": "GPL"
+              },
+              "ability": {
+                "action": "PLAY_DISCARDED"
+              }
+            }
+          ],
+          "image": "halikarnassusB.png"
+        }
+      }
+    },
+    {
+      "name": "Olympia",
+      "sides": {
+        "A": {
+          "initialResource": "W",
+          "stages": [
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "action": "ONE_FREE_PER_AGE"
+              }
+            },
+            {
+              "cost": {
+                "resources": "OO"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "olympiaA.png"
+        },
+        "B": {
+          "initialResource": "W",
+          "stages": [
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "discount": {
+                  "resourceTypes": "WSOC",
+                  "providers": [
+                    "LEFT",
+                    "RIGHT"
+                  ],
+                  "discountedPrice": 1
+                }
+              }
+            },
+            {
+              "cost": {
+                "resources": "SS"
+              },
+              "ability": {
+                "points": 5
+              }
+            },
+            {
+              "cost": {
+                "resources": "OOL"
+              },
+              "ability": {
+                "action": "COPY_GUILD"
+              }
+            }
+          ],
+          "image": "olympiaB.png"
+        }
+      }
+    },
+    {
+      "name": "Rhodos",
+      "sides": {
+        "A": {
+          "initialResource": "O",
+          "stages": [
+            {
+              "cost": {
+                "resources": "WW"
+              },
+              "ability": {
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "CCC"
+              },
+              "ability": {
+                "military": 2
+              }
+            },
+            {
+              "cost": {
+                "resources": "OOOO"
+              },
+              "ability": {
+                "points": 7
+              }
+            }
+          ],
+          "image": "rhodosA.png"
+        },
+        "B": {
+          "initialResource": "O",
+          "stages": [
+            {
+              "cost": {
+                "resources": "SSS"
+              },
+              "ability": {
+                "gold": 3,
+                "military": 1,
+                "points": 3
+              }
+            },
+            {
+              "cost": {
+                "resources": "OOOO"
+              },
+              "ability": {
+                "gold": 4,
+                "military": 1,
+                "points": 4
+              }
+            }
+          ],
+          "image": "rhodosB.png"
+        }
+      }
+    }
+  ]
+}

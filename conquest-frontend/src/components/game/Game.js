@@ -2,16 +2,9 @@ import "./Game.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import Table from "./Table";
-import Cards from "./Cards";
+import PlayerHand from "./PlayerHand";
 
 const Game = () => {
-    const data = {
-        player47: { name: "Babylon", color: "blue", side: "A" },
-        player120: { name: "Babylon", color: "orange", side: "B" },
-        player49: { name: "Gizah", color: "orange", side: "B" },
-        player30: { name: "Gizah", color: "orange", side: "B" },
-    };
-
     const game = useSelector((state) => state.currentPlayer.currentGame);
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
     return (
@@ -23,12 +16,11 @@ const Game = () => {
         >
             <div className="game-container">
                 <div className="game-body">
-                    <Cards />
-                    <Table
-                        // boards={game.gameState.playerCivilizations}
-                        boards={data}
+                    <PlayerHand cards={game.game.deckManager.playerHands[currentPlayer.playerId]} />
+                    {/* <Table
+                        boards={game.gameState.playerCivilizations}
                         currentPlayer={currentPlayer}
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

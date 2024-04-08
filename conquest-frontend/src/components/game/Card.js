@@ -5,16 +5,14 @@ const Card = ({ cardName }) => {
     const renderCard = () => {
         return (
             <div className="card-container">
-                <div>
-                    <img
-                        className="card-image"
-                        src={
-                            process.env.PUBLIC_URL +
-                            `/imgs/cards/front/${cardName}.png`
-                        }
-                        alt={cardName}
-                    />
-                </div>
+                <img
+                    className="card-image"
+                    src={
+                        process.env.PUBLIC_URL +
+                        `/imgs/cards/front/${cardName}`
+                    }
+                    alt={cardName}
+                />
             </div>
         );
     };

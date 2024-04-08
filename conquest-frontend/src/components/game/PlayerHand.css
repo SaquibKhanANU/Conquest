@@ -1,13 +1,9 @@
-.cards-container {
+.player-hand-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 100%;
     align-self: center;
+    height: 200px;
     gap: 10px;
-}
-
-.cards-container .cC {
-    width: 5px;
-    height: auto;
 }
