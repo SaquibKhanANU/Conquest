@@ -3,9 +3,10 @@
     justify-content: center;
     align-items: center;
     /* Add any additional styles you need */
+    width: 100%;
 }
 
 .built-wonder-container img {
-    width: 60%;
+    width: 100%;
     height: auto;
 }

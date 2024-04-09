@@ -1,0 +1,65 @@
+.overlay-content {
+    position: relative;
+    width: 14%;
+}
+
+.choose-card-arrow {
+    font-size: 55px;
+}
+
+.choose-card-cost {
+    font-size: 30px;
+    color: var(--gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 20px;
+}
+
+.choose-card-cost img {
+    width: 25px;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.choose-card-arrow-left,
+.choose-card-arrow-right,
+.choose-card-arrow-bottom {
+    position: absolute;
+    z-index: 3;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+
+.choose-card-arrow:hover {
+    cursor: pointer;
+    color: var(--gold);
+}
+
+.choose-card-arrow-left {
+    top: 50%;
+    left: -120px;
+    transform: translateY(-50%);
+    color: rgb(30, 151, 30);
+}
+
+.choose-card-arrow-right {
+    top: 50%;
+    right: -120px;
+    transform: translateY(-50%);
+    color: rgb(30, 151, 30);
+}
+
+.choose-card-arrow-bottom {
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg); /* Combined transformation */
+    color: red;
+}
+
+.choose-card-arrow-bottom .choose-card-cost {
+    transform: rotate(-90deg);
+}

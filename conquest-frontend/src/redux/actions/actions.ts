@@ -15,14 +15,14 @@ export const setCurrentLobby = (lobbyData) => {
         type: ActionType.SET_CURRENT_LOBBY,
         payload: lobbyData,
     };
-}
+};
 
 export const setCurrentGame = (gameData) => {
     return {
         type: ActionType.SET_CURRENT_GAME,
         payload: gameData,
     };
-}
+};
 
 export const setLobbies = (lobbiesData) => {
     return {
@@ -43,4 +43,18 @@ export const setGames = (gamesData) => {
         type: ActionType.SET_GAMES,
         payload: gamesData,
     };
-}
+};
+
+export const setSelectedCard = (cardData) => {
+    return {
+        type: ActionType.SET_SELECTED_CARD,
+        payload: cardData,
+    };
+};
+
+export const setSelectedAction = (actionData) => {
+    return {
+        type: ActionType.SET_PREPARED_ACTION,
+        payload: actionData,
+    };
+};

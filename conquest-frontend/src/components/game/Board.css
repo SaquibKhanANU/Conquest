@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    min-width: 27vw;
+    min-width: 27.5vw;
     overflow-x: auto;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
@@ -10,19 +10,23 @@
     border: 1px solid black;
     overflow: hidden;
     position: relative;
+    z-index: 1;
 }
 
 .board-container-current-player {
     display: flex;
     flex-direction: column;
-    min-width: 41vw;
+    min-width: 40vw;
     overflow-x: auto;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 10px;
     border: 1px solid black;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     margin-bottom: 10px;
+    position: relative;
+    overflow-y: hidden;
+    z-index: 1;
 }
 
 .board-controls {
@@ -39,18 +43,39 @@
     height: 25px;
 }
 
+.board-wonders-width-4 {
+    gap: 25px;
+}
+
 .board-build-wonders {
-    width: 100%;
     display: flex;
+    width: 100%;
     justify-content: space-evenly; /* Center items horizontally */
     justify-self: center;
     align-self: center;
     margin-top: 2.5px;
 }
 
-.board-build-wonder {
+.board-build-wonder-green {
     width: 20%;
     height: 25px;
+    background-color: green;
+}
+
+.board-build-wonder-green:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+.board-build-wonder-red {
+    width: 20%;
+    height: 25px;
+    background-color: red;
+}
+
+.board-build-wonder-red:hover {
+    cursor: pointer;
+    background-color: lightcoral;
 }
 
 .board-player-id {
@@ -80,4 +105,14 @@
     bottom: 0;
     left: 39px;
     z-index: 0;
+    width: 100%;
+}
+
+.board-build-wonder-card {
+    width: 20%;
+    max-height: 25px;
+    transform: translateY(
+        -3vw
+    ); /* Move the image up by 50% of its own height */
+    z-index: -1;
 }

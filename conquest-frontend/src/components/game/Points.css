@@ -3,19 +3,22 @@
     align-items: center;
     justify-content: center;
     overflow-x: auto;
+    width: 100%;
 }
 
 .points-container img {
-    width: 30px;
+    width: 100%;
     height: auto;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    max-width: 20px;
+    min-width: 20px;
+    padding: 0px;
 }
 
 .points-item p {
-    font-size: 1.5em;
+    font-size: 100%;
     font-weight: bold;
-    margin: 5px;
-
+    margin: 0px;
     text-align: center;
 }
 
@@ -44,6 +47,7 @@
     border: 2px solid maroon;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
+    padding: 2px 5px;
 }
 
 .points-item.gold {

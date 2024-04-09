@@ -7,7 +7,7 @@ const Points = ({ militaryPoints, coins, points }) => {
             <div className="points-item red">
                 <p>{militaryPoints}</p>
                 <img
-                    src={process.env.PUBLIC_URL + "/imgs/tokens/shield.png"}
+                    src={process.env.PUBLIC_URL + "/imgs/tokens/victory1.png"}
                     alt="military points"
                 ></img>
             </div>
@@ -21,7 +21,9 @@ const Points = ({ militaryPoints, coins, points }) => {
             <div className="points-item blue">
                 <p>{points}</p>
                 <img
-                    src={process.env.PUBLIC_URL + "/imgs/tokens/laurel-blue.png"}
+                    src={
+                        process.env.PUBLIC_URL + "/imgs/tokens/laurel-blue.png"
+                    }
                     alt="total points"
                 ></img>
             </div>

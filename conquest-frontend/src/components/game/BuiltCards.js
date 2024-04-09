@@ -6,67 +6,67 @@ const BuiltCards = ({ cards, isCurrentPlayersBoard }) => {
     return (
         <div
             className={`built-cards-container ${
-                isCurrentPlayersBoard ? "built-cards-current-player" : ""
+                isCurrentPlayersBoard ? "built-cards-container-current-player" : ""
             }`}
         >
             <div className="built-cards-section brown">
                 <div className="built-cards-card card-1">
-                    <Card cardName="quarry" />
+                    <Card cardName="quarry.png" />
                 </div>
                 <div className="built-cards-card card-1">
-                    <Card cardName="quarry" />
+                    <Card cardName="quarry.png" />
                 </div>
             </div>
             <div className="built-cards-section silver">
                 <div className="built-cards-card card-1">
-                    <Card cardName="loom" />
+                    <Card cardName="loom.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="loom" />
+                    <Card cardName="loom.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="loom" />
+                    <Card cardName="loom.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="loom" />
+                    <Card cardName="loom.png" />
                 </div>
             </div>
             <div className="built-cards-section yellow">
                 <div className="built-cards-card card-1">
-                    <Card cardName="arena" />
+                    <Card cardName="arena.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="arena" />
+                    <Card cardName="arena.png" />
                 </div>
                 <div className="built-cards-card card-1">
-                    <Card cardName="arena" />
+                    <Card cardName="arena.png" />
                 </div>
             </div>
             <div className="built-cards-section red">
                 <div className="built-cards-card card-1">
-                    <Card cardName="archeryrange" />
+                    <Card cardName="archeryrange.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="archeryrange" />
+                    <Card cardName="archeryrange.png" />
                 </div>
             </div>
             <div className="built-cards-section green">
                 <div className="built-cards-card card-1">
-                    <Card cardName="academy" />
+                    <Card cardName="academy.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="academy" />
+                    <Card cardName="academy.png" />
                 </div>
             </div>
             <div className="built-cards-section blue">
                 <div className="built-cards-card card-1">
-                    <Card cardName="aqueduct" />
+                    <Card cardName="aqueduct.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="aqueduct" />
+                    <Card cardName="aqueduct.png" />
                 </div>
                 <div className="built-cards-card card-2">
-                    <Card cardName="scientistsguild" />
+                    <Card cardName="scientistsguild.png" />
                 </div>
             </div>
         </div>

@@ -8,15 +8,14 @@
 .built-cards-section {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .built-cards-card {
     width: 100%;
-    height: 24px;
+    height: 1.5vw;
 }
 
-.built-cards-current-player .built-cards-card {
-    width: 100%;
-    height: 36px;
+.built-cards-container-current-player .built-cards-card {
+    height: 2vw;
 }

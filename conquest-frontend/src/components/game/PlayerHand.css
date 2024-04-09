@@ -2,8 +2,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 60%;
     align-self: center;
-    height: 200px;
     gap: 10px;
+    position: relative;
+}
+
+.player-hand-card .card-container:hover {
+    cursor: pointer;
+    transform: scale(1.07);
+}
+
+.player-hand-card-green .card-image {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 1); /* Green box shadow */
+}
+
+.player-hand-card-red .card-image {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 1); /* Green box shadow */
+}
+
+.player-hand-overlay {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+    z-index: 2; /* make sure it's above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
