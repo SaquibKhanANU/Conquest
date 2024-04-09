@@ -9,9 +9,11 @@ import java.util.List;
 public class WonderStage {
     private Cost cost;
     private List<Ability> abilities;
+    private boolean isBuilt;
 
     public WonderStage(Cost cost, List<Ability> abilities) {
         this.cost = cost;
         this.abilities = abilities;
+        this.isBuilt = false;
     }
 }

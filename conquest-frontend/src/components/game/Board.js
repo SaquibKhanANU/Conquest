@@ -11,8 +11,10 @@ import {
 } from "../../redux/actions/actions.ts";
 
 const Board = ({ playerId, board }) => {
+    console.log(board.wonder);
+    const { name, image } = board.wonder;
     const dispatch = useDispatch();
-    const [stages, setStages] = useState(board.stages);
+    const [stages, setStages] = useState(board.wonder.stages);
     const selectedCard = useSelector((state) => state.gameAction.selectedCard);
 
     const handleBuildWonderClick = (stage) => {
@@ -32,12 +34,11 @@ const Board = ({ playerId, board }) => {
     };
 
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const isCurrentPlayersBoard = "player120" === playerId; // TODO: change this to currentPlayer.playerId === playerId
-    const { name, side } = board;
+    const isCurrentPlayersBoard = currentPlayer.playerId === playerId; // TODO: change this to currentPlayer.playerId === playerId
     const renderBoard = () => {
         return (
             <div
-                key={`${name}-${side}`}
+                key={`${name}-${playerId}`}
                 className={` ${
                     isCurrentPlayersBoard
                         ? "board-container-current-player"
@@ -47,28 +48,22 @@ const Board = ({ playerId, board }) => {
                 <div className="board-header-container">
                     <p className="board-player-id">{playerId}</p>
                     <div className="board-header-points">
-                        <Points militaryPoints={5} coins={9} points={50} />
+                        <Points militaryPoints={0} coins={0} points={0} />
                     </div>
                 </div>
 
                 <div className="board-built-cards">
                     <BuiltCards isCurrentPlayersBoard={isCurrentPlayersBoard} />
                 </div>
-                {currentPlayer.playerId === playerId && (
+                {/* {currentPlayer.playerId === playerId && (
                     <div className="board-controls">
                         <button className="board-play-card">+</button>
                         <button className="board-discard-card">-</button>
                     </div>
-                )}
+                )} */}
                 <img
                     className="board-image"
-                    src={
-                        process.env.PUBLIC_URL +
-                        "/imgs/boards/" +
-                        name.toLowerCase() +
-                        side.toUpperCase() +
-                        ".png"
-                    }
+                    src={process.env.PUBLIC_URL + "/imgs/boards/" + image}
                     alt="Board"
                 />
 
@@ -87,19 +82,20 @@ const Board = ({ playerId, board }) => {
                             >
                                 <BuiltWonder />
                             </div>
-                        ) : isCurrentPlayersBoard ? (
-                            <button
-                                key={index}
-                                className={`board-build-wonder ${
-                                    stage.buildable
-                                        ? "board-build-wonder-green"
-                                        : "board-build-wonder-red"
-                                }`}
-                                onClick={() => handleBuildWonderClick(stage)}
-                            >
-                                +
-                            </button>
                         ) : (
+                            // : isCurrentPlayersBoard ? (
+                            //     <button
+                            //         key={index}
+                            //         className={`board-build-wonder ${
+                            //             stage.buildable
+                            //                 ? "board-build-wonder-green"
+                            //                 : "board-build-wonder-red"
+                            //         }`}
+                            //         onClick={() => handleBuildWonderClick(stage)}
+                            //     >
+                            //         +
+                            //     </button>
+                            // )
                             <div
                                 className="board-build-wonder-card"
                                 key={index}

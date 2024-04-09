@@ -4,7 +4,7 @@
     align-items: center;
     width: 60%;
     align-self: center;
-    gap: 10px;
+    gap: 15px;
     position: relative;
 }
 
@@ -23,12 +23,8 @@
 
 .player-hand-overlay {
     position: absolute;
-
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
     z-index: 2; /* make sure it's above other content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

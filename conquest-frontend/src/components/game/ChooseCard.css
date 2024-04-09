@@ -1,20 +1,27 @@
 .overlay-content {
     position: relative;
-    width: 14%;
+    width: 100%;
+    z-index: 3;
+    font-weight: bold;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px black; /* Black box shadow */
 }
 
 .choose-card-arrow {
-    font-size: 55px;
+    margin: 0;
+    line-height: 0.2;
+    font-size: 2.5em;
 }
 
 .choose-card-cost {
     font-size: 30px;
-    color: var(--gold);
+    color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
     height: 20px;
+    margin-bottom: 7.5px;
 }
 
 .choose-card-cost img {
@@ -40,26 +47,63 @@
 }
 
 .choose-card-arrow-left {
-    top: 50%;
-    left: -120px;
-    transform: translateY(-50%);
+    bottom: -13%;
+    left: -25%;
     color: rgb(30, 151, 30);
 }
 
+.left-arrow {
+    transform: rotateY(180deg);
+}
 .choose-card-arrow-right {
-    top: 50%;
-    right: -120px;
-    transform: translateY(-50%);
+    bottom: -13%;
+    right: -25%;
     color: rgb(30, 151, 30);
 }
 
 .choose-card-arrow-bottom {
-    bottom: -60px;
-    left: 50%;
+    bottom: -50px;
+    left: 47%;
     transform: translateX(-50%) rotate(90deg); /* Combined transformation */
     color: red;
 }
 
 .choose-card-arrow-bottom .choose-card-cost {
     transform: rotate(-90deg);
+}
+
+.choose-card-wonder-upgrade {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 30%;
+}
+
+.choose-card-wonder-upgrade:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.choose-card-wonder-upgrade img {
+    width: 100%;
+    height: auto;
+}
+
+.choose-card-discard {
+    position: absolute;
+    top: -18%;
+    right: 0;
+    width: 30%;
+    color: white;
+}
+
+.choose-card-discard:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.choose-card-discard img {
+    position: absolute;
+    width: 100%;
+    height: auto;
 }

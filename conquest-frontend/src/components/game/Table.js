@@ -10,7 +10,7 @@ const Table = ({ boards, currentPlayer }) => {
                 {playerIdList.map((playerId) => (
                     <Board
                         key={playerId}
-                        playerId={playerId} 
+                        playerId={playerId}
                         board={boards[playerId]}
                     />
                 ))}

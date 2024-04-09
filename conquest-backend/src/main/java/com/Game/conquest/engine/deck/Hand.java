@@ -1,20 +1,28 @@
 package com.Game.conquest.engine.deck;
 
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@ToString
+@Setter
+@NoArgsConstructor
 public class Hand {
     private List<Card> playerHand;
+    private List<CardPlayability> cardPlayability;
 
     public Hand(List<Card> playerHand) {
         this.playerHand = playerHand;
+        this.cardPlayability = new ArrayList<>();
     }
 
-    public void setPlayerHand(List<Card> playerHand) {
-        this.playerHand = playerHand;
+    public void switchCardToPlayableSelf(Card card, Integer cost) {
+        int index = playerHand.indexOf(card);
+        CardPlayability cardPlayability = this.cardPlayability.get(index);
+        cardPlayability.getSelf().setFirst(true);
+        cardPlayability.getSelf().setSecond(cost);
     }
 }

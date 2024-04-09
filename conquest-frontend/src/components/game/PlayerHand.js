@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCard } from "../../redux/actions/actions.ts";
 
 const PlayerHand = ({ cards }) => {
+    console.log(cards);
     const dispatch = useDispatch();
     const selectedCard = useSelector((state) => state.gameAction.selectedCard);
     const selectedAction = useSelector(
@@ -21,30 +22,34 @@ const PlayerHand = ({ cards }) => {
 
     return (
         <div className="player-hand-container">
-            {cards.playerHand.map((card, index) => {
-                return (
-                    <div
-                        className={`player-hand-card ${
-                            card.isPlayable
-                                ? "player-hand-card-green"
-                                : "player-hand-card-red"
-                        }`}
-                        key={index}
-                        onClick={() => handleCardClick(card)}
-                    >
-                        <Card cardName={card.image} />
-                    </div>
-                );
+            {cards.map((card, index) => {
+                if (selectedCard && selectedCard === card) {
+                    return (
+                        <div key={index} onClick={() => handleCardClick(card)}>
+                            <ChooseCard card={selectedCard.image} />
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div
+                            className={`player-hand-card ${
+                                card.isPlayable
+                                    ? "player-hand-card-green"
+                                    : "player-hand-card-red"
+                            }`}
+                            key={index}
+                            onClick={() => handleCardClick(card)}
+                        >
+                            <Card cardName={card.image} />
+                        </div>
+                    );
+                }
             })}
-            {(selectedCard !== null || selectedAction !== null) && (
+            {selectedAction !== null && (
                 <div
                     className="player-hand-overlay"
                     onClick={handleCloseOverlay}
-                >
-                    {selectedCard !== null && (
-                        <ChooseCard card={selectedCard.image} />
-                    )}
-                </div>
+                ></div>
             )}
         </div>
     );

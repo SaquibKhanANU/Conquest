@@ -1,6 +1,7 @@
 package com.Game.conquest.engine;
 
 import com.Game.conquest.engine.board.BoardManager;
+import com.Game.conquest.engine.common.Action;
 import com.Game.conquest.engine.deck.DeckManager;
 import com.Game.conquest.engine.enumTypes.AgeType;
 import lombok.Getter;
@@ -25,6 +26,13 @@ public class Game {
 
     private void startNewAge() {
         ageType = ageType.getNextAge();
+    }
+
+    private void startNewTurn() {
+        boardManager.findPlayableCards(deckManager.getPlayerHands());
+    }
+
+    private void playAction(Action action) {
     }
 
     public void playTurn() {

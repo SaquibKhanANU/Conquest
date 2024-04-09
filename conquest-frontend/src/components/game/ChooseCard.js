@@ -36,10 +36,10 @@ const ChooseCard = ({ card }) => {
                     />
                 </div>
                 <p
-                    className="choose-card-arrow"
+                    className="choose-card-arrow left-arrow"
                     onClick={() => handleCardClick("LEFT")}
                 >
-                    &#10232;
+                    &#10144;
                 </p>
             </div>
             <div className="choose-card-arrow-right">
@@ -47,7 +47,7 @@ const ChooseCard = ({ card }) => {
                     className="choose-card-arrow"
                     onClick={() => handleCardClick("RIGHT")}
                 >
-                    &#10233;
+                    &#10144;
                 </p>
                 <div className="choose-card-cost">
                     <p>2</p>
@@ -62,7 +62,7 @@ const ChooseCard = ({ card }) => {
                     className="choose-card-arrow"
                     onClick={() => handleCardClick("SELF")}
                 >
-                    &#10233;
+                    &#10144;
                 </p>
                 <div className="choose-card-cost">
                     <p>1</p>
@@ -71,6 +71,25 @@ const ChooseCard = ({ card }) => {
                         alt="coins"
                     />
                 </div>
+            </div>
+            <div className="choose-card-wonder-upgrade">
+                <img
+                    src={
+                        process.env.PUBLIC_URL +
+                        "/imgs/tokens/wonder-upgrade.png"
+                    }
+                    alt="wonder-upgrade"
+                />
+            </div>
+            <div className="choose-card-discard">
+                <img
+                    src={process.env.PUBLIC_URL + "/imgs/tokens/discard.png"}
+                    alt="wonder-upgrade"
+                />
+                <img
+                    src={process.env.PUBLIC_URL + "/imgs/tokens/discardx.png"}
+                    alt="wonder-upgrade"
+                />
             </div>
             <Card cardName={card} />
         </div>

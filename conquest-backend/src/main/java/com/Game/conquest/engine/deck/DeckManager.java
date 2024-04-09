@@ -17,7 +17,6 @@ public class DeckManager {
             playerHands.put(player, new Hand(new ArrayList<>()));
         }
     }
-
     public void deal(AgeType ageType) {
         deck.deal(playerHands, ageType);
     }
