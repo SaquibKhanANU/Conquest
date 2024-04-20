@@ -34,10 +34,11 @@ public class Board {
         this.networkStore = new NetworkStore("test", "test");
     }
 
-    @JsonIgnore
-    public boolean checkIfCardPlayableSelf(Card card) {
-        boolean enoughResources = resourceStore.checkCardCostResource(card);
-        boolean enoughGold = coins >= card.getCost().getGold();
-        return enoughResources && enoughGold;
+    public boolean canPlayCardSelf(Card card) {
+        if (card.getCost() == null || card.getCost().getGold() <= this.coins) {
+            return true;
+        }
+        return false;
     }
+
 }

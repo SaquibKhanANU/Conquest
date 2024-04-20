@@ -7,14 +7,15 @@ import {
     setSelectedAction,
 } from "../../redux/actions/actions.ts";
 
-const ChooseCard = ({ card }) => {
+const ChooseCard = ({ card, cardPlayability }) => {
     const dispatch = useDispatch();
     // const selectedCard = useSelector((state) => state.gameAction.selectedCard);
     // const selectedAction = useSelector(
     //     (state) => state.gameAction.selectedAction
     // );
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const handleCardClick = (neighbour) => {
+
+    const handleCardClick = () => {
         dispatch(setSelectedCard(null));
         dispatch(
             setSelectedAction({
@@ -59,20 +60,19 @@ const ChooseCard = ({ card }) => {
             </div>
             <div className="choose-card-arrow-bottom">
                 <p
-                    className="choose-card-arrow"
-                    onClick={() => handleCardClick("SELF")}
+                    className={`choose-card-arrow ${
+                        cardPlayability.self ? "green-arrow" : "red-arrow"
+                    }`}
+                    onClick={
+                        cardPlayability.self
+                            ? () => handleCardClick("SELF")
+                            : undefined
+                    }
                 >
                     &#10144;
                 </p>
-                <div className="choose-card-cost">
-                    <p>1</p>
-                    <img
-                        src={process.env.PUBLIC_URL + "/imgs/tokens/coin.png"}
-                        alt="coins"
-                    />
-                </div>
             </div>
-            <div className="choose-card-wonder-upgrade">
+            {/* <div className="choose-card-wonder-upgrade">
                 <img
                     src={
                         process.env.PUBLIC_URL +
@@ -80,7 +80,7 @@ const ChooseCard = ({ card }) => {
                     }
                     alt="wonder-upgrade"
                 />
-            </div>
+            </div> */}
             <div className="choose-card-discard">
                 <img
                     src={process.env.PUBLIC_URL + "/imgs/tokens/discard.png"}
@@ -91,7 +91,7 @@ const ChooseCard = ({ card }) => {
                     alt="wonder-upgrade"
                 />
             </div>
-            <Card cardName={card} />
+            <Card cardName={card.image} />
         </div>
     );
 };

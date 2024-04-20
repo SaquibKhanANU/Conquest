@@ -9,9 +9,9 @@ import {
     setSelectedCard,
     setSelectedAction,
 } from "../../redux/actions/actions.ts";
+import ThreeWayArrow from "./ThreeWayArrow.js";
 
 const Board = ({ playerId, board }) => {
-    console.log(board.wonder);
     const { name, image } = board.wonder;
     const dispatch = useDispatch();
     const [stages, setStages] = useState(board.wonder.stages);
@@ -53,7 +53,7 @@ const Board = ({ playerId, board }) => {
                 </div>
 
                 <div className="board-built-cards">
-                    <BuiltCards isCurrentPlayersBoard={isCurrentPlayersBoard} />
+                    {/* <BuiltCards isCurrentPlayersBoard={isCurrentPlayersBoard} /> */}
                 </div>
                 {/* {currentPlayer.playerId === playerId && (
                     <div className="board-controls">
@@ -82,20 +82,22 @@ const Board = ({ playerId, board }) => {
                             >
                                 <BuiltWonder />
                             </div>
-                        ) : (
-                            // : isCurrentPlayersBoard ? (
-                            //     <button
-                            //         key={index}
-                            //         className={`board-build-wonder ${
-                            //             stage.buildable
-                            //                 ? "board-build-wonder-green"
-                            //                 : "board-build-wonder-red"
-                            //         }`}
-                            //         onClick={() => handleBuildWonderClick(stage)}
-                            //     >
-                            //         +
-                            //     </button>
-                            // )
+                        )
+                        //  : isCurrentPlayersBoard && selectedCard ? (
+                        //     <ThreeWayArrow />
+                        //     // <button
+                        //     //     key={index}
+                        //     //     className={`board-build-wonder ${
+                        //     //         stage.buildable
+                        //     //             ? "board-build-wonder-green"
+                        //     //             : "board-build-wonder-red"
+                        //     //     }`}
+                        //     //     onClick={() => handleBuildWonderClick(stage)}
+                        //     // >
+                        //     //     +
+                        //     // </button>
+                        // ) 
+                        : (
                             <div
                                 className="board-build-wonder-card"
                                 key={index}

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCard } from "../../redux/actions/actions.ts";
 
 const PlayerHand = ({ cards }) => {
-    console.log(cards);
+    const { playerHand, cardPlayabilityList } = cards;
     const dispatch = useDispatch();
     const selectedCard = useSelector((state) => state.gameAction.selectedCard);
     const selectedAction = useSelector(
@@ -20,20 +20,23 @@ const PlayerHand = ({ cards }) => {
         dispatch(setSelectedCard(null));
     };
 
+
     return (
         <div className="player-hand-container">
-            {cards.map((card, index) => {
+            {playerHand.map((card, index) => {
+                const cardPlayability = cardPlayabilityList[index];
+                const isPlayableSelf = cardPlayability.self;
                 if (selectedCard && selectedCard === card) {
                     return (
                         <div key={index} onClick={() => handleCardClick(card)}>
-                            <ChooseCard card={selectedCard.image} />
+                            <ChooseCard card={selectedCard} cardPlayability={cardPlayability} />
                         </div>
                     );
                 } else {
                     return (
                         <div
                             className={`player-hand-card ${
-                                card.isPlayable
+                                isPlayableSelf
                                     ? "player-hand-card-green"
                                     : "player-hand-card-red"
                             }`}

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum AgeType {
+    AGE("age"),
     AGE_ONE("age1"),
     AGE_TWO("age2"),
     AGE_THREE("age3");

@@ -9,23 +9,22 @@
 
 .choose-card-arrow {
     margin: 0;
-    line-height: 0.2;
     font-size: 2.5em;
 }
 
 .choose-card-cost {
-    font-size: 30px;
+    font-size: 20px;
     color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
     height: 20px;
-    margin-bottom: 7.5px;
+    margin-bottom: 2.5px;
 }
 
 .choose-card-cost img {
-    width: 25px;
+    width: 20px;
     height: auto;
     margin-bottom: 5px;
 }
@@ -41,29 +40,29 @@
     height: 20px;
 }
 
-.choose-card-arrow:hover {
+.green-arrow:hover {
     cursor: pointer;
     color: var(--gold);
 }
 
 .choose-card-arrow-left {
-    bottom: -13%;
-    left: -25%;
-    color: rgb(30, 151, 30);
+    bottom: -11%;
+    left: -10%;
+    color: red;
 }
 
 .left-arrow {
     transform: rotateY(180deg);
 }
 .choose-card-arrow-right {
-    bottom: -13%;
-    right: -25%;
-    color: rgb(30, 151, 30);
+    bottom: -11%;
+    right: -10%;
+    color: red;
 }
 
 .choose-card-arrow-bottom {
-    bottom: -50px;
-    left: 47%;
+    bottom: -13%;
+    left: 50%;
     transform: translateX(-50%) rotate(90deg); /* Combined transformation */
     color: red;
 }
@@ -92,7 +91,7 @@
 .choose-card-discard {
     position: absolute;
     top: -18%;
-    right: 0;
+    right: 35%;
     width: 30%;
     color: white;
 }
@@ -106,4 +105,12 @@
     position: absolute;
     width: 100%;
     height: auto;
+}
+
+.green-arrow {
+    color: green;
+}
+
+.red-arrow {
+    color: red;
 }

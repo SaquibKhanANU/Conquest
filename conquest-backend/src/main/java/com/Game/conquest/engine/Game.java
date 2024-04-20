@@ -17,19 +17,22 @@ public class Game {
         this.boardManager = boardManager;
     }
 
-    private AgeType ageType;
+    private AgeType ageType = AgeType.AGE;
 
     public void startGame() {
-        ageType = AgeType.AGE_ONE;
-        deckManager.deal(ageType);
+        this.startNewAge();
+        this.startNewTurn();
     }
 
     private void startNewAge() {
-        ageType = ageType.getNextAge();
+        this.ageType = this.ageType.getNextAge();
+        this.deckManager.deal(this.ageType);
     }
 
     private void startNewTurn() {
-        boardManager.findPlayableCards(deckManager.getPlayerHands());
+        // this.deckManager.rotatePlayerHands();
+        this.deckManager.clearCardPlayability();
+        this.boardManager.findPlayableCards(deckManager.getPlayerHands());
     }
 
     private void playAction(Action action) {

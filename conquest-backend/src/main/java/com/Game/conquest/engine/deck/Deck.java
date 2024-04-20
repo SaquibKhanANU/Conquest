@@ -16,10 +16,6 @@ public class Deck {
         int numPlayers = playerHands.size();
         int cardsPerPlayer = currentAgeCards.size() / numPlayers;
 
-        if (currentAgeCards.size() % numPlayers != 0) {
-            throw new IllegalArgumentException("Number of cards is not divisible evenly among players");
-        }
-
         Collections.shuffle(currentAgeCards);
         int index = 0;
 

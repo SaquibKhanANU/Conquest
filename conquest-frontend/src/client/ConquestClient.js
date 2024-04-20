@@ -106,7 +106,6 @@ class ConquestSession {
                     `/topic/lobby/${lobby.lobbyId}`,
                     (message) => {
                         const updatedLobby = JSON.parse(message.body);
-                        console.log("Received updated lobby: ", updatedLobby);
                         dispatch(ApiAction.setCurrentLobby(updatedLobby));
                     }
                 );

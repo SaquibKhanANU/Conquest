@@ -20,4 +20,10 @@ public class DeckManager {
     public void deal(AgeType ageType) {
         deck.deal(playerHands, ageType);
     }
+
+    public void clearCardPlayability() {
+        for (Map.Entry<String, Hand> entry : playerHands.entrySet()) {
+            entry.getValue().getCardPlayabilityList().clear();
+        }
+    }
 }

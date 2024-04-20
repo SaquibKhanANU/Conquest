@@ -12,17 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Hand {
     private List<Card> playerHand;
-    private List<CardPlayability> cardPlayability;
+    private List<CardPlayability> cardPlayabilityList;
 
     public Hand(List<Card> playerHand) {
         this.playerHand = playerHand;
-        this.cardPlayability = new ArrayList<>();
+        this.cardPlayabilityList = new ArrayList<>();
     }
 
-    public void switchCardToPlayableSelf(Card card, Integer cost) {
-        int index = playerHand.indexOf(card);
-        CardPlayability cardPlayability = this.cardPlayability.get(index);
-        cardPlayability.getSelf().setFirst(true);
-        cardPlayability.getSelf().setSecond(cost);
-    }
 }

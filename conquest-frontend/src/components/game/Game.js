@@ -18,7 +18,7 @@ const Game = () => {
         >
             <div className="game-container">
                 <div className="game-body">
-                    <PlayerHand cards={cards.playerHand} />
+                    <PlayerHand cards={cards} />
                     <Table boards={boards} currentPlayer={currentPlayer} />
                 </div>
             </div>
