@@ -17,24 +17,24 @@ const Board = ({ playerId, board }) => {
     const [stages, setStages] = useState(board.wonder.stages);
     const selectedCard = useSelector((state) => state.gameAction.selectedCard);
 
-    const handleBuildWonderClick = (stage) => {
-        if (stage.buildable && selectedCard !== null) {
-            console.log("Build Wonder Clicked");
-            stage.built = true;
-            setStages([...stages]);
-            dispatch(setSelectedCard(null));
-            dispatch(
-                setSelectedAction({
-                    action: "BUILD_WONDER",
-                    card: selectedCard,
-                    playerId: playerId,
-                })
-            );
-        }
-    };
+    // const handleBuildWonderClick = (stage) => {
+    //     if (stage.buildable && selectedCard !== null) {
+    //         stage.built = true;
+    //         setStages([...stages]);
+    //         dispatch(setSelectedCard(null));
+    //         dispatch(
+    //             setSelectedAction({
+    //                 action: "BUILD_WONDER",
+    //                 card: selectedCard,
+    //                 playerId: playerId,
+    //                 neighbourType: "SELF",
+    //             })
+    //         );
+    //     }
+    // };
 
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
-    const isCurrentPlayersBoard = currentPlayer.playerId === playerId; // TODO: change this to currentPlayer.playerId === playerId
+    const isCurrentPlayersBoard = currentPlayer.playerId === playerId; 
     const renderBoard = () => {
         return (
             <div

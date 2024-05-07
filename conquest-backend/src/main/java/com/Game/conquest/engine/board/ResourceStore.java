@@ -16,8 +16,8 @@ public class ResourceStore {
         this.initialResource = initialResource;
         this.publicResources = new ArrayList<>();
         this.privateResources = new ArrayList<>();
+        this.publicResources.add(initialResource);
     }
-
     public void addPublicResource(ResourceType resourceType) {
         this.publicResources.add(resourceType);
     }
@@ -26,8 +26,11 @@ public class ResourceStore {
         this.privateResources.add(resourceType);
     }
 
-    public boolean checkCardCostResource(Card card) {
+    public boolean checkCardPlayabilityResource(Card card) {
         List<ResourceType> resourceCost = card.getCost().getResources();
+        if (resourceCost == null) {
+            return true;
+        }
         for (ResourceType resource : resourceCost) {
             if (!publicResources.contains(resource) && !privateResources.contains(resource)) {
                 return false;

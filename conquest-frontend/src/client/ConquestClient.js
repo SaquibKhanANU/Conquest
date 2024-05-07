@@ -1,3 +1,4 @@
+import { compressPositions } from "three/examples/jsm/utils/GeometryCompressionUtils.js";
 import * as ApiAction from "../redux/actions/actions.ts";
 
 const SockJS = require("sockjs-client");
@@ -213,6 +214,12 @@ class ConquestSession {
 
     async kickPlayer(playerId) {
         this.sendMessage("/app/lobby/kickPlayer", playerId);
+    }
+
+    // GAME
+    async sendGameAction(action) {
+        console.log("Sending game action: ", action);
+        this.sendMessage("/app/game/receiveGameAction", JSON.stringify(action));
     }
 }
 

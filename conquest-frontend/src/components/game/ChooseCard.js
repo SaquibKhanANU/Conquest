@@ -6,6 +6,7 @@ import {
     setSelectedCard,
     setSelectedAction,
 } from "../../redux/actions/actions.ts";
+import { useSession } from "../global/contexts/SessionContext.js";
 
 const ChooseCard = ({ card, cardPlayability }) => {
     const dispatch = useDispatch();
@@ -14,15 +15,21 @@ const ChooseCard = ({ card, cardPlayability }) => {
     //     (state) => state.gameAction.selectedAction
     // );
     const currentPlayer = useSelector((state) => state.currentPlayer.player);
+    const { session } = useSession();
 
     const handleCardClick = () => {
         dispatch(setSelectedCard(null));
-        dispatch(
-            setSelectedAction({
-                action: "BUILD_CARD",
-                card: card,
-                playerId: currentPlayer.playerId,
-            })
+        const action = {
+            actionType: "PLAY_CARD",
+            card: card,
+            playerId: currentPlayer.playerId,
+            neighbourType: "SELF",
+        };
+        dispatch(setSelectedAction(action));
+        session.sendGameAction(action);
+
+        console.log(
+           action
         );
     };
 
@@ -38,7 +45,7 @@ const ChooseCard = ({ card, cardPlayability }) => {
                 </div>
                 <p
                     className="choose-card-arrow left-arrow"
-                    onClick={() => handleCardClick("LEFT")}
+                    onClick={false ? () => handleCardClick("LEFT") : undefined}
                 >
                     &#10144;
                 </p>
@@ -46,7 +53,7 @@ const ChooseCard = ({ card, cardPlayability }) => {
             <div className="choose-card-arrow-right">
                 <p
                     className="choose-card-arrow"
-                    onClick={() => handleCardClick("RIGHT")}
+                    onClick={false ? () => handleCardClick("RIGHT") : undefined}
                 >
                     &#10144;
                 </p>

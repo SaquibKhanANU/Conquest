@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dadfd1c0-da12-4295-bd6b-ddc1a297d57a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/conquest-backend/src/main/java/com/Game/conquest/engine/card/Card.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/conquest-backend/src/main/java/com/Game/conquest/engine/card/CardType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/conquest-backend/src/main/java/com/Game/conquest/engine/card/ResourceCost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conquest-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/conquest-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conquest-backend/src/main/java/com/Game/conquest/engine/deck/DeckManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/conquest-backend/src/main/java/com/Game/conquest/engine/deck/DeckManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2ekemmqJE1xnufJYwpmAhqV9jj6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,7 +35,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Coding/Conquest/conquest-backend",
+    "last_opened_file_path": "C:/Coding/Official/Conquest/conquest-backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -43,6 +44,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-21.0.2-corretto-21.0.2-4caba194b151-51586f01" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -52,6 +61,9 @@
       <option name="presentableId" value="Default" />
       <updated>1712453166507</updated>
       <workItem from="1712453167678" duration="631000" />
+      <workItem from="1713660655725" duration="50000" />
+      <workItem from="1713662971460" duration="15000" />
+      <workItem from="1714371194322" duration="378000" />
     </task>
     <servers />
   </component>

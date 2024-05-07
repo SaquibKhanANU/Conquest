@@ -35,10 +35,7 @@ public class Board {
     }
 
     public boolean canPlayCardSelf(Card card) {
-        if (card.getCost() == null || card.getCost().getGold() <= this.coins) {
-            return true;
-        }
-        return false;
+        return card.getCost() == null || (card.getCost().getGold() <= this.coins && this.resourceStore.checkCardPlayabilityResource(card));
     }
 
 }

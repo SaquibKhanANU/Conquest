@@ -4,7 +4,10 @@ import com.Game.conquest.engine.board.BoardManager;
 import com.Game.conquest.engine.common.Action;
 import com.Game.conquest.engine.deck.DeckManager;
 import com.Game.conquest.engine.enumTypes.AgeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+
+import java.util.HashMap;
 
 
 @Getter
@@ -12,9 +15,13 @@ public class Game {
     private final DeckManager deckManager;
     private final BoardManager boardManager;
 
+    @JsonIgnore
+    private HashMap<String, Action> currentTurnInfo;
+
     public Game(DeckManager deckManager, BoardManager boardManager) {
         this.deckManager = deckManager;
         this.boardManager = boardManager;
+        this.currentTurnInfo = new HashMap<>();
     }
 
     private AgeType ageType = AgeType.AGE;
@@ -40,5 +47,18 @@ public class Game {
 
     public void playTurn() {
 
+    }
+
+    public void receiveAction(Action action, String playerId) {
+        System.out.println("Received action from player: " + playerId + " action: " + action.getActionType());
+        currentTurnInfo.put(playerId, action);
+        if (isTurnComplete()) {
+            this.playTurn();
+            this.startNewTurn();
+        }
+    }
+
+    private boolean isTurnComplete() {
+        return currentTurnInfo.size() == deckManager.getPlayerHands().size();
     }
 }

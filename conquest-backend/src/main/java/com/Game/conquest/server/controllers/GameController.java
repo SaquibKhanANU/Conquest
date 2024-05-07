@@ -1,12 +1,15 @@
 package com.Game.conquest.server.controllers;
 
 
+import com.Game.conquest.engine.common.Action;
+import com.Game.conquest.server.converter.GenericConverter;
 import com.Game.conquest.server.dataObjects.Game;
 import com.Game.conquest.server.dataObjects.Player;
 import com.Game.conquest.server.repositories.PlayerRepository;
 import com.Game.conquest.server.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -54,9 +57,16 @@ public class GameController {
     }
 
 
-    @MessageMapping("/game/arrangeBoards")
-    private void arrangeBoards(long gameId, Principal principal) {
-        Game game = gameService.get(gameId);
-
+    @MessageMapping("/game/receiveGameAction")
+    public void receiveGameAction(@Payload String action, Principal principal) throws Exception {
+        System.out.println("Received action from player: " + principal.getName() + " action: " + action);
+        Action actionParsed =  GenericConverter.fromJson(action, Action.class);
+        System.out.println("Received action from player: " + principal.getName() + " action: " + actionParsed);
+        Player player = playerRepository.get(principal.getName());
+        com.Game.conquest.engine.Game game = gameService.get(player.getGameId()).getGame();
+        synchronized (game) {
+            game.receiveAction(actionParsed, player.getPlayerId());
+        }
+        messagingTemplate.convertAndSend("/topic/game/" + player.getGameId(), game);
     }
 }

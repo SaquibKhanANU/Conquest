@@ -2,11 +2,13 @@ package com.Game.conquest.engine.enumTypes;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor(force = true)
 public enum ResourceType {
     WOOD('W'),
     STONE('S'),
@@ -24,6 +26,9 @@ public enum ResourceType {
 
     public static List<ResourceType> parseResources(String resourcesString) {
         List<ResourceType> parsedResources = new ArrayList<>();
+        if (resourcesString == null) {
+            return parsedResources;
+        }
         for (char resourceChar : resourcesString.toCharArray()) {
             switch (resourceChar) {
                 case 'W':
