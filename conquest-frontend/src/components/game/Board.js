@@ -53,7 +53,7 @@ const Board = ({ playerId, board }) => {
                 </div>
 
                 <div className="board-built-cards">
-                    {/* <BuiltCards isCurrentPlayersBoard={isCurrentPlayersBoard} /> */}
+                    <BuiltCards isCurrentPlayersBoard={isCurrentPlayersBoard} cards={board.playedCards} />
                 </div>
                 {/* {currentPlayer.playerId === playerId && (
                     <div className="board-controls">

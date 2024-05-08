@@ -3,72 +3,32 @@ import React from "react";
 import Card from "./Card";
 
 const BuiltCards = ({ cards, isCurrentPlayersBoard }) => {
+    const groupedCards = cards.reduce((acc, card) => {
+        const cardType = card.cardType.toLowerCase();
+        if (!acc[cardType]) {
+            acc[cardType] = [];
+        }
+        acc[cardType].push(card);
+        return acc;
+    }, {});
+
+    const cardTypesOrder = ["brown", "grey", "yellow", "red", "green", "blue"];
+
     return (
         <div
             className={`built-cards-container ${
                 isCurrentPlayersBoard ? "built-cards-container-current-player" : ""
             }`}
         >
-            <div className="built-cards-section brown">
-                <div className="built-cards-card card-1">
-                    <Card cardName="quarry.png" />
+            {cardTypesOrder.map((type) => (
+                <div key={type} className={`built-cards-section ${type}`}>
+                    {groupedCards[type]?.map((card, index) => (
+                        <div key={index} className="built-cards-card">
+                            <Card cardName={card.image} />
+                        </div>
+                    ))}
                 </div>
-                <div className="built-cards-card card-1">
-                    <Card cardName="quarry.png" />
-                </div>
-            </div>
-            <div className="built-cards-section silver">
-                <div className="built-cards-card card-1">
-                    <Card cardName="loom.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="loom.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="loom.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="loom.png" />
-                </div>
-            </div>
-            <div className="built-cards-section yellow">
-                <div className="built-cards-card card-1">
-                    <Card cardName="arena.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="arena.png" />
-                </div>
-                <div className="built-cards-card card-1">
-                    <Card cardName="arena.png" />
-                </div>
-            </div>
-            <div className="built-cards-section red">
-                <div className="built-cards-card card-1">
-                    <Card cardName="archeryrange.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="archeryrange.png" />
-                </div>
-            </div>
-            <div className="built-cards-section green">
-                <div className="built-cards-card card-1">
-                    <Card cardName="academy.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="academy.png" />
-                </div>
-            </div>
-            <div className="built-cards-section blue">
-                <div className="built-cards-card card-1">
-                    <Card cardName="aqueduct.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="aqueduct.png" />
-                </div>
-                <div className="built-cards-card card-2">
-                    <Card cardName="scientistsguild.png" />
-                </div>
-            </div>
+            ))}
         </div>
     );
 };

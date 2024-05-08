@@ -38,6 +38,9 @@ public class Game {
     }
 
     private void startNewTurn() {
+        if (deckManager.checkLastCardInAge()) {
+            this.startNewAge();
+        }
         currentTurnInfo.clear();
         this.deckManager.rotatePlayerHands(1);
         this.deckManager.clearCardPlayability();
@@ -61,7 +64,6 @@ public class Game {
 
     private void playAction(String playerId, Action action) {
         Card card = deckManager.playCardByIndex(playerId, action.getIndex());
-        System.out.println(card.getName());
         boardManager.playCardAndAction(playerId, card, action);
     }
 

@@ -47,5 +47,14 @@ public class DeckManager {
         return card;
     }
 
+    public boolean checkLastCardInAge() {
+        for (Hand hand : playerHands.values()) {
+            if (hand.getPlayerHand().size() == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
