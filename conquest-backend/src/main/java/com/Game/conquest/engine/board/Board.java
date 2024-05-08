@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 public class Board {
@@ -31,7 +32,7 @@ public class Board {
         this.playedCards = new ArrayList<>();
         this.resourceStore = new ResourceStore(wonder.getInitialResource());
         this.scienceStore = new ScienceStore();
-        this.militaryStore = new MilitaryStore();
+        this.militaryStore = new MilitaryStore(Settings.getPointsPerMilitaryVictory());
         this.networkStore = new NetworkStore("test", "test");
     }
 
@@ -54,6 +55,12 @@ public class Board {
 
     public void discardCard(Card card) {
         this.coins += 3;
+    }
+    public void changeCoins(int numCoins) {
+        this.coins += numCoins;
+    }
+    public void addPoints(int points) {
+        this.totalPoints += points;
     }
 
 }

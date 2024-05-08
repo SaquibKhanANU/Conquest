@@ -15,12 +15,11 @@ public class GoldAbility extends InstantAbility {
     }
 
     @Override
-    public void calculatePoints(Board board) {
-
-    }
-
-    @Override
     public void applyAbility(Board board) {
-
+        board.changeCoins(gold);
+    }
+    @Override
+    public void calculatePoints(Board board) {
+        int points = board.getCoins() / 3;
     }
 }

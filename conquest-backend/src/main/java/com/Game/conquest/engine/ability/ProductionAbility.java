@@ -25,7 +25,6 @@ public class ProductionAbility extends InstantAbility {
 
     @Override
     public void applyAbility(Board board) {
-        System.out.println("we are here!!!");
         ResourceStore resourceStore = board.getResourceStore();
         if (this.isSellable) {
             resources.forEach(resourceStore::addPublicResource);

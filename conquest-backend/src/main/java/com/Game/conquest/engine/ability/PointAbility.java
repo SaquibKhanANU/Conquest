@@ -16,11 +16,10 @@ public class PointAbility extends InstantAbility {
 
     @Override
     public void calculatePoints(Board board) {
-
     }
 
     @Override
     public void applyAbility(Board board) {
-
+        board.addPoints(this.points);
     }
 }
