@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions/actions.ts";
 import { useSession } from "../global/contexts/SessionContext.js";
 
-const ChooseCard = ({ card, cardPlayability }) => {
+const ChooseCard = ({ card, cardPlayability, index }) => {
     const dispatch = useDispatch();
     // const selectedCard = useSelector((state) => state.gameAction.selectedCard);
     // const selectedAction = useSelector(
@@ -21,13 +21,11 @@ const ChooseCard = ({ card, cardPlayability }) => {
         dispatch(setSelectedCard(null));
         const action = {
             actionType: "PLAY_CARD",
-            card: card,
+            index: index,
             playerId: currentPlayer.playerId,
             neighbourType: "SELF",
         };
-        dispatch(setSelectedAction(action));
         session.sendGameAction(action);
-
         console.log(
            action
         );

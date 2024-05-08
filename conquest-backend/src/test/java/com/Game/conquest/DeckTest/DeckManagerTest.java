@@ -1,5 +1,6 @@
 package com.Game.conquest.DeckTest;
 
+import com.Game.conquest.engine.deck.Hand;
 import com.Game.conquest.server.dataObjects.Civilization;
 import com.Game.conquest.engine.Game;
 import com.Game.conquest.engine.data.definition.GameDefinition;
@@ -11,8 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckManagerTest {
     // Test cases for DeckManager
@@ -40,13 +40,27 @@ public class DeckManagerTest {
 
     @Test
     public void testDeckManagerContents() {
-        game.getDeckManager().deal(AgeType.AGE_THREE);
+        game.getDeckManager().deal(AgeType.AGE_ONE);
         int expectedHandSize = 7;
 
         game.getDeckManager().getPlayerHands().forEach((player, hand) -> {
             int actualHandSize = hand.getPlayerHand().size();
             assertEquals(expectedHandSize, actualHandSize, "Hand size for " + player + " does not match expected size");
         });
+    }
+
+    @Test
+    public void testRotatePlayerHands() {
+        // Assuming game is properly initialized and has a DeckManager
+        game.getDeckManager().deal(AgeType.AGE_ONE);
+        Map<String, Hand> playerHandsInitial = new HashMap<>(game.getDeckManager().getPlayerHands());
+        game.getDeckManager().rotatePlayerHands(1);
+        Map<String, Hand> playerHandsRotated = game.getDeckManager().getPlayerHands();
+        for (String player : playerHandsInitial.keySet()) {
+            Hand initialHand = playerHandsInitial.get(player);
+            Hand rotatedHand = playerHandsRotated.get(player);
+            assertNotEquals(initialHand, rotatedHand, "Hand rotation incorrect for player " + player);
+        }
     }
 
 }

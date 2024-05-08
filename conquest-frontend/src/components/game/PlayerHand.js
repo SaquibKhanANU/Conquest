@@ -29,7 +29,7 @@ const PlayerHand = ({ cards }) => {
                 if (selectedCard && selectedCard === card) {
                     return (
                         <div key={index} onClick={() => handleCardClick(card)}>
-                            <ChooseCard card={selectedCard} cardPlayability={cardPlayability} />
+                            <ChooseCard card={selectedCard} cardPlayability={cardPlayability} index={index} />
                         </div>
                     );
                 } else {

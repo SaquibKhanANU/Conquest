@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### TODO
+
+FIX UI FOR CHOOSING A CARD
+
+- Make it so theres 3 buttons at the bottom of the card, play card, build wonder, bin card
+- if there is a cheaper option with a neigbhour give a popup with the options
+- on hover show all buttons and allow the player to click buttons on hover

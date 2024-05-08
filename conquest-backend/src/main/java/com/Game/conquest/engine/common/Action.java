@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Action {
     private ActionType actionType;
-    private Card card;
+    private int index;
     private String playerId;
     private NeighbourType neighbourType;
 }

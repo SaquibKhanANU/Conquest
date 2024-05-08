@@ -19,4 +19,12 @@ public class Hand {
         this.cardPlayabilityList = new ArrayList<>();
     }
 
+
+    public Card getCardByIndex(int index) {
+        return playerHand.get(index);
+    }
+
+    public void removeCardByIndex(int index) {
+        playerHand.remove(index);
+    }
 }

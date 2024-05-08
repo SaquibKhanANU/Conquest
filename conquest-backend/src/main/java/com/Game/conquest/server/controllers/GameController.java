@@ -59,14 +59,13 @@ public class GameController {
 
     @MessageMapping("/game/receiveGameAction")
     public void receiveGameAction(@Payload String action, Principal principal) throws Exception {
-        System.out.println("Received action from player: " + principal.getName() + " action: " + action);
         Action actionParsed =  GenericConverter.fromJson(action, Action.class);
-        System.out.println("Received action from player: " + principal.getName() + " action: " + actionParsed);
         Player player = playerRepository.get(principal.getName());
         com.Game.conquest.engine.Game game = gameService.get(player.getGameId()).getGame();
+        Game gameJson = gameService.get(player.getGameId());
         synchronized (game) {
             game.receiveAction(actionParsed, player.getPlayerId());
         }
-        messagingTemplate.convertAndSend("/topic/game/" + player.getGameId(), game);
+        messagingTemplate.convertAndSend("/topic/game/" + player.getGameId(), gameJson);
     }
 }

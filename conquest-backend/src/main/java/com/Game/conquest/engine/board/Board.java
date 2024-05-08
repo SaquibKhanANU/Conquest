@@ -1,6 +1,7 @@
 package com.Game.conquest.engine.board;
 
 import com.Game.conquest.engine.Settings;
+import com.Game.conquest.engine.ability.abilityInterface.Ability;
 import com.Game.conquest.engine.deck.Card;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -35,7 +36,24 @@ public class Board {
     }
 
     public boolean canPlayCardSelf(Card card) {
-        return card.getCost() == null || (card.getCost().getGold() <= this.coins && this.resourceStore.checkCardPlayabilityResource(card));
+        return card.getCost() == null || (card.getCost().getGold() <= this.coins &&
+                this.resourceStore.checkCardPlayabilityResource(card));
+    }
+
+    public void playCard(Card card) {
+        this.playedCards.add(card);
+        for (Ability ability : card.getAbilities()) {
+            ability.applyAbility(this);
+            ability.calculatePoints(this);
+        }
+    }
+
+    public void buildWonder(Card card) {
+
+    }
+
+    public void discardCard(Card card) {
+        this.coins += 3;
     }
 
 }

@@ -2,6 +2,7 @@ package com.Game.conquest.engine;
 
 import com.Game.conquest.engine.board.BoardManager;
 import com.Game.conquest.engine.common.Action;
+import com.Game.conquest.engine.deck.Card;
 import com.Game.conquest.engine.deck.DeckManager;
 import com.Game.conquest.engine.enumTypes.AgeType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,25 +38,31 @@ public class Game {
     }
 
     private void startNewTurn() {
-        // this.deckManager.rotatePlayerHands();
+        currentTurnInfo.clear();
+        this.deckManager.rotatePlayerHands(1);
         this.deckManager.clearCardPlayability();
         this.boardManager.findPlayableCards(deckManager.getPlayerHands());
     }
 
-    private void playAction(Action action) {
-    }
-
-    public void playTurn() {
-
-    }
 
     public void receiveAction(Action action, String playerId) {
-        System.out.println("Received action from player: " + playerId + " action: " + action.getActionType());
         currentTurnInfo.put(playerId, action);
         if (isTurnComplete()) {
             this.playTurn();
             this.startNewTurn();
         }
+    }
+
+    private void playTurn() {
+        for (String playerId : currentTurnInfo.keySet()) {
+            playAction(playerId, currentTurnInfo.get(playerId));
+        }
+    }
+
+    private void playAction(String playerId, Action action) {
+        Card card = deckManager.playCardByIndex(playerId, action.getIndex());
+        System.out.println(card.getName());
+        boardManager.playCardAndAction(playerId, card, action);
     }
 
     private boolean isTurnComplete() {
