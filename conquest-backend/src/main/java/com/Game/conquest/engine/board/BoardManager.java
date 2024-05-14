@@ -47,18 +47,20 @@ public class BoardManager {
 
     private void applyCardCost(Card card, Action action, Board board) {
         Cost cost = card.getCost();
-        int gold = cost.getGold();
-        switch (action.getNeighbourType()) {
-            case SELF -> board.changeCoins(-gold);
-            case RIGHT -> {
-                board.changeCoins(-gold);
-                // TODO: Add coins to neighbours city
+        if (cost != null) {
+            int gold = cost.getGold();
+            switch (action.getNeighbourType()) {
+                case SELF -> board.changeCoins(-gold);
+                case RIGHT -> {
+                    board.changeCoins(-gold);
+                    // TODO: Add coins to neighbours city
+                }
+                case LEFT -> {
+                    board.changeCoins(-gold);
+                    // TODO: Add coins to neighbours city
+                }
+                default ->  throw new IllegalArgumentException("Unexpected value: " + action.getNeighbourType());
             }
-            case LEFT -> {
-                board.changeCoins(-gold);
-                // TODO: Add coins to neighbours city
-            }
-            default ->  throw new IllegalArgumentException("Unexpected value: " + action.getNeighbourType());
         }
     }
 }

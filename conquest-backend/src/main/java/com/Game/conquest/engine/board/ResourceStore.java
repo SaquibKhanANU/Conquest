@@ -1,5 +1,6 @@
 package com.Game.conquest.engine.board;
 
+import com.Game.conquest.engine.common.Cost;
 import com.Game.conquest.engine.deck.Card;
 import com.Game.conquest.engine.enumTypes.ResourceType;
 import lombok.Getter;
@@ -27,16 +28,21 @@ public class ResourceStore {
     }
 
     public boolean checkCardPlayabilityResource(Card card) {
-        List<ResourceType> resourceCost = card.getCost().getResources();
-        if (resourceCost == null) {
+        Cost cost = card.getCost();
+        List<ResourceType> resourceCost;
+        if (cost != null) {
+            resourceCost = cost.getResources();
+            if (resourceCost == null) {
+                return true;
+            }
+            for (ResourceType resource : resourceCost) {
+                if (!publicResources.contains(resource) && !privateResources.contains(resource)) {
+                    return false;
+                }
+            }
             return true;
         }
-        for (ResourceType resource : resourceCost) {
-            if (!publicResources.contains(resource) && !privateResources.contains(resource)) {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
 }

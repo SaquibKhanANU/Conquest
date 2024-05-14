@@ -2,13 +2,13 @@ package com.Game.conquest.engine.board;
 
 import com.Game.conquest.engine.Settings;
 import com.Game.conquest.engine.ability.abilityInterface.Ability;
+import com.Game.conquest.engine.common.Cost;
 import com.Game.conquest.engine.deck.Card;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 public class Board {
@@ -37,8 +37,28 @@ public class Board {
     }
 
     public boolean canPlayCardSelf(Card card) {
-        return card.getCost() == null || (card.getCost().getGold() <= this.coins &&
-                this.resourceStore.checkCardPlayabilityResource(card));
+        /* TODO: The following checks
+            1. Enough resources in the ResourceStore
+            2. Enough coins in board coins//
+            3. If it is free e.g. no resource cost
+            4. If it is free e.g. a child structure is built
+         */
+        boolean resourceCheck = false;
+        boolean goldCheck = false;
+        boolean freeCheckCost = false;
+        Cost cost = card.getCost();
+        if (cost != null) {
+            resourceCheck = this.resourceStore.checkCardPlayabilityResource(card);
+            goldCheck = card.getCost().getGold() <= this.coins;
+        } else {
+            freeCheckCost = true;
+        }
+        boolean freeCheckChildBuilt = playedCards.stream()
+                .anyMatch(builtCard -> {
+                    List<String> children = builtCard.getChildren();
+                    return children != null && children.contains(card.getParents());
+                });
+        return (resourceCheck && goldCheck) || freeCheckCost || freeCheckChildBuilt;
     }
 
     public void playCard(Card card) {
