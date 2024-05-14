@@ -16,7 +16,6 @@ const Board = ({ playerId, board }) => {
     const dispatch = useDispatch();
     const [stages, setStages] = useState(board.wonder.stages);
     const selectedCard = useSelector((state) => state.gameAction.selectedCard);
-
     // const handleBuildWonderClick = (stage) => {
     //     if (stage.buildable && selectedCard !== null) {
     //         stage.built = true;
@@ -48,7 +47,7 @@ const Board = ({ playerId, board }) => {
                 <div className="board-header-container">
                     <p className="board-player-id">{playerId}</p>
                     <div className="board-header-points">
-                        <Points militaryPoints={0} coins={0} points={0} />
+                        <Points militaryPoints={0} coins={board.coins} points={board.totalPoints} />
                     </div>
                 </div>
 
